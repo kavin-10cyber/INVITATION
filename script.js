@@ -268,15 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  const coverFooter = document.querySelector('.cover-footer');
-  if (coverFooter) {
-    coverFooter.addEventListener('click', () => {
-      if (isEnvelopeOpened) {
-        goToScreen2();
-      }
-    });
-    coverFooter.style.cursor = 'pointer';
-  }
   if (btnReplay) {
     btnReplay.addEventListener('click', replayEnvelope);
   }
