@@ -116,14 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
       calligraphy.style.transition = 'opacity 0.35s ease';
     }
 
-    // 4. Mark envelope opened and reveal scroll-down prompt (DO NOT auto-transition)
+    // 4. Mark envelope opened and activate whole-screen gentle bounce micro-interaction
     setTimeout(() => {
       isEnvelopeOpened = true;
       isOpening = false;
 
-      if (scrollCue) {
-        scrollCue.classList.remove('is-scrolling', 'paused-bounce');
-        scrollCue.classList.add('visible');
+      if (coverScreen) {
+        coverScreen.classList.remove('is-scrolling', 'paused-bounce');
+        coverScreen.classList.add('screen-bounce');
       }
     }, 850);
   }
@@ -158,16 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // SCROLL CUE AUTO-PAUSE & FADE-OUT ON SCROLL / SWIPE
   // ==========================================================================
+  // WHOLE SCREEN GENTLE BOUNCE AUTO-PAUSE ON SCROLL / SWIPE
+  // ==========================================================================
   function handleScrollOrSwipeInteraction() {
-    if (!scrollCue) return;
     const currentScroll = appContainer ? appContainer.scrollTop : (window.scrollY || window.pageYOffset || 0);
 
-    // If user has scrolled or swiped down into Screen 2
+    // If user has scrolled or swiped down towards Screen 2
     if (currentScroll > 15) {
-      scrollCue.classList.add('is-scrolling', 'paused-bounce');
+      if (coverScreen) {
+        coverScreen.classList.add('is-scrolling', 'paused-bounce');
+      }
     } else if (currentScroll <= 5 && isEnvelopeOpened) {
-      // Returned back to Screen 1: smoothly restore the cue
-      scrollCue.classList.remove('is-scrolling', 'paused-bounce');
+      // Returned back to Screen 1: smoothly restore the screen gentle bounce
+      if (coverScreen) {
+        coverScreen.classList.remove('is-scrolling', 'paused-bounce');
+      }
     }
   }
 
@@ -192,8 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('touchmove', (e) => {
     if (touchDragStartY !== null && e.touches && e.touches[0]) {
       const deltaY = touchDragStartY - e.touches[0].clientY;
-      if (deltaY > 10 && isEnvelopeOpened && scrollCue) {
-        scrollCue.classList.add('is-scrolling', 'paused-bounce');
+      if (deltaY > 10 && isEnvelopeOpened && coverScreen) {
+        coverScreen.classList.add('is-scrolling', 'paused-bounce');
       }
     }
     handleScrollOrSwipeInteraction();
@@ -208,8 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
         openEnvelope();
       }
     }
-    if (e.deltaY > 5 && isEnvelopeOpened && scrollCue) {
-      scrollCue.classList.add('is-scrolling', 'paused-bounce');
+    if (e.deltaY > 5 && isEnvelopeOpened && coverScreen) {
+      coverScreen.classList.add('is-scrolling', 'paused-bounce');
     }
     handleScrollOrSwipeInteraction();
   }, { passive: true });
@@ -222,8 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
       isEnvelopeOpened = false;
       isOpening = false;
 
-      if (scrollCue) {
-        scrollCue.classList.remove('visible', 'is-scrolling', 'paused-bounce');
+      if (coverScreen) {
+        coverScreen.classList.remove('screen-bounce', 'is-scrolling', 'paused-bounce');
       }
 
       if (envelope) {
@@ -255,12 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ctaContainer) {
     ctaContainer.addEventListener('click', openEnvelope);
   }
-  if (scrollCue) {
-    scrollCue.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goToScreen2();
-    });
-  }
   if (innerCard) {
     innerCard.addEventListener('click', (e) => {
       if (isEnvelopeOpened) {
@@ -268,6 +267,15 @@ document.addEventListener('DOMContentLoaded', () => {
         goToScreen2();
       }
     });
+  }
+  const coverFooter = document.querySelector('.cover-footer');
+  if (coverFooter) {
+    coverFooter.addEventListener('click', () => {
+      if (isEnvelopeOpened) {
+        goToScreen2();
+      }
+    });
+    coverFooter.style.cursor = 'pointer';
   }
   if (btnReplay) {
     btnReplay.addEventListener('click', replayEnvelope);
