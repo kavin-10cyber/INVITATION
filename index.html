@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Wedding Invitation | Deepak &amp; Vikashini</title>
+  <meta name="description"
+    content="Traditional luxury mobile-first interactive wedding invitation for Deepak & Vikashini with 3D envelope unfold animation.">
+
+  <!-- Google Fonts: Great Vibes (for calligraphy), Cinzel (royal serif), Playfair Display, Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bg-audio" src="bg-music.mp3" preload="auto" loop></audio>
+
+  <!-- Floating Audio Toggle Button (Bottom Right) -->
+  <aside class="audio-control-bar" aria-label="Music Controls">
+    <button id="btn-music-toggle" class="btn-music-fab" type="button" aria-label="Toggle traditional wedding music"
+      title="Toggle Music">
+      <div class="sound-wave-icon" id="sound-wave">
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="bar bar3"></span>
+        <span class="bar bar4"></span>
+      </div>
+      <svg class="music-note-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Ambient Flower Petals & Gold Sparkles Canvas -->
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Outer Desktop Wrapper to mimic realistic mobile viewport -->
+  <div class="screen-wrapper">
+
+    <!-- Mobile App Container (Centered on desktop, fills mobile viewport) -->
+    <main class="app-container" id="app-container">
+
+      <!-- ================================================================ -->
+      <!-- SCREEN 1: TRADITIONAL MANDAP BACKDROP & 3D ENVELOPE COMPONENT    -->
+      <!-- ================================================================ -->
+      <section id="cover-screen" class="cover-screen" role="region"
+        aria-label="Traditional Wedding Invitation Envelope">
+
+        <!-- Subtle Contrast Overlay -->
+        <div class="cover-overlay" aria-hidden="true"></div>
+
+        <!-- Top Hanging Bells & Sacred Invocations Decor -->
+        <header class="header-container">
+          <div class="sacred-mantra-badge">
+            <span class="divine-star">✦</span>
+            <span class="mantra-text">|| ஓம் முருகா ||</span>
+            <span class="divine-star">✦</span>
+          </div>
+          <h1 id="invocation-title" class="invocation-title"></h1>
+          <div class="ornamental-divider" aria-hidden="true">
+            <span class="line left-line"></span>
+            <span class="gem">&#10022;</span>
+            <span class="line right-line"></span>
+          </div>
+        </header>
+
+        <!-- Centered 3D Responsive Envelope Component -->
+        <div class="envelope-section">
+          <!-- The Signature Calligraphy Script: "You're Invited" (Relocated below header & above tap cue) -->
+          <div class="invitation-calligraphy-wrapper">
+            <h2 class="youre-invited-text">You're Invited</h2>
+          </div>
+
+          <!-- Pulsing Call-to-Action Indicator -->
+          <div class="cta-container" id="cta-container">
+            <div class="tap-indicator" aria-hidden="true">
+              <svg class="tap-finger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M12 2a3 3 0 0 0-3 3v7l-1.5-1.5a2.12 2.12 0 0 0-3 3L9 18a8 8 0 0 0 8 8h1a8 8 0 0 0 8-8V9a3 3 0 0 0-6 0v1"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <p class="cta-text" id="cta-text">TAP TO OPEN INVITATION</p>
+            <div class="cta-sparkles" aria-hidden="true">
+              <span>✨</span>
+              <span>✦</span>
+              <span>✨</span>
+            </div>
+          </div>
+
+          <div class="envelope-scene" id="envelope-scene">
+
+            <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap to open invitation envelope">
+
+              <!-- Interior Lining of Envelope with Gold Starlet Pattern -->
+              <div class="envelope-back">
+                <div class="lining-pattern"></div>
+              </div>
+
+              <!-- 3D Top Flap (Letter fold type with 180deg unroll animation) -->
+              <div class="envelope-flap" id="envelope-flap">
+                <div class="flap-texture"></div>
+                <div class="flap-gold-edge"></div>
+
+                <!-- 3D Golden Wax Seal (#D4AF37) centered over the flap fold with initials D & V -->
+                <div class="wax-seal-wrapper" id="wax-seal-wrapper">
+                  <div class="wax-seal" id="wax-seal" title="Click or tap to open invitation">
+                    <div class="seal-glow-ring"></div>
+                    <div class="seal-ring outer-ring"></div>
+                    <div class="seal-ring inner-ring"></div>
+                    <div class="seal-content">
+                      <span class="seal-monogram">D &amp; V</span>
+                    </div>
+                    <div class="seal-highlight"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inner Invitation Card (slides vertically upward upon unsealing) -->
+              <div class="inner-card" id="inner-card" aria-hidden="true">
+                <div class="inner-card-border">
+                  <div class="inner-card-corner top-left"></div>
+                  <div class="inner-card-corner top-right"></div>
+                  <div class="inner-card-corner bottom-left"></div>
+                  <div class="inner-card-corner bottom-right"></div>
+
+                  <div class="inner-card-content">
+                    <span class="card-auspicious">॥ அன்புடன் அழைக்கிறோம் ॥</span>
+                    <h2 class="card-couple">Deepak &amp; Vikashini</h2>
+                    <div class="card-date-badge">
+                      <span>NOVEMBER 22, 2026</span>
+                    </div>
+                    <p class="card-note">Join us as we step into our new beginning!</p>
+                    <div class="card-mini-seal">&#10084;</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Front Envelope Pocket with Aari Embroidery Artwork -->
+              <div class="envelope-pocket" id="envelope-pocket">
+                <div class="pocket-floral-art"></div>
+                <div class="pocket-shading"></div>
+                <div class="pocket-gold-trim"></div>
+              </div>
+
+            </div> <!-- /.envelope -->
+          </div> <!-- /.envelope-scene -->
+        </div>
+
+
+        <!-- Bottom Footer -->
+        <footer class="cover-footer">
+          <div class="bottom-auspicious-tag">
+            <span>DEEPAK &amp; VIKASHINI WEDDING</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- SCREEN 2: MAIN COUPLE ANNOUNCEMENT (ROYAL FRAMED SCREEN)         -->
+      <!-- ================================================================ -->
+      <section id="announcement-screen" class="announcement-screen" aria-label="Wedding Couple Announcement">
+        <div class="royal-frame-card">
+
+          <!-- Ornate Gold Corner Flourishes -->
+          <div class="frame-corner top-left" aria-hidden="true"></div>
+          <div class="frame-corner top-right" aria-hidden="true"></div>
+          <div class="frame-corner bottom-left" aria-hidden="true"></div>
+          <div class="frame-corner bottom-right" aria-hidden="true"></div>
+
+          <!-- Auspicious Deity Motif: Lord Murugan Sacred Vel & Mayil Emblem -->
+          <div class="deity-badge-container">
+            <div class="deity-emblem" aria-hidden="true">
+              <svg class="vel-icon" viewBox="0 0 120 154" width="52" height="66" fill="none"
+                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sacred Vel of Lord Murugan">
+                <defs>
+                  <!-- Rich Multi-Stop Metallic Gold Gradients -->
+                  <linearGradient id="velGoldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="15%" stop-color="#FFF5C0" />
+                    <stop offset="45%" stop-color="#FFDF73" />
+                    <stop offset="75%" stop-color="#D4AF37" />
+                    <stop offset="100%" stop-color="#9A6B15" />
+                  </linearGradient>
+
+                  <linearGradient id="velGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFDF73" />
+                    <stop offset="25%" stop-color="#D4AF37" />
+                    <stop offset="60%" stop-color="#996515" />
+                    <stop offset="90%" stop-color="#664104" />
+                    <stop offset="100%" stop-color="#402600" />
+                  </linearGradient>
+
+                  <linearGradient id="velGoldBevel" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FFFDE8" />
+                    <stop offset="20%" stop-color="#FFF0A0" />
+                    <stop offset="50%" stop-color="#E5C158" />
+                    <stop offset="80%" stop-color="#AA771C" />
+                    <stop offset="100%" stop-color="#6B4505" />
+                  </linearGradient>
+
+                  <linearGradient id="velShaftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#734907" />
+                    <stop offset="25%" stop-color="#D4AF37" />
+                    <stop offset="50%" stop-color="#FFF8D6" />
+                    <stop offset="75%" stop-color="#D4AF37" />
+                    <stop offset="100%" stop-color="#5E3902" />
+                  </linearGradient>
+
+                  <linearGradient id="velSpineHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="20%" stop-color="#FFF9D2" />
+                    <stop offset="70%" stop-color="#FFDF73" />
+                    <stop offset="100%" stop-color="#D4AF37" />
+                  </linearGradient>
+
+                  <radialGradient id="velDivineAura" cx="50%" cy="42%" r="48%">
+                    <stop offset="0%" stop-color="#FFF2B2" stop-opacity="0.5" />
+                    <stop offset="40%" stop-color="#FFD700" stop-opacity="0.22" />
+                    <stop offset="75%" stop-color="#D4AF37" stop-opacity="0.08" />
+                    <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
+                  </radialGradient>
+
+                  <radialGradient id="kumkumGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FF2A4B" stop-opacity="0.9" />
+                    <stop offset="60%" stop-color="#C40018" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#730009" stop-opacity="0.3" />
+                  </radialGradient>
+
+                  <filter id="kumkumDrop" x="-40%" y="-40%" width="180%" height="180%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#550005" flood-opacity="0.8" />
+                  </filter>
+                </defs>
+
+                <!-- ================= BACKGROUND DIVINE HALO / PRABHAVALI ================= -->
+                <!-- Radiant Aura Disk -->
+                <circle cx="60" cy="56" r="45" fill="url(#velDivineAura)" />
+
+                <!-- Outer Prabhavali Sunburst Rays -->
+                <g stroke="url(#velGoldLight)" opacity="0.75" stroke-linecap="round">
+                  <line x1="60" y1="6" x2="60" y2="12" stroke-width="1.2" />
+                  <line x1="75" y1="9" x2="73" y2="15" stroke-width="0.9" />
+                  <line x1="89" y1="18" x2="84" y2="23" stroke-width="1.1" />
+                  <line x1="99" y1="31" x2="93" y2="35" stroke-width="0.9" />
+                  <line x1="104" y1="46" x2="98" y2="48" stroke-width="1.1" />
+                  <line x1="105" y1="62" x2="99" y2="62" stroke-width="0.9" />
+                  <line x1="100" y1="77" x2="94" y2="75" stroke-width="1.1" />
+                  <line x1="91" y1="90" x2="86" y2="86" stroke-width="0.9" />
+                  <line x1="45" y1="9" x2="47" y2="15" stroke-width="0.9" />
+                  <line x1="31" y1="18" x2="36" y2="23" stroke-width="1.1" />
+                  <line x1="21" y1="31" x2="27" y2="35" stroke-width="0.9" />
+                  <line x1="16" y1="46" x2="22" y2="48" stroke-width="1.1" />
+                  <line x1="15" y1="62" x2="21" y2="62" stroke-width="0.9" />
+                  <line x1="20" y1="77" x2="26" y2="75" stroke-width="1.1" />
+                  <line x1="29" y1="90" x2="34" y2="86" stroke-width="0.9" />
+                </g>
+
+                <!-- Ornate Prabhavali Beaded Arc -->
+                <path d="M 23 78 A 42 42 0 0 1 97 78" fill="none" stroke="url(#velGoldLight)" stroke-width="0.75"
+                  stroke-dasharray="1 3.5" stroke-linecap="round" opacity="0.8" />
+                <path d="M 26 78 A 38 38 0 0 1 94 78" fill="none" stroke="#D4AF37" stroke-width="0.5" opacity="0.5" />
+
+                <!-- Golden Starburst Accent Points -->
+                <circle cx="60" cy="5" r="1.3" fill="#FFF8D6" />
+                <circle cx="89" cy="17" r="1.1" fill="#FFDF73" />
+                <circle cx="31" cy="17" r="1.1" fill="#FFDF73" />
+                <circle cx="104" cy="45" r="1.1" fill="#FFDF73" />
+                <circle cx="16" cy="45" r="1.1" fill="#FFDF73" />
+
+                <!-- ================= SACRED VEL SPEARHEAD (VEERA VEL) ================= -->
+                <!-- Left Blade Facet (Bright Golden Luster) -->
+                <path d="M 60 14 C 47 34, 29 48, 30 70 C 31 83, 42 91, 55 93.5 L 60 94 Z" fill="url(#velGoldLight)"
+                  stroke="#664104" stroke-width="0.7" />
+
+                <!-- Right Blade Facet (Chiselled Shadow Luster for 3D Bevel) -->
+                <path d="M 60 14 C 73 34, 91 48, 90 70 C 89 83, 78 91, 65 93.5 L 60 94 Z" fill="url(#velGoldDark)"
+                  stroke="#4A2D00" stroke-width="0.7" />
+
+                <!-- Inner Embossed Golden Border (Double Rims) -->
+                <path d="M 60 21 C 49 38, 34 51, 35 69 C 36 79, 45 86, 55 88.5" fill="none" stroke="#FFEAA5"
+                  stroke-width="0.85" opacity="0.9" />
+                <path d="M 60 21 C 71 38, 86 51, 85 69 C 84 79, 75 86, 65 88.5" fill="none" stroke="#E5C158"
+                  stroke-width="0.85" opacity="0.8" />
+
+                <!-- Secondary Inner Bead Trim (Swarna Bindu Chain along Blade Edge) -->
+                <path d="M 59 28 C 51 43, 39 54, 40 68 C 41 76, 48 81, 55 83.5" fill="none" stroke="#FFF2B2"
+                  stroke-width="0.75" stroke-dasharray="0.8 2.5" stroke-linecap="round" opacity="0.75" />
+                <path d="M 61 28 C 69 43, 81 54, 80 68 C 79 76, 72 81, 65 83.5" fill="none" stroke="#D4AF37"
+                  stroke-width="0.75" stroke-dasharray="0.8 2.5" stroke-linecap="round" opacity="0.65" />
+
+                <!-- Intricate Temple Filigree Scrollwork (Engraved Leaf Patterns in Wings) -->
+                <!-- Left Wing Filigree -->
+                <g stroke="#996515" stroke-width="0.6" fill="none" opacity="0.55" stroke-linecap="round">
+                  <path d="M 44 64 C 41 68, 43 75, 49 76 C 52 76, 53 72, 51 70 C 49 68, 45 71, 47 73" />
+                  <path d="M 46 53 C 43 56, 42 60, 46 62" />
+                  <path d="M 52 42 C 49 46, 48 50, 52 52" />
+                </g>
+                <!-- Right Wing Filigree -->
+                <g stroke="#664104" stroke-width="0.6" fill="none" opacity="0.55" stroke-linecap="round">
+                  <path d="M 76 64 C 79 68, 77 75, 71 76 C 68 76, 67 72, 69 70 C 71 68, 75 71, 73 73" />
+                  <path d="M 74 53 C 77 56, 78 60, 74 62" />
+                  <path d="M 68 42 C 71 46, 72 50, 68 52" />
+                </g>
+
+                <!-- Central Raised Veera Spine Ridge (Thandu) with Beveled Specular Gleam -->
+                <polygon points="58.7,16 61.3,16 62.1,94 57.9,94" fill="url(#velGoldBevel)" />
+                <line x1="60" y1="15" x2="60" y2="93.5" stroke="url(#velSpineHighlight)" stroke-width="1.1"
+                  stroke-linecap="round" />
+
+                <!-- Sacred Tip (Kūr) Radiant Divine Diamond Crown -->
+                <polygon points="60,9 62.5,14 60,17 57.5,14" fill="#FFFFFF" stroke="#D4AF37" stroke-width="0.5" />
+                <circle cx="60" cy="14" r="0.9" fill="#FFF2B2" />
+
+                <!-- ================= SACRED THIRUNEERU (VIBHUTI) & RED KUMKUM ================= -->
+                <!-- Three Pristine Curved White Holy Ash Stripes (Tripundra) -->
+                <g stroke="#FFFFFF" stroke-linecap="round" opacity="0.97">
+                  <!-- Top Vibhuti Line -->
+                  <path d="M 48 48.5 Q 60 51.5 72 48.5" stroke-width="2.1" />
+                  <path d="M 48 48.5 Q 60 51.5 72 48.5" stroke="#EFEFEF" stroke-width="0.8" />
+
+                  <!-- Middle Vibhuti Line -->
+                  <path d="M 45 54.5 Q 60 58 75 54.5" stroke-width="2.3" />
+                  <path d="M 45 54.5 Q 60 58 75 54.5" stroke="#EFEFEF" stroke-width="0.9" />
+
+                  <!-- Bottom Vibhuti Line -->
+                  <path d="M 48 60.5 Q 60 63.5 72 60.5" stroke-width="2.1" />
+                  <path d="M 48 60.5 Q 60 63.5 72 60.5" stroke="#EFEFEF" stroke-width="0.8" />
+                </g>
+
+                <!-- Sacred Vermilion Kumkum Pottu (Thilakam) with Divine Glow -->
+                <circle cx="60" cy="55" r="4.2" fill="url(#kumkumGlow)" />
+                <circle cx="60" cy="55" r="3" fill="#B30018" stroke="#FFECA8" stroke-width="0.6"
+                  filter="url(#kumkumDrop)" />
+                <circle cx="60" cy="55" r="1.6" fill="#E60021" />
+                <!-- Divine Bindu Spark in Kumkum -->
+                <circle cx="59.2" cy="54.2" r="0.6" fill="#FFFFFF" />
+
+                <!-- ================= PADMA PEEDAM (ORNATE LOTUS PEDESTAL COLLAR) ================= -->
+                <!-- Lotus Petal Base Layer -->
+                <g stroke="#5E3902" stroke-width="0.5" stroke-linejoin="round">
+                  <!-- Outer flanking petals -->
+                  <path d="M 44 94 C 42 90, 49 89, 52 93 C 51 96, 45 97, 44 94 Z" fill="url(#velGoldLight)" />
+                  <path d="M 76 94 C 78 90, 71 89, 68 93 C 69 96, 75 97, 76 94 Z" fill="url(#velGoldDark)" />
+
+                  <!-- Mid-tier lotus petals -->
+                  <path d="M 49 94 C 50 89, 57 88, 57 93.5 C 56 97, 50 98, 49 94 Z" fill="url(#velGoldLight)" />
+                  <path d="M 71 94 C 70 89, 63 88, 63 93.5 C 64 97, 70 98, 71 94 Z" fill="url(#velGoldDark)" />
+
+                  <!-- Central Upright Bloom Petal -->
+                  <path
+                    d="M 56 93.5 C 57 88, 60 86, 60 86 C 60 86, 63 88, 64 93.5 C 64 98, 60 99.5, 60 99.5 C 60 99.5, 56 98, 56 93.5 Z"
+                    fill="#FFF5C0" stroke="#7A5205" stroke-width="0.6" />
+                  <line x1="60" y1="87" x2="60" y2="98" stroke="#E5C158" stroke-width="0.5" />
+
+                  <!-- Lower Lotus Inverted Calyx Base -->
+                  <path d="M 47 98.5 Q 60 101.5 73 98.5 L 74 102.5 Q 60 105.5 46 102.5 Z" fill="url(#velGoldBevel)"
+                    stroke="#5E3902" stroke-width="0.6" />
+                  <!-- Calyx Pearls / Dots -->
+                  <circle cx="51" cy="100.5" r="0.9" fill="#FFFDE8" />
+                  <circle cx="55.5" cy="101.5" r="0.9" fill="#FFFDE8" />
+                  <circle cx="60" cy="102" r="1.1" fill="#FFFDE8" />
+                  <circle cx="64.5" cy="101.5" r="0.9" fill="#FFFDE8" />
+                  <circle cx="69" cy="100.5" r="0.9" fill="#FFFDE8" />
+                </g>
+
+                <!-- ================= GOLDEN SHAFT (DHANDAM) & TEMPLE RINGS ================= -->
+                <!-- Main Cylindrical Shaft -->
+                <rect x="57" y="103" width="6" height="40" fill="url(#velShaftGrad)" stroke="#5E3902"
+                  stroke-width="0.5" />
+                <!-- Center metallic shaft highlight reflection -->
+                <line x1="60" y1="103" x2="60" y2="143" stroke="#FFFCE3" stroke-width="0.9" opacity="0.8" />
+
+                <!-- Ornate Decorative Golden Rings / Bandings along the Staff -->
+                <!-- Ring 1 (Top Neck Collar) -->
+                <g>
+                  <rect x="55" y="105" width="10" height="2.8" rx="1.4" fill="url(#velGoldLight)" stroke="#664104"
+                    stroke-width="0.5" />
+                  <circle cx="60" cy="106.4" r="0.7" fill="#FFFFFF" />
+                </g>
+
+                <!-- Ring 2 (Upper Mid Ring) -->
+                <g>
+                  <rect x="54.5" y="115" width="11" height="3" rx="1.5" fill="url(#velGoldLight)" stroke="#664104"
+                    stroke-width="0.5" />
+                  <line x1="56" y1="116.5" x2="64" y2="116.5" stroke="#FFFFFF" stroke-width="0.6" />
+                </g>
+
+                <!-- Ring 3 (Lower Mid Ring) -->
+                <g>
+                  <rect x="54.5" y="127" width="11" height="3" rx="1.5" fill="url(#velGoldLight)" stroke="#664104"
+                    stroke-width="0.5" />
+                  <line x1="56" y1="128.5" x2="64" y2="128.5" stroke="#FFFFFF" stroke-width="0.6" />
+                </g>
+
+                <!-- Ring 4 (Base Staff Collar) -->
+                <g>
+                  <rect x="55" y="137" width="10" height="2.8" rx="1.4" fill="url(#velGoldLight)" stroke="#664104"
+                    stroke-width="0.5" />
+                </g>
+
+                <!-- Bottom Kalasam / Temple Finial Pommel Knob -->
+                <g stroke="#5E3902" stroke-width="0.5">
+                  <circle cx="60" cy="144" r="3.8" fill="url(#velGoldBevel)" />
+                  <ellipse cx="59.3" cy="142.8" rx="1.4" ry="0.9" fill="#FFFDE8" />
+                  <polygon points="58,146 62,146 60,152" fill="url(#velGoldDark)" stroke="#4A2D00" stroke-width="0.4" />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Top Invocations Header -->
+          <div class="invocations-header">
+            <p class="invocations-text">Sri Angalamman Thunai &bull; Sri Nachiyathal Thunai &bull; Sri Karunambikai
+              Amman Thunai</p>
+          </div>
+
+          <!-- Title & Solicitation -->
+          <div class="announcement-header">
+            <h1 class="wedding-invitation-title">Wedding Invitation</h1>
+            <p class="solicitation-text">
+              Cordial solicitation for your gracious presence with family and friends on the auspicious occasion of the
+              wedding of
+            </p>
+          </div>
+
+          <!-- Groom Details Section -->
+          <div class="person-card groom-card">
+            <div class="person-badge">GROOM</div>
+            <h2 class="person-name groom-name">S. Deepak</h2>
+            <p class="person-qualifications">B.Com(PA)., MBA &nbsp;|&nbsp; ATYATI TECHNOLOGIES PVT LTD - BANGALORE</p>
+            <p class="person-parents">Son of Mr. N. Sivakolundhu &amp; Mrs. S. Aruljothi</p>
+          </div>
+
+          <!-- Ornamental Golden Ampersand Divider -->
+          <div class="royal-ampersand-divider" aria-hidden="true">
+            <span class="ornament-swirl left">❦</span>
+            <span class="gold-ampersand">&amp;</span>
+            <span class="ornament-swirl right">❦</span>
+          </div>
+
+          <!-- Bride Details Section -->
+          <div class="person-card bride-card">
+            <div class="person-badge">BRIDE</div>
+            <h2 class="person-name bride-name">P. Vikashini</h2>
+            <p class="person-qualifications">B.Sc., (IT)</p>
+            <p class="person-parents">Daughter of Mr. R. Palanisamy (Babu) &amp; Mrs. P. Janaki</p>
+          </div>
+
+          <!-- Date & Time Highlight Banner -->
+          <div class="muhurtham-highlight-banner">
+            <div class="banner-inner">
+              <span class="banner-auspicious-tag">AUSPICIOUS SUMUHURTHAM</span>
+              <h3 class="banner-date">SUNDAY, 22ND NOVEMBER 2026</h3>
+              <p class="banner-time">Sumuhurtham: 5:00 AM to 6:00 AM</p>
+            </div>
+          </div>
+
+          <!-- Footer Controls: Scroll Cue & Subtle Replay -->
+          <div class="screen2-footer-controls">
+            <button class="btn-replay-subtle" id="btn-replay" type="button" title="Experience envelope opening again">
+              <span class="replay-icon">↺</span>
+              <span>Replay Envelope</span>
+            </button>
+            <div class="scroll-cue" aria-hidden="true">
+              <span class="scroll-cue-text">Scroll for Event Details</span>
+              <span class="scroll-arrow">↓</span>
+            </div>
+          </div>
+
+        </div> <!-- /.royal-frame-card -->
+      </section>
+
+    </main> <!-- /.app-container -->
+  </div> <!-- /.screen-wrapper -->
+
+  <!-- SVG Gradients -->
+  <svg width="0" height="0" class="svg-defs" aria-hidden="true">
+    <defs>
+      <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#BF953F" />
+        <stop offset="25%" stop-color="#FCF6BA" />
+        <stop offset="50%" stop-color="#B38728" />
+        <stop offset="75%" stop-color="#FBF5B7" />
+        <stop offset="100%" stop-color="#AA771C" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

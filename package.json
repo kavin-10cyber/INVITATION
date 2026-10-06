@@ -1,0 +1,15 @@
+{
+  "name": "wedding-invitation",
+  "version": "1.0.0",
+  "description": "Interactive Digital Wedding Invitation for Deepak & Vikashini",
+  "scripts": {
+    "dev": "npx live-server --port=3000 --open=index.html",
+    "start": "npx live-server --port=3000 --open=index.html"
+  },
+  "keywords": [
+    "wedding",
+    "invitation",
+    "south-indian"
+  ],
+  "license": "ISC"
+}
