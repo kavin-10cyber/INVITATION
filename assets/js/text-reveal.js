@@ -728,22 +728,45 @@
         setTimeout(() => { isScreenTransitioning = false; }, 1800);
         window.WeddingVenueDirections.transitionToScreen4();
       }
+    } else {
+      const screen4El = document.getElementById('invitation-screen-4');
+      if (screen4El && screen4El.classList.contains('screen-active') && !screen4El.classList.contains('screen-hidden')) {
+        const isNearBottom = (screen4El.scrollHeight - screen4El.scrollTop - screen4El.clientHeight) <= 50;
+        if (isNearBottom) {
+          if (window.WeddingThankYou && typeof window.WeddingThankYou.transitionToScreen5 === 'function') {
+            isScreenTransitioning = true;
+            setTimeout(() => { isScreenTransitioning = false; }, 1800);
+            window.WeddingThankYou.transitionToScreen5();
+          }
+        }
+      }
     }
   }
 
   function handleScrollUp() {
     if (isScreenTransitioning) return;
-    const screen4El = document.getElementById('invitation-screen-4');
-    if (screen4El && screen4El.classList.contains('screen-active') && !screen4El.classList.contains('screen-hidden')) {
-      if (screen4El.scrollTop <= 10) {
-        if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionBackToScreen3 === 'function') {
+    const screen5El = document.getElementById('invitation-screen-5');
+    if (screen5El && screen5El.classList.contains('screen-active') && !screen5El.classList.contains('screen-hidden')) {
+      if (screen5El.scrollTop <= 10) {
+        if (window.WeddingThankYou && typeof window.WeddingThankYou.transitionBackToScreen4 === 'function') {
           isScreenTransitioning = true;
           setTimeout(() => { isScreenTransitioning = false; }, 800);
-          window.WeddingVenueDirections.transitionBackToScreen3();
+          window.WeddingThankYou.transitionBackToScreen4();
         }
       }
-    } else if (screen3El && screen3El.classList.contains('screen-active') && !screen3El.classList.contains('screen-hidden')) {
-      transitionBackToScreen2();
+    } else {
+      const screen4El = document.getElementById('invitation-screen-4');
+      if (screen4El && screen4El.classList.contains('screen-active') && !screen4El.classList.contains('screen-hidden')) {
+        if (screen4El.scrollTop <= 10) {
+          if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionBackToScreen3 === 'function') {
+            isScreenTransitioning = true;
+            setTimeout(() => { isScreenTransitioning = false; }, 800);
+            window.WeddingVenueDirections.transitionBackToScreen3();
+          }
+        }
+      } else if (screen3El && screen3El.classList.contains('screen-active') && !screen3El.classList.contains('screen-hidden')) {
+        transitionBackToScreen2();
+      }
     }
   }
 
