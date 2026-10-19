@@ -89,10 +89,12 @@
    * with pure, velvety optical film exposure bloom and zero artificial shapes.
    */
   function transitionToScreen5() {
-    if (isTransitioning || !screen5El) return;
+    if (isTransitioning) return;
+    if (!screen4El) screen4El = document.getElementById('invitation-screen-4');
+    if (!screen5El) screen5El = document.getElementById('invitation-screen-5');
+    if (!screen5El) return;
     isTransitioning = true;
 
-    if (!screen4El) screen4El = document.getElementById('invitation-screen-4');
     const btnReplayFab = document.getElementById('btn-replay-fab');
 
     // Ensure Replay FAB is completely hidden on Thank You screen
