@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="assets/css/style.css?v=8.7">
   <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.4">
-  <link rel="stylesheet" href="assets/css/venue-directions.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/venue-directions.css?v=2.0">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -208,6 +208,62 @@
                             <span class="bridge-glint glint-3">✦</span>
                             <span class="bridge-glint glint-4">✧</span>
                             <span class="bridge-glint glint-5">✦</span>
+                          </div>
+                        </div>
+
+                        <!-- Modern Frosted Glassmorphism Disc & Pulsing Radar Pin Bridge (Screen 3 -> Screen 4) -->
+                        <div class="venue-radar-bridge-overlay" id="venue-radar-bridge" aria-hidden="true">
+                          <div class="radar-backdrop-scrim"></div>
+                          <div class="radar-disc-perspective-wrapper">
+                            <div class="radar-glass-disc" id="radar-glass-disc">
+                              <div class="radar-glass-bevel-rim"></div>
+                              <div class="radar-glass-specular-sheen"></div>
+                              
+                              <!-- Concentric Sonar Radar Waves -->
+                              <div class="radar-ripples-container" aria-hidden="true">
+                                <span class="radar-ripple-ring ring-1"></span>
+                                <span class="radar-ripple-ring ring-2"></span>
+                                <span class="radar-ripple-ring ring-3"></span>
+                              </div>
+
+                              <!-- Liquid Gold Location Pin -->
+                              <div class="radar-pin-assembly" aria-hidden="true">
+                                <div class="radar-pin-glow"></div>
+                                <svg class="radar-gold-pin-svg" viewBox="0 0 48 64" width="46" height="60" fill="none" aria-hidden="true">
+                                  <defs>
+                                    <linearGradient id="goldTechGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="#FFF8DC" />
+                                      <stop offset="30%" stop-color="#F2D388" />
+                                      <stop offset="70%" stop-color="#C59B46" />
+                                      <stop offset="100%" stop-color="#7A5615" />
+                                    </linearGradient>
+                                    <radialGradient id="pinCoreGlow" cx="50%" cy="50%" r="50%">
+                                      <stop offset="0%" stop-color="#FFFFFF" />
+                                      <stop offset="55%" stop-color="#FFE8A3" />
+                                      <stop offset="100%" stop-color="#D4AF37" />
+                                    </radialGradient>
+                                    <filter id="goldDropGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.65"/>
+                                      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#E0C17C" flood-opacity="0.6"/>
+                                    </filter>
+                                  </defs>
+                                  <path d="M24 2C13.5 2 5 10.5 5 21c0 14.8 17.2 39.5 18.1 40.8a1.2 1.2 0 0 0 1.8 0C25.8 60.5 43 35.8 43 21 43 10.5 34.5 2 24 2z"
+                                        fill="url(#goldTechGrad)"
+                                        stroke="#FFF8DC"
+                                        stroke-width="1.2"
+                                        filter="url(#goldDropGlow)" />
+                                  <circle cx="24" cy="21" r="7.5" fill="#0C1324" stroke="url(#goldTechGrad)" stroke-width="1.5" />
+                                  <circle cx="24" cy="21" r="4.2" fill="url(#pinCoreGlow)" />
+                                </svg>
+                                <div class="radar-pin-beacon-pulse"></div>
+                              </div>
+
+                              <!-- High-Tech Luxury Telemetry Label -->
+                              <div class="radar-telemetry-badge" aria-hidden="true">
+                                <span class="radar-telemetry-status">DESTINATION LOCKED</span>
+                                <span class="radar-telemetry-coords">11.1085° N, 77.3411° E &bull; TIRUPUR</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
 
@@ -993,7 +1049,7 @@
   <script src="assets/js/scratch-card.js?v=5.7" defer></script>
   <script src="assets/js/envelope.js?v=10.3" defer></script>
   <script src="assets/js/theme-switcher.js" defer></script>
-  <script src="assets/js/venue-directions.js?v=1.1" defer></script>
+  <script src="assets/js/venue-directions.js?v=2.0" defer></script>
   <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
 

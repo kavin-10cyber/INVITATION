@@ -304,30 +304,62 @@
 
   /**
    * Cinematic transition from Screen 3 (Reception) to Screen 4 (Venue & Directions).
+   * Concept 2: Frosted Glassmorphism Disc & Pulsing Radar Pin (Apple / Tesla Modern Tech-Luxury).
    */
   function transitionToScreen4() {
     if (isTransitioning || !screen4El) return;
     isTransitioning = true;
 
     if (!screen3El) screen3El = document.getElementById('invitation-screen-3');
+    const radarBridgeEl = document.getElementById('venue-radar-bridge');
+    const glassDiscEl = document.getElementById('radar-glass-disc');
+    const sheenEl = radarBridgeEl ? radarBridgeEl.querySelector('.radar-glass-specular-sheen') : null;
+    const pinEl = radarBridgeEl ? radarBridgeEl.querySelector('.radar-pin-assembly') : null;
+    const rings = radarBridgeEl ? radarBridgeEl.querySelectorAll('.radar-ripple-ring') : null;
+    const telemetryEl = radarBridgeEl ? radarBridgeEl.querySelector('.radar-telemetry-badge') : null;
 
     // Scroll to top of Screen 4 before entrance
     screen4El.scrollTop = 0;
 
-    if (typeof gsap !== 'undefined') {
+    if (typeof gsap !== 'undefined' && radarBridgeEl && glassDiscEl) {
       if (screen3El) gsap.killTweensOf(screen3El);
-      gsap.killTweensOf(screen4El);
+      gsap.killTweensOf([screen4El, radarBridgeEl, glassDiscEl]);
+      if (sheenEl) gsap.killTweensOf(sheenEl);
+      if (pinEl) gsap.killTweensOf(pinEl);
+      if (telemetryEl) gsap.killTweensOf(telemetryEl);
+      if (rings && rings.length > 0) gsap.killTweensOf(rings);
 
       const headerEl = screen4El.querySelector('.venue-header-section');
       const cardsEl = screen4El.querySelectorAll('.venue-card');
       const calBtnEl = screen4El.querySelector('.venue-calendar-action-section');
       const backBtnEl = screen4El.querySelector('.btn-venue-back');
 
-      // Prepare Screen 4 initial states
-      gsap.set(screen4El, {
-        display: 'flex',
+      // 1. Activate transition bridge overlay & set initial 3D transforms
+      radarBridgeEl.classList.add('active');
+      radarBridgeEl.style.display = 'flex';
+      gsap.set(radarBridgeEl, { opacity: 1 });
+
+      gsap.set(glassDiscEl, {
         opacity: 0,
-        scale: 0.96
+        scale: 0.72,
+        rotateX: 18,
+        rotateY: -14,
+        rotateZ: 0,
+        transformPerspective: 900
+      });
+
+      if (sheenEl) gsap.set(sheenEl, { xPercent: -120, opacity: 0 });
+      if (pinEl) gsap.set(pinEl, { scale: 0, opacity: 0 });
+      if (telemetryEl) gsap.set(telemetryEl, { opacity: 0, y: 10 });
+      if (rings && rings.length > 0) {
+        gsap.set(rings, { scale: 0.25, opacity: 0 });
+      }
+
+      // Prepare Screen 4 initial states (hidden until aperture zoom)
+      gsap.set(screen4El, {
+        display: 'none',
+        opacity: 0,
+        scale: 0.94
       });
 
       if (headerEl) gsap.set(headerEl, { opacity: 0, y: -16 });
@@ -342,6 +374,11 @@
             screen3El.classList.add('screen-hidden');
             screen3El.style.display = 'none';
           }
+          radarBridgeEl.classList.remove('active');
+          radarBridgeEl.style.display = 'none';
+          gsap.set(radarBridgeEl, { clearProps: 'all' });
+          gsap.set(glassDiscEl, { clearProps: 'all' });
+
           screen4El.classList.remove('screen-hidden');
           screen4El.classList.add('screen-active');
           gsap.set(screen4El, { clearProps: 'transform' });
@@ -349,51 +386,126 @@
         }
       });
 
-      // 1. Screen 3 dissolves away smoothly
+      // Step 1: Screen 3 dissolves away smoothly
       if (screen3El) {
         tl.to(screen3El, {
           opacity: 0,
-          scale: 0.96,
-          duration: 0.45,
+          scale: 0.94,
+          duration: 0.35,
           ease: 'power2.inOut'
         }, 0);
       }
 
-      // 2. Screen 4 emerges into view with golden depth
+      // Step 2: 3D Frosted Acrylic Glass Disc emerges with spring tilt
+      tl.to(glassDiscEl, {
+        opacity: 1,
+        scale: 1.0,
+        rotateX: 6,
+        rotateY: -4,
+        duration: 0.45,
+        ease: 'back.out(1.5)'
+      }, 0.15);
+
+      // Level out 3D tilt
+      tl.to(glassDiscEl, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.35,
+        ease: 'power2.out'
+      }, 0.50);
+
+      // Specular light sheen sweeps across glass disc
+      if (sheenEl) {
+        tl.to(sheenEl, {
+          opacity: 0.95,
+          xPercent: 140,
+          duration: 0.65,
+          ease: 'power2.inOut'
+        }, 0.25);
+      }
+
+      // Step 3: Liquid Gold Location Pin pops up at center with bounce
+      if (pinEl) {
+        tl.to(pinEl, {
+          opacity: 1,
+          scale: 1.0,
+          duration: 0.45,
+          ease: 'back.out(2.0)'
+        }, 0.40);
+      }
+
+      // Telemetry badge fades in
+      if (telemetryEl) {
+        tl.to(telemetryEl, {
+          opacity: 1,
+          y: 0,
+          duration: 0.35,
+          ease: 'power2.out'
+        }, 0.52);
+      }
+
+      // Step 4: 3 Sonar radar ripple rings pulse outwards from pin tip
+      if (rings && rings.length > 0) {
+        rings.forEach((ring, index) => {
+          const startAt = 0.55 + (index * 0.14);
+          tl.fromTo(ring,
+            { scale: 0.25, opacity: 0.95 },
+            { scale: 2.2 + (index * 0.2), opacity: 0, duration: 0.70, ease: 'power2.out' },
+            startAt
+          );
+        });
+      }
+
+      // Step 5: Glass Disc expands smoothly (aperture zoom effect) revealing Screen 4
+      tl.to(glassDiscEl, {
+        scale: 2.8,
+        opacity: 0,
+        duration: 0.50,
+        ease: 'expo.in'
+      }, 1.05);
+
+      tl.to(radarBridgeEl, {
+        opacity: 0,
+        duration: 0.40,
+        ease: 'power2.inOut'
+      }, 1.15);
+
+      // Screen 4 enters seamlessly
+      tl.set(screen4El, { display: 'flex' }, 1.10);
       tl.to(screen4El, {
         opacity: 1,
         scale: 1.0,
-        duration: 0.60,
+        duration: 0.50,
         ease: 'power2.out'
-      }, 0.20);
+      }, 1.15);
 
-      // 3. Staggered reveal of header, cards, and button
+      // Staggered reveal of Screen 4 components
       if (backBtnEl) {
-        tl.to(backBtnEl, { opacity: 1, x: 0, duration: 0.40, ease: 'power2.out' }, 0.35);
+        tl.to(backBtnEl, { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 1.25);
       }
       if (headerEl) {
-        tl.to(headerEl, { opacity: 1, y: 0, duration: 0.55, ease: 'back.out(1.2)' }, 0.40);
+        tl.to(headerEl, { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(1.2)' }, 1.30);
       }
       if (cardsEl && cardsEl.length > 0) {
         tl.to(cardsEl, {
           opacity: 1,
           y: 0,
           scale: 1.0,
-          stagger: 0.16,
-          duration: 0.60,
+          stagger: 0.14,
+          duration: 0.50,
           ease: 'back.out(1.3)',
           clearProps: 'transform'
-        }, 0.55);
+        }, 1.35);
       }
       if (calBtnEl) {
         tl.to(calBtnEl, {
           opacity: 1,
           y: 0,
           scale: 1.0,
-          duration: 0.50,
+          duration: 0.45,
           ease: 'back.out(1.5)',
           clearProps: 'transform'
-        }, 0.85);
+        }, 1.55);
       }
 
     } else {
@@ -472,11 +584,22 @@
   }
 
   /**
-   * Resets Screen 4 state on replay.
+   * Resets Screen 4 and radar bridge state on replay.
    */
   function reset() {
     isTransitioning = false;
     closeCalendarModal();
+
+    const radarBridgeEl = document.getElementById('venue-radar-bridge');
+    if (radarBridgeEl) {
+      if (typeof gsap !== 'undefined') gsap.killTweensOf(radarBridgeEl);
+      radarBridgeEl.classList.remove('active');
+      radarBridgeEl.style.removeProperty('display');
+      radarBridgeEl.style.removeProperty('opacity');
+      radarBridgeEl.style.removeProperty('transform');
+      radarBridgeEl.style.display = 'none';
+      radarBridgeEl.style.opacity = '0';
+    }
 
     if (screen4El) {
       screen4El.classList.remove('screen-active');
