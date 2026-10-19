@@ -385,19 +385,18 @@
   min-height: clamp(34px, 4.4vh, 40px);
   padding: clamp(7px, 1.2vh, 9px) clamp(18px, 4.8vw, 24px);
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(255, 248, 225, 0.94) 0%, rgba(245, 215, 130, 0.88) 28%, rgba(212, 175, 55, 0.82) 65%, rgba(163, 108, 25, 0.90) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.88);
-  color: #3A050E;
+  background: radial-gradient(ellipse at 50% 28%, #FFF2BA 0%, #F5CE58 26%, #D4AF37 54%, #B8861B 80%, #7D4E08 100%);
+  border: 1.5px solid rgba(255, 248, 195, 0.95);
+  color: #2E040B;
   text-decoration: none;
   cursor: pointer;
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.55),
-    0 0 16px rgba(212, 175, 55, 0.50),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.90),
-    inset 0 -2px 5px rgba(110, 65, 10, 0.35),
-    inset 0 0 10px rgba(255, 248, 210, 0.40);
-  backdrop-filter: blur(14px) saturate(190%);
-  -webkit-backdrop-filter: blur(14px) saturate(190%);
+    0 0 16px rgba(212, 175, 55, 0.55),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 4px rgba(75, 42, 6, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
   animation: tapBtnGentleHop 1.6s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
   outline: none;
@@ -407,34 +406,21 @@
   white-space: nowrap;
 }
 
-/* Glass Dome Convex Reflection Highlight */
-.btn-tap-open::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 6%;
-  right: 6%;
-  height: 46%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.12) 100%);
-  border-radius: 18px 18px 60px 60px;
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* Diagonal Specular Light Beam Shine Sweep */
 .btn-tap-open::before {
   content: '';
   position: absolute;
   top: -60%;
   left: -130%;
-  width: 55%;
+  width: 48%;
   height: 220%;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.25) 25%,
-    rgba(255, 255, 255, 0.92) 50%,
-    rgba(255, 255, 255, 0.25) 75%,
+    rgba(255, 255, 255, 0.20) 25%,
+    rgba(255, 255, 255, 0.90) 50%,
+    rgba(255, 245, 200, 0.95) 54%,
+    rgba(255, 255, 255, 0.20) 75%,
     transparent 100%
   );
   transform: rotate(26deg);
@@ -463,13 +449,12 @@
 
 .btn-tap-open:hover {
   transform: scale(1.06);
-  border-color: #FFFFFF;
+  border-color: #FFFCE8;
   box-shadow:
     0 8px 26px rgba(0, 0, 0, 0.65),
-    0 0 24px rgba(212, 175, 55, 0.75),
-    inset 0 1.5px 3px rgba(255, 255, 255, 0.95),
-    inset 0 -2px 5px rgba(110, 65, 10, 0.40),
-    inset 0 0 14px rgba(255, 248, 210, 0.55);
+    0 0 24px rgba(212, 175, 55, 0.80),
+    inset 0 1.5px 3px rgba(255, 255, 255, 0.90),
+    inset 0 -2px 5px rgba(85, 45, 8, 0.50);
 }
 
 .btn-tap-open:active {
@@ -484,10 +469,10 @@
   font-weight: 900;
   letter-spacing: 0.16em;
   line-height: 1;
-  color: #3A050E;
-  -webkit-text-stroke: 0.45px #3A050E;
-  text-stroke: 0.45px #3A050E;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  color: #2E040B;
+  -webkit-text-stroke: 0.45px #2E040B;
+  text-stroke: 0.45px #2E040B;
+  text-shadow: 0 1px 1px rgba(255, 240, 180, 0.65);
 }
 
 .btn-tap-open .tap-open-icon {
@@ -495,9 +480,9 @@
   z-index: 3;
   width: 15px;
   height: 15px;
-  color: #3A050E;
+  color: #2E040B;
   display: block;
-  stroke: #3A050E;
+  stroke: #2E040B;
   stroke-width: 0.6;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
