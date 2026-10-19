@@ -452,7 +452,7 @@
 
 .invitation-card .invitation-screen.screen-3.screen-active {
   display: flex !important;
-  opacity: 1 !important;
+  opacity: 1;
   pointer-events: auto !important;
   touch-action: pan-y !important;
   z-index: 35 !important;

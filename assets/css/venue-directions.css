@@ -17,7 +17,7 @@
   width: 100% !important;
   height: 100% !important;
   max-height: 100% !important;
-  padding: clamp(20px, 3.2vh, 32px) clamp(16px, 4.4vw, 24px) clamp(50px, 7.5vh, 70px) clamp(16px, 4.4vw, 24px) !important;
+  padding: clamp(20px, 3.2vh, 32px) clamp(16px, 4.4vw, 24px) clamp(85px, 12vh, 110px) clamp(16px, 4.4vw, 24px) !important;
   box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
@@ -30,7 +30,7 @@
   overscroll-behavior-y: contain !important;
   scrollbar-width: thin !important;
   scrollbar-color: rgba(198, 161, 91, 0.35) transparent !important;
-  z-index: 25 !important;
+  z-index: 40 !important;
   will-change: transform, opacity !important;
 }
 
@@ -54,6 +54,7 @@
   display: flex !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+  z-index: 40 !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -233,19 +234,19 @@
   box-sizing: border-box;
   background: linear-gradient(135deg, rgba(10, 18, 38, 0.88) 0%, rgba(6, 12, 26, 0.92) 100%);
   border: 1.2px solid rgba(224, 193, 124, 0.65);
-  border-radius: clamp(16px, 3.8vw, 20px);
+  border-radius: clamp(16px, 4vw, 20px);
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.55),
     0 0 14px rgba(212, 175, 55, 0.22),
     inset 0 1px 1px rgba(255, 242, 178, 0.28);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: clamp(14px, 2.8vw, 18px);
+  padding: clamp(16px, 4.2vw, 20px);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
-  justify-content: space-between;
-  gap: clamp(10px, 2.5vw, 16px);
+  justify-content: flex-start;
+  gap: clamp(12px, 1.8vh, 16px);
   cursor: pointer;
   text-decoration: none;
   position: relative;
@@ -293,84 +294,98 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. Card Content (Left Column)
+   5. Card Tier 1: Top Row (Event Badge & Section Label)
    -------------------------------------------------------------------------- */
-.venue-card-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  justify-content: space-between;
-}
-
-/* Card Header Tag Row */
-.venue-tag-row {
+.venue-card-top-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 2px;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
 }
 
 .venue-badge-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(20px, 5.5vw, 24px);
-  height: clamp(16px, 4.4vw, 19px);
+  width: clamp(22px, 5.8vw, 25px);
+  height: clamp(18px, 4.6vw, 20px);
   border: 1px solid #E0C17C;
   border-radius: 10px;
   font-family: var(--font-royal);
-  font-size: clamp(0.50rem, 1.4vw, 0.58rem);
+  font-size: clamp(0.52rem, 1.4vw, 0.58rem);
   font-weight: 700;
   color: #E0C17C;
-  background: rgba(14, 24, 46, 0.5);
+  background: rgba(14, 24, 46, 0.65);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 }
 
 .venue-section-label {
   font-family: var(--font-royal);
-  font-size: clamp(0.46rem, 1.35vw, 0.54rem);
+  font-size: clamp(0.48rem, 1.4vw, 0.56rem);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: #C6A15B;
   text-transform: uppercase;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   6. Card Tier 2: Main Content Row (Left: Info, Right: Map Preview)
+   -------------------------------------------------------------------------- */
+.venue-card-main-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: clamp(12px, 3.2vw, 16px);
+  width: 100%;
+}
+
+.venue-card-info-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 /* Event Title */
 .venue-event-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.02rem, 3.2vw, 1.25rem);
+  font-size: clamp(1.10rem, 3.6vw, 1.30rem);
   font-weight: 600;
   color: #FFFDF8;
-  margin: 3px 0 7px 0;
-  line-height: 1.2;
+  margin: 0 0 clamp(8px, 1.4vh, 12px) 0;
+  line-height: 1.25;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  word-break: break-word;
 }
 
 /* Details Group */
 .venue-details-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: clamp(6px, 1.2vh, 10px);
   width: 100%;
-  margin-bottom: 8px;
 }
 
 .venue-detail-row {
   display: flex;
   align-items: flex-start;
-  gap: 7px;
+  gap: 8px;
   font-family: var(--font-sans);
-  font-size: clamp(0.58rem, 1.65vw, 0.67rem);
-  color: #E6DBCC;
-  line-height: 1.35;
+  font-size: clamp(0.66rem, 1.85vw, 0.74rem);
+  color: #E8DCCF;
+  line-height: 1.4;
 }
 
 .venue-detail-icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   color: #E0C17C;
   flex-shrink: 0;
   margin-top: 2px;
@@ -378,76 +393,37 @@
 
 .venue-detail-text {
   flex: 1;
+  min-width: 0;
   word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .venue-location-name {
   font-weight: 600;
   color: #FFFDF8;
+  font-size: clamp(0.70rem, 2.0vw, 0.80rem);
   display: block;
+  line-height: 1.35;
+  margin-bottom: 2px;
+  word-break: break-word;
 }
 
 .venue-location-addr {
-  font-size: clamp(0.54rem, 1.5vw, 0.60rem);
+  font-size: clamp(0.62rem, 1.7vw, 0.70rem);
   color: #BDB09E;
   display: block;
-  margin-top: 1px;
+  line-height: 1.35;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
-/* View Directions Pill Button */
-.venue-btn-directions {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: clamp(30px, 3.8vh, 34px);
-  padding: 4px clamp(10px, 2.8vw, 14px);
-  border: 1px solid rgba(224, 193, 124, 0.75);
-  border-radius: 20px;
-  background: rgba(14, 24, 46, 0.75);
-  color: #E0C17C;
-  font-family: var(--font-royal);
-  font-size: clamp(0.54rem, 1.5vw, 0.62rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  pointer-events: none; /* Uniform click handling across entire card */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-  transition: all 0.25s ease;
-}
-
-.venue-card:hover .venue-btn-directions {
-  background: rgba(24, 38, 70, 0.9);
-  border-color: rgba(255, 242, 178, 0.95);
-  color: #FFF2B2;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5), 0 0 8px rgba(212, 175, 55, 0.4);
-}
-
-.venue-btn-directions .directions-pin-icon {
-  width: 11px;
-  height: 11px;
-  fill: currentColor;
-}
-
-.venue-btn-directions .directions-chevron {
-  width: 10px;
-  height: 10px;
-  fill: currentColor;
-  transition: transform 0.25s ease;
-}
-
-.venue-card:hover .venue-btn-directions .directions-chevron {
-  transform: translateX(3px);
-}
-
-/* --------------------------------------------------------------------------
-   6. Map Thumbnail (Right Column)
-   -------------------------------------------------------------------------- */
-.venue-card-map-wrap {
-  width: clamp(88px, 25vw, 118px);
-  align-self: stretch;
+/* Map Preview Column (Right Side) */
+.venue-card-map-col {
+  width: clamp(96px, 27vw, 112px);
   flex-shrink: 0;
+  align-self: stretch;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   position: relative;
 }
@@ -455,8 +431,8 @@
 .venue-map-inner {
   width: 100%;
   height: 100%;
-  min-height: clamp(94px, 26vw, 124px);
-  border-radius: clamp(12px, 3.0vw, 15px);
+  min-height: 100px;
+  border-radius: clamp(10px, 2.6vw, 14px);
   border: 1.2px solid rgba(224, 193, 124, 0.75);
   box-shadow:
     0 4px 14px rgba(0, 0, 0, 0.55),
@@ -493,6 +469,63 @@
 .venue-card:hover .venue-map-iframe,
 .venue-card:hover .venue-map-fallback {
   transform: scale(1.06);
+}
+
+/* --------------------------------------------------------------------------
+   7. Card Tier 3: Bottom Action Row ("View Directions" Button)
+   -------------------------------------------------------------------------- */
+.venue-card-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-top: 2px;
+}
+
+.venue-btn-directions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 clamp(16px, 4.2vw, 22px);
+  border: 1.2px solid rgba(224, 193, 124, 0.75);
+  border-radius: 22px;
+  background: rgba(14, 24, 46, 0.75);
+  color: #E0C17C;
+  font-family: var(--font-royal);
+  font-size: clamp(0.58rem, 1.6vw, 0.66rem);
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  pointer-events: none; /* Uniform click handling across entire card */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.venue-card:hover .venue-btn-directions {
+  background: rgba(24, 38, 70, 0.95);
+  border-color: rgba(255, 242, 178, 0.95);
+  color: #FFF2B2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.45);
+}
+
+.venue-btn-directions .directions-pin-icon {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+.venue-btn-directions .directions-chevron {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.venue-card:hover .venue-btn-directions .directions-chevron {
+  transform: translateX(3px);
 }
 
 /* --------------------------------------------------------------------------
@@ -750,34 +783,63 @@
    -------------------------------------------------------------------------- */
 @media (max-width: 380px) {
   .venue-screen-title {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
   }
 
   .venue-card {
-    padding: 12px 10px;
-    gap: 8px;
+    padding: 14px 12px;
+    gap: 10px;
   }
 
-  .venue-card-map-wrap {
-    width: 82px;
+  .venue-card-main-row {
+    gap: 10px;
+  }
+
+  .venue-card-map-col {
+    width: 90px;
   }
 
   .venue-map-inner {
-    min-height: 88px;
+    min-height: 94px;
   }
 
   .venue-event-title {
-    font-size: 0.96rem;
+    font-size: 1.04rem;
   }
 
   .venue-detail-row {
-    font-size: 0.56rem;
+    font-size: 0.63rem;
+    gap: 6px;
   }
 
   .venue-btn-directions {
-    font-size: 0.50rem;
-    padding: 3px 8px;
-    min-height: 28px;
+    font-size: 0.54rem;
+    padding: 0 14px;
+    min-height: 44px;
+  }
+}
+
+/* Stack map below text only on ultra-narrow screens under 340px */
+@media (max-width: 339px) {
+  .venue-card-main-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .venue-card-map-col {
+    width: 100%;
+    height: 110px;
+    min-height: 110px;
+  }
+
+  .venue-card-action-row {
+    width: 100%;
+  }
+
+  .venue-btn-directions {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
   }
 }
 
@@ -806,7 +868,7 @@
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  z-index: 60 !important;
+  z-index: 70 !important;
   pointer-events: none !important;
   display: none;
   opacity: 0;
