@@ -1215,6 +1215,11 @@
       window.WeddingVenueDirections.reset();
     }
 
+    // Reset Screen 5 (Thank You Closing Screen)
+    if (window.WeddingThankYou && typeof window.WeddingThankYou.reset === 'function') {
+      window.WeddingThankYou.reset();
+    }
+
     // Reset Golden Lotus Bridge & Floating Replay FAB
     if (receptionBridgeEl) {
       if (typeof gsap !== 'undefined') gsap.killTweensOf(receptionBridgeEl);

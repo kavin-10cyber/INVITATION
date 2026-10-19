@@ -1,0 +1,481 @@
+/* ==========================================================================
+   THANK YOU CLOSING SCREEN - MODULAR STYLESHEET
+   Workspace: INVITATION (Deepak & Vikashini)
+   File: assets/css/thank-you.css
+   Purpose: Elegant, modern Indian wedding Thank You closing screen (Screen 5)
+            matching user reference image aesthetic and exact content.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Screen 5 Container Architecture (Docked Inside Card Slot)
+   -------------------------------------------------------------------------- */
+.invitation-card .invitation-screen.screen-5,
+.invitation-card.card-docked-fullscreen #invitation-screen-5 {
+  background: url('../images/thank_you_screen_bg.jpg') center top / 100% 100% no-repeat !important;
+  background-color: #FAF6EE !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  /* Top clearance for hanging floral & chandelier; bottom clearance for temple pavilion & lake */
+  padding: clamp(75px, 12vh, 105px) clamp(16px, 4.5vw, 24px) clamp(80px, 13vh, 115px) clamp(16px, 4.5vw, 24px) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(198, 161, 91, 0.35) transparent !important;
+  z-index: 50 !important;
+  will-change: transform, opacity !important;
+}
+
+.invitation-card .invitation-screen.screen-5::-webkit-scrollbar {
+  width: 3px;
+}
+
+.invitation-card .invitation-screen.screen-5::-webkit-scrollbar-thumb {
+  background: rgba(198, 161, 91, 0.4);
+  border-radius: 4px;
+}
+
+/* Screen 5 Hidden / Active States */
+.invitation-card .invitation-screen.screen-5.screen-hidden {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.invitation-card .invitation-screen.screen-5.screen-active {
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 50 !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Clean Replay FAB Auto-Hide Guard
+   IMMUTABLE SCOPE RULE: Never show replay button, RSVP, or share buttons on
+   the final Thank You closing screen. Keep it serene and uncluttered.
+   -------------------------------------------------------------------------- */
+body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Ambient Light Shimmer Overlay & Subtle Drifting Petals
+   -------------------------------------------------------------------------- */
+.ty-shimmer-scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 25%, rgba(255, 252, 242, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+  mix-blend-mode: soft-light;
+  z-index: 1;
+}
+
+.ty-petals-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.ty-petal {
+  position: absolute;
+  font-size: clamp(10px, 2.5vw, 14px);
+  opacity: 0.75;
+  filter: drop-shadow(0 2px 4px rgba(180, 80, 100, 0.25));
+  user-select: none;
+  animation: tyPetalFloat 9s ease-in-out infinite;
+}
+
+.ty-petal-1 {
+  top: 14%;
+  left: 12%;
+  animation-delay: 0s;
+  animation-duration: 8.5s;
+}
+
+.ty-petal-2 {
+  top: 22%;
+  right: 14%;
+  animation-delay: 2.2s;
+  animation-duration: 9.8s;
+  transform: rotate(45deg);
+}
+
+.ty-petal-3 {
+  top: 55%;
+  left: 16%;
+  animation-delay: 4.5s;
+  animation-duration: 11s;
+  font-size: clamp(9px, 2.2vw, 12px);
+}
+
+.ty-petal-4 {
+  top: 68%;
+  right: 18%;
+  animation-delay: 6.2s;
+  animation-duration: 10.5s;
+}
+
+@keyframes tyPetalFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(0.9);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(12px) translateX(6px) rotate(20deg) scale(1.0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(26px) translateX(-4px) rotate(40deg) scale(0.95);
+    opacity: 0.85;
+  }
+  75% {
+    transform: translateY(40px) translateX(8px) rotate(60deg) scale(1.0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(58px) translateX(2px) rotate(85deg) scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Content Wrapper: Balanced Vertical Flow
+   -------------------------------------------------------------------------- */
+.ty-content-wrapper {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: clamp(280px, 86vw, 360px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   5. Top Section: Hanging Finial Pip & Eyebrow
+   -------------------------------------------------------------------------- */
+.ty-header-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(2px, 0.6vh, 6px);
+}
+
+.ty-top-pip-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(3px, 0.6vh, 6px);
+  opacity: 0.9;
+}
+
+.ty-top-pip-svg {
+  filter: drop-shadow(0 1px 3px rgba(184, 134, 11, 0.35));
+}
+
+.ty-eyebrow-text {
+  font-family: var(--font-royal, 'Cinzel', serif);
+  font-size: clamp(0.50rem, 1.45vw, 0.58rem);
+  font-weight: 700;
+  letter-spacing: clamp(0.18em, 0.5vw, 0.24em);
+  color: #8C6320;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+/* --------------------------------------------------------------------------
+   6. Main Animated Heading: "Thank You" Calligraphy
+   -------------------------------------------------------------------------- */
+.ty-title-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: clamp(1px, 0.3vh, 4px) 0 clamp(4px, 0.8vh, 8px) 0;
+}
+
+.ty-main-heading {
+  font-family: 'Great Vibes', 'Alex Brush', cursive;
+  font-size: clamp(2.5rem, 8.8vw, 3.8rem);
+  font-weight: 400;
+  color: #4A0B16; /* Deep royal wine burgundy matching Screen 1 Couple Title */
+  margin: 0;
+  padding: 0;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(212, 175, 55, 0.32), 0 1px 2px rgba(74, 11, 22, 0.2);
+  transform-origin: center center;
+}
+
+/* Thin Champagne-Gold Flourish with Small Heart */
+.ty-flourish-wrap {
+  width: clamp(120px, 38vw, 175px);
+  height: clamp(16px, 2.5vh, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(2px, 0.4vh, 6px);
+}
+
+.ty-heart-flourish-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 4px rgba(184, 134, 11, 0.35));
+}
+
+/* --------------------------------------------------------------------------
+   7. Supporting Heading: "For Gracing Us With Your Presence & Blessings"
+   -------------------------------------------------------------------------- */
+.ty-supporting-heading {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(0.72rem, 2.25vw, 0.88rem);
+  font-weight: 600;
+  color: #5A1621;
+  letter-spacing: 0.02em;
+  line-height: 1.38;
+  margin: clamp(4px, 0.8vh, 8px) 0 clamp(6px, 1.0vh, 10px) 0;
+  padding: 0 8px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* --------------------------------------------------------------------------
+   8. Symmetrical Filigree Divider Ornaments
+   -------------------------------------------------------------------------- */
+.ty-divider-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: clamp(140px, 45vw, 190px);
+  margin: clamp(4px, 0.8vh, 8px) auto;
+  opacity: 0.85;
+}
+
+.ty-div-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #C6A15B 50%, transparent 100%);
+}
+
+.ty-div-line.left {
+  background: linear-gradient(90deg, transparent 0%, #C6A15B 100%);
+}
+
+.ty-div-line.right {
+  background: linear-gradient(90deg, #C6A15B 0%, transparent 100%);
+}
+
+.ty-div-gem {
+  color: #C6A15B;
+  font-size: 0.58rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+}
+
+/* --------------------------------------------------------------------------
+   9. Circular Antique-Gold Couple Monogram (D & V)
+   -------------------------------------------------------------------------- */
+.ty-monogram-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: clamp(4px, 0.8vh, 8px) 0 clamp(2px, 0.4vh, 6px) 0;
+}
+
+.ty-monogram-container {
+  position: relative;
+  width: clamp(82px, 23vw, 108px);
+  height: clamp(82px, 23vw, 108px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 12px rgba(184, 134, 11, 0.28));
+}
+
+.ty-monogram-wreath-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.ty-monogram-core {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ty-monogram-initials {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.4rem, 4.2vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1;
+  color: #8C6320;
+  background: linear-gradient(135deg, #FFF0B8 0%, #E5BE53 28%, #C69E3D 58%, #8F6218 85%, #E5BE53 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1.5px 3px rgba(74, 11, 22, 0.28));
+  transform: translateY(-1px);
+}
+
+.ty-monogram-amp {
+  font-size: 0.78em;
+  font-family: var(--font-royal, 'Cinzel', serif);
+  font-style: normal;
+  vertical-align: middle;
+  padding: 0 1px;
+}
+
+/* --------------------------------------------------------------------------
+   10. Couple Names & Tagline Section
+   -------------------------------------------------------------------------- */
+.ty-names-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: clamp(2px, 0.5vh, 6px) 0 clamp(4px, 0.8vh, 8px) 0;
+}
+
+.ty-couple-names {
+  font-family: var(--font-royal, 'Cinzel', serif);
+  font-size: clamp(0.78rem, 2.4vw, 0.96rem);
+  font-weight: 700;
+  color: #4A0B16;
+  letter-spacing: clamp(0.08em, 0.25vw, 0.12em);
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  line-height: 1.25;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+.ty-names-amp {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.25em;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: #C6A15B;
+  vertical-align: baseline;
+  padding: 0 2px;
+}
+
+.ty-couple-tagline {
+  font-family: var(--font-royal, 'Cinzel', serif);
+  font-size: clamp(0.44rem, 1.25vw, 0.52rem);
+  font-weight: 600;
+  color: #8C6320;
+  letter-spacing: clamp(0.12em, 0.35vw, 0.16em);
+  text-transform: uppercase;
+  margin: clamp(3px, 0.5vh, 5px) 0 0 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   11. Exact Replacement Paragraph
+   "Your love, blessings, and good wishes mean the world to us.
+    We are grateful to share this beautiful new beginning with you."
+   -------------------------------------------------------------------------- */
+.ty-message-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: clamp(6px, 1.2vh, 12px) 0 0 0;
+}
+
+.ty-message-paragraph {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(0.68rem, 2.15vw, 0.82rem);
+  font-weight: 500;
+  line-height: 1.62;
+  color: #3E1E22;
+  text-align: center;
+  max-width: clamp(260px, 82vw, 330px);
+  margin: 0;
+  padding: 0 6px;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.015em;
+}
+
+/* --------------------------------------------------------------------------
+   12. Responsive Fine-Tuning for Small Viewports (<= 360px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 360px) {
+  .invitation-card .invitation-screen.screen-5,
+  .invitation-card.card-docked-fullscreen #invitation-screen-5 {
+    padding-top: clamp(60px, 10vh, 75px) !important;
+    padding-bottom: clamp(65px, 11vh, 85px) !important;
+  }
+
+  .ty-main-heading {
+    font-size: 2.35rem;
+  }
+
+  .ty-monogram-container {
+    width: 78px;
+    height: 78px;
+  }
+
+  .ty-monogram-initials {
+    font-size: 1.35rem;
+  }
+
+  .ty-supporting-heading {
+    font-size: 0.70rem;
+    line-height: 1.32;
+  }
+
+  .ty-message-paragraph {
+    font-size: 0.66rem;
+    line-height: 1.55;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Reduced Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .ty-petal {
+    animation: none !important;
+    opacity: 0.4 !important;
+  }
+}
