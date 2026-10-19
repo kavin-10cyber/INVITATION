@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="assets/css/style.css?v=9.1">
   <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.6">
   <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.3">
-  <link rel="stylesheet" href="assets/css/thank-you.css?v=2.0">
+  <link rel="stylesheet" href="assets/css/thank-you.css?v=2.1">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -268,80 +268,39 @@
                           </div>
                         </div>
 
-                        <!-- Modern Rose-Gold Prismatic Crystal Refraction Bridge (Screen 4 -> Screen 5) -->
-                        <div class="venue-crystal-bridge-overlay" id="venue-crystal-bridge" aria-hidden="true">
-                          <!-- Dark Backdrop Scrim (Smoothly dims Venue Screen) -->
-                          <div class="crystal-backdrop-scrim"></div>
+                        <!-- Cinematic Rose-Gold Optical Lens Flare & Film Light Leak Bridge (Screen 4 -> Screen 5) -->
+                        <div class="venue-flare-bridge-overlay" id="venue-flare-bridge" aria-hidden="true">
+                          <!-- Subtle Filmic Dark Vignette -->
+                          <div class="flare-scrim"></div>
 
-                          <!-- Prismatic Caustic Aurora & Refraction Rays (Blush-Pink & Champagne Gold) -->
-                          <div class="crystal-caustics-layer">
-                            <div class="crystal-radial-aurora"></div>
-                            <div class="crystal-refraction-rays"></div>
+                          <!-- Soft Organic Rose-Gold & Champagne Film Light Leak Bloom -->
+                          <div class="flare-light-leak" id="flare-light-leak"></div>
+
+                          <!-- Cinematic Optical Flare Core & Anamorphic Streak Assembly -->
+                          <div class="flare-stage" id="flare-stage">
+                            <!-- Ultra-wide Horizontal Anamorphic Light Streak -->
+                            <div class="flare-anamorphic-streak"></div>
+                            <div class="flare-anamorphic-glow"></div>
+
+                            <!-- Radiant Lens Core Orb -->
+                            <div class="flare-core-orb"></div>
+                            <div class="flare-starburst"></div>
+
+                            <!-- Soft Out-of-Focus Optical Bokeh Orbs -->
+                            <div class="flare-bokeh-orb bokeh-1"></div>
+                            <div class="flare-bokeh-orb bokeh-2"></div>
+                            <div class="flare-bokeh-orb bokeh-3"></div>
                           </div>
 
-                          <!-- 3D Perspective Stage for Faceted Crystal Prism -->
-                          <div class="crystal-perspective-wrapper">
-                            <div class="crystal-gem-assembly" id="crystal-gem-assembly">
-                              <!-- Faceted Crystal Prism SVG with Rose-Gold / Diamond Bevels -->
-                              <svg class="crystal-prism-svg" viewBox="0 0 160 200" width="140" height="175" fill="none" aria-hidden="true">
-                                <defs>
-                                  <linearGradient id="roseGoldCore" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#FFF0F5" stop-opacity="0.95" />
-                                    <stop offset="35%" stop-color="#FCE7EC" stop-opacity="0.85" />
-                                    <stop offset="70%" stop-color="#E8A5B8" stop-opacity="0.7" />
-                                    <stop offset="100%" stop-color="#C27484" stop-opacity="0.9" />
-                                  </linearGradient>
-                                  <linearGradient id="roseGoldFacetTop" x1="20%" y1="0%" x2="80%" y2="100%">
-                                    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
-                                    <stop offset="50%" stop-color="#FAD4DE" stop-opacity="0.65" />
-                                    <stop offset="100%" stop-color="#DDA0B2" stop-opacity="0.45" />
-                                  </linearGradient>
-                                  <linearGradient id="roseGoldFacetLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#FFF5F7" stop-opacity="0.8" />
-                                    <stop offset="100%" stop-color="#B86B7D" stop-opacity="0.6" />
-                                  </linearGradient>
-                                  <linearGradient id="roseGoldFacetRight" x1="100%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stop-color="#FDE8EE" stop-opacity="0.9" />
-                                    <stop offset="100%" stop-color="#9C4D61" stop-opacity="0.65" />
-                                  </linearGradient>
-                                  <linearGradient id="goldSpecBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#FFFFFF" />
-                                    <stop offset="35%" stop-color="#FCE4EC" />
-                                    <stop offset="70%" stop-color="#D4AF37" />
-                                    <stop offset="100%" stop-color="#E8A5B8" />
-                                  </linearGradient>
-                                  <filter id="crystalGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
-                                    <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#E8A5B8" flood-opacity="0.6"/>
-                                    <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="#FFF0F5" flood-opacity="0.8"/>
-                                  </filter>
-                                </defs>
-                                <!-- Top Apex Pyramid Facets -->
-                                <polygon points="80,15 40,75 80,95" fill="url(#roseGoldFacetLeft)" stroke="url(#goldSpecBorder)" stroke-width="1.2" />
-                                <polygon points="80,15 120,75 80,95" fill="url(#roseGoldFacetRight)" stroke="url(#goldSpecBorder)" stroke-width="1.2" />
-                                <polygon points="80,15 40,75 120,75" fill="url(#roseGoldFacetTop)" stroke="url(#goldSpecBorder)" stroke-width="1.0" />
-                                <!-- Bottom Inverted Pyramid Facets -->
-                                <polygon points="80,95 40,75 80,185" fill="url(#roseGoldCore)" stroke="url(#goldSpecBorder)" stroke-width="1.2" />
-                                <polygon points="80,95 120,75 80,185" fill="url(#roseGoldFacetRight)" stroke="url(#goldSpecBorder)" stroke-width="1.2" />
-                                <!-- Inner Specular Light Core -->
-                                <circle cx="80" cy="95" r="16" fill="#FFFFFF" opacity="0.85" filter="url(#crystalGlowFilter)" />
-                                <circle cx="80" cy="95" r="7" fill="#FFF5F8" />
-                              </svg>
-                              <!-- Specular Shimmer Sheen across Crystal -->
-                              <div class="crystal-specular-sweep"></div>
-                            </div>
+                          <!-- Floating Cinematic Stardust Glimmers -->
+                          <div class="flare-stardust-layer">
+                            <span class="flare-dust d-1"></span>
+                            <span class="flare-dust d-2"></span>
+                            <span class="flare-dust d-3"></span>
+                            <span class="flare-dust d-4"></span>
+                            <span class="flare-dust d-5"></span>
+                            <span class="flare-dust d-6"></span>
                           </div>
-
-                          <!-- Floating Rose-Gold Sparkle Glints -->
-                          <div class="crystal-sparkles-container" aria-hidden="true">
-                            <span class="crystal-glint c-glint-1">✦</span>
-                            <span class="crystal-glint c-glint-2">✧</span>
-                            <span class="crystal-glint c-glint-3">✦</span>
-                            <span class="crystal-glint c-glint-4">✧</span>
-                            <span class="crystal-glint c-glint-5">✦</span>
-                          </div>
-
-                          <!-- Full-Screen Radiant Pearlescent Blush-Pink & Rose-Gold Exposure Bloom -->
-                          <div class="crystal-pink-bloom" id="crystal-pink-bloom"></div>
                         </div>
 
                         <!-- SCREEN 1: EMOTIONAL INTRODUCTION -->
@@ -1233,7 +1192,7 @@
   <script src="assets/js/envelope.js?v=10.3" defer></script>
   <script src="assets/js/theme-switcher.js" defer></script>
   <script src="assets/js/venue-directions.js?v=3.3" defer></script>
-  <script src="assets/js/thank-you.js?v=2.0" defer></script>
+  <script src="assets/js/thank-you.js?v=2.1" defer></script>
   <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
 

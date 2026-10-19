@@ -2,8 +2,8 @@
    THANK YOU CLOSING SCREEN - MODULAR STYLESHEET
    Workspace: INVITATION (Deepak & Vikashini)
    File: assets/css/thank-you.css
-   Purpose: Elegant, modern Indian wedding Thank You closing screen (Screen 5)
-            matching user reference image aesthetic and exact content.
+   Purpose: Mobile-first luxury Thank You closing screen (Screen 5) matching
+            user reference image aesthetic and exact replacement content.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -18,8 +18,8 @@
   width: 100% !important;
   height: 100% !important;
   max-height: 100% !important;
-  /* Top clearance for hanging floral & chandelier; bottom clearance for temple pavilion & lake */
-  padding: clamp(75px, 12vh, 105px) clamp(16px, 4.5vw, 24px) clamp(80px, 13vh, 115px) clamp(16px, 4.5vw, 24px) !important;
+  /* Top clearance for floral arch & top lotus; bottom clearance for water, pavilion & marble steps */
+  padding: clamp(92px, 13.5vh, 125px) clamp(20px, 5.5vw, 32px) clamp(180px, 27vh, 240px) clamp(20px, 5.5vw, 32px) !important;
   box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
@@ -79,7 +79,7 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 25%, rgba(255, 252, 242, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+  background: radial-gradient(circle at 50% 28%, rgba(255, 252, 242, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
   mix-blend-mode: soft-light;
   z-index: 1;
 }
@@ -173,26 +173,14 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
 }
 
 /* --------------------------------------------------------------------------
-   5. Top Section: Hanging Finial Pip & Eyebrow
+   5. Top Section: Eyebrow Text (Below Background Lotus Motif)
    -------------------------------------------------------------------------- */
 .ty-header-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: clamp(2px, 0.6vh, 6px);
-}
-
-.ty-top-pip-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: clamp(3px, 0.6vh, 6px);
-  opacity: 0.9;
-}
-
-.ty-top-pip-svg {
-  filter: drop-shadow(0 1px 3px rgba(184, 134, 11, 0.35));
+  margin-bottom: clamp(2px, 0.4vh, 4px);
 }
 
 .ty-eyebrow-text {
@@ -205,42 +193,45 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   margin: 0;
   padding: 0;
   line-height: 1.2;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 /* --------------------------------------------------------------------------
-   6. Main Animated Heading: "Thank You" Calligraphy
+   6. Main Animated Heading: "Thank You" Calligraphy + Heart Flourish
    -------------------------------------------------------------------------- */
 .ty-title-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: clamp(1px, 0.3vh, 4px) 0 clamp(4px, 0.8vh, 8px) 0;
+  margin: clamp(1px, 0.2vh, 3px) 0 clamp(4px, 0.7vh, 7px) 0;
 }
 
 .ty-main-heading {
   font-family: 'Great Vibes', 'Alex Brush', cursive;
-  font-size: clamp(2.5rem, 8.8vw, 3.8rem);
+  font-size: clamp(2.6rem, 9.0vw, 3.8rem);
   font-weight: 400;
-  color: #4A0B16; /* Deep royal wine burgundy matching Screen 1 Couple Title */
-  margin: 0;
-  padding: 0;
   line-height: 1.08;
   letter-spacing: 0.01em;
   text-align: center;
-  text-shadow: 0 2px 14px rgba(212, 175, 55, 0.32), 0 1px 2px rgba(74, 11, 22, 0.2);
+  margin: 0;
+  padding: 0;
+  /* Regal wine burgundy transitioning into warm antique gold */
+  background: linear-gradient(135deg, #4A0B16 0%, #5E1220 48%, #A87820 82%, #C6A15B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(198, 161, 91, 0.35));
   transform-origin: center center;
 }
 
 /* Thin Champagne-Gold Flourish with Small Heart */
 .ty-flourish-wrap {
-  width: clamp(120px, 38vw, 175px);
+  width: clamp(130px, 42vw, 185px);
   height: clamp(16px, 2.5vh, 22px);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: clamp(2px, 0.4vh, 6px);
+  margin-top: clamp(2px, 0.3vh, 5px);
 }
 
 .ty-heart-flourish-svg {
@@ -260,10 +251,10 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   color: #5A1621;
   letter-spacing: 0.02em;
   line-height: 1.38;
-  margin: clamp(4px, 0.8vh, 8px) 0 clamp(6px, 1.0vh, 10px) 0;
+  margin: clamp(3px, 0.6vh, 6px) 0 clamp(5px, 0.8vh, 8px) 0;
   padding: 0 8px;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
 }
 
 /* --------------------------------------------------------------------------
@@ -274,15 +265,14 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: clamp(140px, 45vw, 190px);
-  margin: clamp(4px, 0.8vh, 8px) auto;
+  width: clamp(130px, 42vw, 175px);
+  margin: clamp(3px, 0.6vh, 6px) auto;
   opacity: 0.85;
 }
 
 .ty-div-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, #C6A15B 50%, transparent 100%);
 }
 
 .ty-div-line.left {
@@ -295,70 +285,40 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
 
 .ty-div-gem {
   color: #C6A15B;
-  font-size: 0.58rem;
+  font-size: 0.54rem;
   line-height: 1;
   filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
 }
 
 /* --------------------------------------------------------------------------
    9. Circular Antique-Gold Couple Monogram (D & V)
+   Extracted directly from user reference image with floral double ring & initials
    -------------------------------------------------------------------------- */
 .ty-monogram-section {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: clamp(4px, 0.8vh, 8px) 0 clamp(2px, 0.4vh, 6px) 0;
+  margin: clamp(4px, 0.8vh, 8px) 0 clamp(2px, 0.4vh, 5px) 0;
 }
 
 .ty-monogram-container {
   position: relative;
-  width: clamp(82px, 23vw, 108px);
-  height: clamp(82px, 23vw, 108px);
+  width: clamp(135px, 40vw, 175px);
+  height: auto;
+  aspect-ratio: 296 / 198;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 4px 12px rgba(184, 134, 11, 0.28));
+  filter: drop-shadow(0 3px 10px rgba(184, 134, 11, 0.25));
 }
 
-.ty-monogram-wreath-img {
-  position: absolute;
-  inset: 0;
+.ty-monogram-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   pointer-events: none;
-}
-
-.ty-monogram-core {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-.ty-monogram-initials {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(1.4rem, 4.2vw, 1.85rem);
-  font-weight: 500;
-  line-height: 1;
-  color: #8C6320;
-  background: linear-gradient(135deg, #FFF0B8 0%, #E5BE53 28%, #C69E3D 58%, #8F6218 85%, #E5BE53 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1.5px 3px rgba(74, 11, 22, 0.28));
-  transform: translateY(-1px);
-}
-
-.ty-monogram-amp {
-  font-size: 0.78em;
-  font-family: var(--font-royal, 'Cinzel', serif);
-  font-style: normal;
-  vertical-align: middle;
-  padding: 0 1px;
+  user-select: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -369,7 +329,7 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: clamp(2px, 0.5vh, 6px) 0 clamp(4px, 0.8vh, 8px) 0;
+  margin: clamp(2px, 0.4vh, 5px) 0 clamp(4px, 0.7vh, 7px) 0;
 }
 
 .ty-couple-names {
@@ -403,9 +363,9 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   color: #8C6320;
   letter-spacing: clamp(0.12em, 0.35vw, 0.16em);
   text-transform: uppercase;
-  margin: clamp(3px, 0.5vh, 5px) 0 0 0;
+  margin: clamp(3px, 0.4vh, 5px) 0 0 0;
   padding: 0;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 /* --------------------------------------------------------------------------
@@ -418,7 +378,7 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: clamp(6px, 1.2vh, 12px) 0 0 0;
+  margin: clamp(6px, 1.0vh, 10px) 0 0 0;
 }
 
 .ty-message-paragraph {
@@ -437,13 +397,13 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
 }
 
 /* --------------------------------------------------------------------------
-   12. Responsive Fine-Tuning for Small Viewports (<= 360px)
+   12. Responsive Adjustments for Compact Mobile Screens (<= 360px)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 360px) {
   .invitation-card .invitation-screen.screen-5,
   .invitation-card.card-docked-fullscreen #invitation-screen-5 {
-    padding-top: clamp(60px, 10vh, 75px) !important;
-    padding-bottom: clamp(65px, 11vh, 85px) !important;
+    padding-top: clamp(75px, 11vh, 90px) !important;
+    padding-bottom: clamp(140px, 22vh, 180px) !important;
   }
 
   .ty-main-heading {
@@ -451,12 +411,7 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   }
 
   .ty-monogram-container {
-    width: 78px;
-    height: 78px;
-  }
-
-  .ty-monogram-initials {
-    font-size: 1.35rem;
+    width: 125px;
   }
 
   .ty-supporting-heading {
@@ -478,187 +433,4 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
     animation: none !important;
     opacity: 0.4 !important;
   }
-}
-
-/* --------------------------------------------------------------------------
-   14. Modern Rose-Gold Prismatic Crystal Refraction Bridge (Screen 4 -> Screen 5)
-   Ultra-Luxury Jewelry / Cartier-Inspired Transition with Soft Blush-Pink Wash
-   -------------------------------------------------------------------------- */
-.venue-crystal-bridge-overlay {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 70 !important;
-  pointer-events: none !important;
-  display: none;
-  opacity: 0;
-  will-change: transform, opacity;
-  border-radius: inherit !important;
-  overflow: hidden !important;
-}
-
-.venue-crystal-bridge-overlay.active {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* 14.1 Dark Midnight Backdrop Scrim (Smoothly masks Screen 4 Navy) */
-.crystal-backdrop-scrim {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(12, 18, 32, 0.94) 0%, rgba(5, 11, 24, 0.98) 70%, rgba(2, 6, 15, 1) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  pointer-events: none;
-}
-
-/* 14.2 Prismatic Caustics & Refraction Rays Layer */
-.crystal-caustics-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-/* Soft Ethereal Blush-Pink & Champagne Radial Aurora */
-.crystal-radial-aurora {
-  position: absolute;
-  width: clamp(280px, 80vw, 380px);
-  height: clamp(280px, 80vw, 380px);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 235, 242, 0.6) 0%, rgba(247, 192, 208, 0.4) 35%, rgba(224, 193, 124, 0.22) 60%, transparent 75%);
-  filter: blur(28px);
-  transform: scale(0.6);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-/* Multi-Chromatic Prismatic Caustic Fan */
-.crystal-refraction-rays {
-  position: absolute;
-  width: clamp(340px, 95vw, 460px);
-  height: clamp(340px, 95vw, 460px);
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg at 50% 50%,
-    transparent 0deg,
-    rgba(255, 240, 245, 0.45) 20deg,
-    transparent 45deg,
-    rgba(247, 185, 202, 0.55) 75deg,
-    transparent 110deg,
-    rgba(254, 219, 226, 0.45) 150deg,
-    transparent 185deg,
-    rgba(224, 193, 124, 0.38) 220deg,
-    transparent 260deg,
-    rgba(255, 215, 228, 0.5) 300deg,
-    transparent 340deg,
-    rgba(255, 240, 245, 0.45) 360deg
-  );
-  filter: blur(10px);
-  mix-blend-mode: screen;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-/* 14.3 3D Perspective Stage for Faceted Crystal Prism */
-.crystal-perspective-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1000px;
-  perspective-origin: 50% 50%;
-  pointer-events: none;
-}
-
-.crystal-gem-assembly {
-  position: relative;
-  width: 140px;
-  height: 175px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
-}
-
-.crystal-prism-svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 14px 30px rgba(194, 116, 132, 0.45)) drop-shadow(0 0 25px rgba(255, 240, 245, 0.65));
-  will-change: transform;
-}
-
-/* Specular Shimmer Sheen across Crystal Facets */
-.crystal-specular-sweep {
-  position: absolute;
-  top: -55%;
-  left: -65%;
-  width: 50%;
-  height: 210%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.6) 45%,
-    rgba(255, 245, 248, 0.95) 50%,
-    rgba(255, 255, 255, 0.6) 55%,
-    transparent 100%
-  );
-  transform: rotate(38deg);
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-/* 14.4 Floating Rose-Gold Sparkle Glints */
-.crystal-sparkles-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.crystal-glint {
-  position: absolute;
-  color: #FFF0F5;
-  text-shadow: 0 0 8px #F492A7, 0 0 16px #FFFFFF;
-  font-size: 14px;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-.c-glint-1 { top: 32%; left: 24%; font-size: 16px; }
-.c-glint-2 { top: 26%; right: 26%; font-size: 12px; }
-.c-glint-3 { bottom: 34%; left: 28%; font-size: 14px; }
-.c-glint-4 { bottom: 28%; right: 23%; font-size: 15px; }
-.c-glint-5 { top: 48%; right: 18%; font-size: 11px; }
-
-/* 14.5 Full-Screen Radiant Pearlescent Blush-Pink & Rose-Gold Exposure Bloom
-   CRITICAL BRIDGE ELEMENT: Fills screen with soft, ethereal pink morning light
-   to flawlessly wash out the dark navy and reveal the light blush-pink Thank You theme! */
-.crystal-pink-bloom {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at 50% 48%,
-    #FFFFFF 0%,
-    #FFF2F6 26%,
-    #FDE4EB 52%,
-    #F8C8D4 78%,
-    #F0B2C0 100%
-  );
-  opacity: 0;
-  z-index: 25;
-  will-change: transform, opacity;
 }
