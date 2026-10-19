@@ -378,21 +378,21 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: clamp(6px, 1.0vh, 10px) 0 0 0;
+  margin: calc(clamp(6px, 1.0vh, 10px) + 1.5cm) 0 0 0;
 }
 
 .ty-message-paragraph {
   font-family: var(--font-serif, 'Playfair Display', serif);
   font-style: italic;
-  font-size: clamp(0.68rem, 2.15vw, 0.82rem);
-  font-weight: 500;
+  font-size: clamp(1.02rem, 3.25vw, 1.23rem);
+  font-weight: 600;
   line-height: 1.62;
-  color: #3E1E22;
+  color: #7E5516;
   text-align: center;
-  max-width: clamp(260px, 82vw, 330px);
+  max-width: clamp(280px, 88vw, 360px);
   margin: 0;
   padding: 0 6px;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
   letter-spacing: 0.015em;
 }
 
@@ -420,7 +420,7 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   }
 
   .ty-message-paragraph {
-    font-size: 0.66rem;
+    font-size: 0.99rem;
     line-height: 1.55;
   }
 }
