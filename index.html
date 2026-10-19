@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="assets/css/style.css?v=9.0">
   <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.6">
-  <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.0">
+  <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.1">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -880,13 +880,21 @@
 
                           </div> <!-- /.venue-cards-list -->
 
-                          <!-- Action Section: Add to Calendar -->
+                          <!-- Action Section: Add to Calendar & Scroll Indicator -->
                           <div class="venue-calendar-action-section">
                             <button type="button" id="btn-add-calendar" class="btn-add-calendar" aria-label="Add Grand Reception to your calendar">
                               <svg class="calendar-btn-icon" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h2v2h2v2h-2v2h-2v-2h-2v-2h2v-2z"/>
                               </svg>
                               <span class="calendar-btn-text">Add to Calendar</span>
+                            </button>
+
+                            <!-- S4 Scroll Indicator Button (Exact venue button style with hopping arrow) -->
+                            <button type="button" id="btn-venue-scroll" class="btn-venue-scroll" aria-label="Scroll Venue Screen" title="Scroll down">
+                              <span class="venue-btn-text">SCROLL</span>
+                              <svg class="venue-btn-arrow" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                                <path d="M12 3c-.55 0-1 .45-1 1v11.17l-3.59-3.58a.996.996 0 1 0-1.41 1.41l5.3 5.29c.39.39 1.02.39 1.41 0l5.3-5.29a.996.996 0 1 0-1.41-1.41L13 15.17V4c0-.55-.45-1-1-1z"/>
+                              </svg>
                             </button>
                           </div>
 
@@ -1045,7 +1053,7 @@
   <script src="assets/js/scratch-card.js?v=5.7" defer></script>
   <script src="assets/js/envelope.js?v=10.3" defer></script>
   <script src="assets/js/theme-switcher.js" defer></script>
-  <script src="assets/js/venue-directions.js?v=3.0" defer></script>
+  <script src="assets/js/venue-directions.js?v=3.1" defer></script>
   <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
 

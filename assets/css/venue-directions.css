@@ -575,6 +575,103 @@
 }
 
 /* --------------------------------------------------------------------------
+   7b. "Scroll" Indicator Button (Exact Venue Button Style with Hopping Arrow)
+   -------------------------------------------------------------------------- */
+.btn-venue-scroll {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: clamp(34px, 4.4vh, 40px);
+  padding: clamp(7px, 1.2vh, 9px) clamp(18px, 5.0vw, 24px);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 30%, #FFECA8 0%, #D4AF37 55%, #996515 100%);
+  border: 1.5px solid rgba(255, 242, 178, 0.92);
+  color: #3A050E;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(212, 175, 55, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s ease;
+  animation: scrollBtnHop 1.4s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+  outline: none;
+  pointer-events: auto;
+  box-sizing: border-box;
+  will-change: transform, box-shadow;
+  white-space: nowrap;
+  margin-top: clamp(14px, 2.0vh, 18px);
+}
+
+.btn-venue-scroll:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(212, 175, 55, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+.btn-venue-scroll:active {
+  transform: scale(0.95);
+}
+
+.btn-venue-scroll .venue-btn-text {
+  font-family: var(--font-royal);
+  font-size: clamp(0.70rem, 2.2vw, 0.80rem);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  color: #3A050E;
+  -webkit-text-stroke: 0.40px #3A050E;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.btn-venue-scroll .venue-btn-arrow {
+  width: 15px;
+  height: 15px;
+  color: #3A050E;
+  display: block;
+  stroke: #3A050E;
+  stroke-width: 0.9;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-venue-scroll:hover .venue-btn-arrow {
+  transform: translateY(2.5px);
+}
+
+.btn-venue-scroll.is-scrolled-down .venue-btn-arrow {
+  transform: rotate(180deg);
+}
+
+.btn-venue-scroll.is-scrolled-down:hover .venue-btn-arrow {
+  transform: rotate(180deg) translateY(2.5px);
+}
+
+@keyframes scrollBtnHop {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.6),
+      0 0 14px rgba(212, 175, 55, 0.45);
+  }
+  25% {
+    transform: translateY(-5px);
+    box-shadow:
+      0 9px 24px rgba(0, 0, 0, 0.7),
+      0 0 20px rgba(212, 175, 55, 0.65);
+  }
+  40% {
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
    8. Calendar Confirmation Modal
    -------------------------------------------------------------------------- */
 .calendar-modal-backdrop {

@@ -157,7 +157,35 @@
       });
     }
 
-    // 6. Touch swipe back to Screen 3 when at top of Screen 4
+    // 6. Scroll Indicator Button Click & Tracking
+    const btnVenueScroll = document.getElementById('btn-venue-scroll');
+    if (btnVenueScroll && screen4El) {
+      btnVenueScroll.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const maxScroll = screen4El.scrollHeight - screen4El.clientHeight;
+        // If near bottom, scroll smoothly back to top; otherwise scroll down by 320px
+        if (maxScroll > 20 && screen4El.scrollTop >= maxScroll - 40) {
+          screen4El.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          screen4El.scrollBy({ top: 320, behavior: 'smooth' });
+        }
+      });
+
+      // Update arrow orientation when user reaches bottom
+      screen4El.addEventListener('scroll', () => {
+        const maxScroll = screen4El.scrollHeight - screen4El.clientHeight;
+        if (maxScroll > 30 && screen4El.scrollTop >= maxScroll - 40) {
+          btnVenueScroll.classList.add('is-scrolled-down');
+          btnVenueScroll.setAttribute('title', 'Scroll to top');
+        } else {
+          btnVenueScroll.classList.remove('is-scrolled-down');
+          btnVenueScroll.setAttribute('title', 'Scroll down');
+        }
+      }, { passive: true });
+    }
+
+    // 7. Touch swipe back to Screen 3 when at top of Screen 4
     if (screen4El) {
       screen4El.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
