@@ -45,7 +45,7 @@
     if (typeof gsap !== 'undefined') {
       if (envelopeCardSlot) {
         gsap.set(envelopeCardSlot, {
-          clipPath: 'inset(-2000px -2000px 0px -2000px)',
+          clipPath: 'inset(-2000px 0px 0px 0px)',
           zIndex: 5
         });
       }
@@ -435,7 +435,7 @@
 
         if (envelopeCardSlot) {
           gsap.set(envelopeCardSlot, {
-            clipPath: 'inset(-2000px -2000px 0px -2000px)',
+            clipPath: 'inset(-2000px 0px 0px 0px)',
             zIndex: 5
           });
         }
@@ -823,7 +823,7 @@
         tl.add(() => {
           if (envelopeCardSlot) {
             gsap.set(envelopeCardSlot, {
-              clipPath: 'inset(-2000px -2000px 0px -2000px)',
+              clipPath: 'inset(-2000px 0px 0px 0px)',
               zIndex: 5
             });
           }
@@ -1000,7 +1000,7 @@
 
       if (envelopeCardSlot && typeof gsap !== 'undefined') {
         gsap.set(envelopeCardSlot, {
-          clipPath: 'inset(-2000px -2000px 0px -2000px)',
+          clipPath: 'inset(-2000px 0px 0px 0px)',
           zIndex: 5
         });
       }

@@ -66,7 +66,7 @@
 
 @media (max-width: 480px) {
   :root {
-    --card-w: clamp(250px, 78vw, 290px);
+    --card-w: calc(var(--envelope-w) * 0.90);
   }
 }
 
@@ -2215,6 +2215,108 @@
   flex: 1;
   min-height: clamp(160px, 25vh, 210px);
   width: 100%;
+}
+
+/* ==========================================================================
+   SCREEN 3 - VENUE ACTION BUTTON (RIGHT OF VIKASHINI AT BOTTOM)
+   Rectangular Gold Bar in Replay Button Theme:
+   Rich Metallic Gold Bar, 1.5px Bevel Border, Bold Royal Wine Typography,
+   Down Arrow Icon, Shifted Leftward, Gold Glow Elevation, and Gentle Hop.
+   ========================================================================== */
+.invitation-card .screen3-venue-action-wrap {
+  position: absolute !important;
+  bottom: clamp(48px, 9vh, 76px) !important;
+  right: clamp(34px, 9.5vw, 58px) !important;
+  z-index: 50 !important;
+  pointer-events: auto !important;
+}
+
+.invitation-card .btn-reception-venue {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: clamp(34px, 4.4vh, 40px);
+  padding: clamp(7px, 1.2vh, 9px) clamp(16px, 4.5vw, 20px);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 30%, #FFECA8 0%, #D4AF37 55%, #996515 100%);
+  border: 1.5px solid rgba(255, 242, 178, 0.92);
+  color: #3A050E;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(212, 175, 55, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  animation: venueBtnHop 1.4s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+  outline: none;
+  pointer-events: auto;
+  box-sizing: border-box;
+  will-change: transform, box-shadow;
+  white-space: nowrap;
+}
+
+.invitation-card .btn-reception-venue:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(212, 175, 55, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+.invitation-card .btn-reception-venue:active {
+  transform: scale(0.95);
+}
+
+.invitation-card .btn-reception-venue .venue-btn-text {
+  font-family: var(--font-royal);
+  font-size: clamp(0.70rem, 2.2vw, 0.80rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: #3A050E;
+  -webkit-text-stroke: 0.45px #3A050E;
+  text-stroke: 0.45px #3A050E;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.invitation-card .btn-reception-venue .venue-btn-arrow {
+  width: 15px;
+  height: 15px;
+  color: #3A050E;
+  display: block;
+  stroke: #3A050E;
+  stroke-width: 0.9;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.invitation-card .btn-reception-venue:hover .venue-btn-arrow {
+  transform: translateY(2.5px);
+}
+
+@keyframes venueBtnHop {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.6),
+      0 0 14px rgba(212, 175, 55, 0.45);
+  }
+  25% {
+    transform: translateY(-5px);
+    box-shadow:
+      0 9px 24px rgba(0, 0, 0, 0.7),
+      0 0 20px rgba(212, 175, 55, 0.7);
+  }
+  45% {
+    transform: translateY(0);
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.6),
+      0 0 14px rgba(212, 175, 55, 0.45);
+  }
 }
 
 /* Golden Lotus Transition Bridge Overlay */

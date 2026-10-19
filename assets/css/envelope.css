@@ -156,8 +156,8 @@
   z-index: 5;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  clip-path: inset(-2000px -2000px 0px -2000px);
-  -webkit-clip-path: inset(-2000px -2000px 0px -2000px);
+  clip-path: inset(-2000px 0px 0px 0px);
+  -webkit-clip-path: inset(-2000px 0px 0px 0px);
   pointer-events: none;
 }
 

@@ -33,3 +33,12 @@ All conversations must adhere to the single source of truth for global objects:
 Every conversation communicates with future and concurrent conversations by keeping `.agents/PROJECT_CONTEXT.md` continuously up to date:
 - **Before editing**: Read `.agents/PROJECT_CONTEXT.md` to see what changes were made recently.
 - **After editing**: Append your change with date, file paths, and rationale to the **Active Conversation Synchronization Log** in `.agents/PROJECT_CONTEXT.md`.
+
+---
+
+## 4. Mandatory Immediate Git Push Protocol
+Whenever ANY conversation, subagent, or user-facing task modifies any file in this codebase:
+- **IMMEDIATELY stage all modified project files**: `git add <files>`
+- **Commit with descriptive semantic message**: `git commit -m "feat/fix: ..."`
+- **Immediately push to GitHub**: `git push origin main`
+- **Zero Local Drift**: No turn may conclude with unpushed commits or uncommitted working trees. This guarantees absolute parity across all parallel sessions and remotes.

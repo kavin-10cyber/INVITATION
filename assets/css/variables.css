@@ -46,6 +46,6 @@
   --envelope-h: calc(var(--envelope-w) * (254 / 447));
   /* Exact flap height from reference (162 / 254) matching V-tip and seal */
   --flap-h: calc(var(--envelope-h) * (162 / 254));
-  --card-w: calc(var(--envelope-w) * 0.92);
-  --card-h: calc(var(--envelope-h) * 0.92);
+  --card-w: calc(var(--envelope-w) * 0.90);
+  --card-h: calc(var(--envelope-h) * 0.90);
 }

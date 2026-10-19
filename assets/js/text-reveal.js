@@ -185,6 +185,13 @@
       });
     }
 
+    const btnReceptionVenue = document.getElementById('btn-reception-venue');
+    if (btnReceptionVenue) {
+      btnReceptionVenue.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
     // Wheel & Touch swipe navigation between Screen 2 and Screen 3
     window.addEventListener('wheel', handleScrollNavigation, { passive: true });
     window.addEventListener('touchstart', (e) => {
@@ -527,7 +534,7 @@
       if (currentState === STATES.TRANSITIONING) {
         showScreen2Final();
       }
-    }, 700);
+    }, 2400);
     activeTimeouts.push(fallbackTimer);
 
     if (typeof gsap === 'undefined') {
@@ -565,6 +572,7 @@
       });
     }
 
+    // 2.0-second cinematic Warm Antique-Gold page transition timeline
     const tl = gsap.timeline({
       onComplete: () => {
         clearTimeout(fallbackTimer);
@@ -572,45 +580,45 @@
       }
     });
 
-    // 1. Soft gold veil briefly fades in
+    // 1. Soft warm antique-gold veil glides in with rich radiance (0.65s)
     if (overlayEl) {
       tl.to(overlayEl, {
-        opacity: 0.55,
-        duration: 0.35,
+        opacity: 0.68,
+        duration: 0.65,
         ease: 'power2.out'
       }, 0);
     }
 
-    // 2. Screen 1 fades out smoothly
+    // 2. Screen 1 recedes smoothly into the golden mist (0.90s)
     if (screen1El) {
       tl.to(screen1El, {
         opacity: 0,
-        scale: 0.96,
-        y: -10,
-        duration: 0.55,
+        scale: 0.95,
+        y: -12,
+        duration: 0.90,
         ease: 'power2.inOut'
-      }, 0.1);
+      }, 0.25);
     }
 
-    // 3. Screen 2 emerges gracefully
+    // 3. Screen 2 emerges gracefully from the golden warmth (1.25s)
     if (screen2El) {
       tl.to(screen2El, {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 0.65,
+        duration: 1.25,
         ease: 'power2.out',
         clearProps: 'transform'
-      }, 0.15);
+      }, 0.60);
     }
 
-    // 4. Gold veil dissolves away cleanly
+    // 4. Gold veil dissolves away cleanly into Screen 2 (0.90s, finishing at exactly 2.0s)
     if (overlayEl) {
       tl.to(overlayEl, {
         opacity: 0,
-        duration: 0.45,
+        duration: 0.90,
         ease: 'power2.inOut'
-      }, 0.35);
+      }, 1.10);
     }
   }
 
@@ -779,6 +787,7 @@
         const s3VenueName = screen3El.querySelector('.screen3-venue-name');
         const s3VenueAddr = screen3El.querySelector('.screen3-venue-address');
         const s3VenueDivider = screen3El.querySelector('.s3-venue-divider');
+        const s3VenueBtn = screen3El.querySelector('#btn-reception-venue');
 
         // Style 3 (Cinematic Optical Blur Focus) + Style 2 (Celestial Starlight) Pre-states
         if (s3Date) gsap.set(s3Date, { opacity: 0, y: -18 });
@@ -803,6 +812,7 @@
         if (s3VenueName) gsap.set(s3VenueName, { opacity: 0, filter: 'blur(7px)', scale: 0.95 });
         if (s3VenueAddr) gsap.set(s3VenueAddr, { opacity: 0, y: 8, filter: 'blur(4px)' });
         if (s3VenueDivider) gsap.set(s3VenueDivider, { scaleX: 0, transformOrigin: 'center center' });
+        if (s3VenueBtn) gsap.set(s3VenueBtn, { opacity: 0, scale: 0.72, y: 16 });
       }, 0.85)
       // 5. Golden Lotus Bridge gently dissolves away into Screen 3 (0.55s, total 2.0s)
       .to(receptionBridgeEl, {
@@ -882,7 +892,16 @@
       .to(screen3El.querySelector('.s3-pin-badge-img'), { opacity: 1, scale: 1.0, filter: 'blur(0px)', duration: 0.65, ease: 'back.out(1.3)', clearProps: 'transform,filter' }, 2.54)
       .to(screen3El.querySelector('.screen3-venue-name'), { opacity: 1, filter: 'blur(0px)', scale: 1.0, duration: 0.80, ease: 'sine.out', clearProps: 'transform,filter' }, 2.58)
       .to(screen3El.querySelector('.screen3-venue-address'), { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.70, ease: 'sine.out', clearProps: 'transform,filter' }, 2.66)
-      .to(screen3El.querySelector('.s3-venue-divider'), { scaleX: 1, duration: 0.65, ease: 'power2.out', clearProps: 'transform' }, 2.72);
+      .to(screen3El.querySelector('.s3-venue-divider'), { scaleX: 1, duration: 0.65, ease: 'power2.out', clearProps: 'transform' }, 2.72)
+      // F. Venue Action Button: Enters with buoyant royal bounce next to Vikashini
+      .to(screen3El.querySelector('#btn-reception-venue'), {
+        opacity: 1,
+        scale: 1.0,
+        y: 0,
+        duration: 0.70,
+        ease: 'back.out(1.6)',
+        clearProps: 'transform,opacity'
+      }, 2.76);
 
     } else {
       // Fallback
@@ -1125,7 +1144,11 @@
     if (screen3El) {
       screen3El.classList.remove('screen-active');
       screen3El.classList.add('screen-hidden');
-      if (typeof gsap !== 'undefined') gsap.set(screen3El, { clearProps: 'all' });
+      if (typeof gsap !== 'undefined') {
+        gsap.set(screen3El, { clearProps: 'all' });
+        const s3VenueBtn = screen3El.querySelector('#btn-reception-venue');
+        if (s3VenueBtn) gsap.set(s3VenueBtn, { clearProps: 'all' });
+      }
       screen3El.style.removeProperty('display');
       screen3El.style.removeProperty('opacity');
       screen3El.style.removeProperty('transform');

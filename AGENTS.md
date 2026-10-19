@@ -60,3 +60,7 @@ Whenever you make any architectural, structural, CSS, or JS modification:
    - If JS or CSS was updated, bump the script/stylesheet version query string in `index.html` (e.g. `?v=3.1`) so browsers and other sessions immediately load the fresh code without aggressive cache trapping.
 3. **Keep Code Clean**:
    - Do NOT leave temporary debugging test scripts in the root directory. Clean up after testing.
+4. **Mandatory Immediate Git Push (CRITICAL)**:
+   - **EVERY conversation and agent turn that makes ANY changes MUST immediately stage, commit, and push to GitHub (`git push origin main`)**.
+   - Run `git add <files>`, write a descriptive semantic commit message (`git commit -m "..."`), and immediately execute `git push origin main`.
+   - **NEVER leave unpushed commits or dirty working trees** at the end of a turn. This guarantees that all parallel conversations, subagents, and GitHub remotes are continuously synchronized with zero merge drift.
