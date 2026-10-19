@@ -29,8 +29,8 @@
 @import './envelope.css';
 @import './invitation-card.css';
 
-/* 5. Screen 2: Royal Announcement Card (Preserved for future use) */
-/* @import './announcement.css'; */
+/* 5. Screen 4: Venue & Directions Screen */
+@import './venue-directions.css';
 
 /* 6. Live Color Themes & Selector Bar */
 @import './themes.css';

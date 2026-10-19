@@ -188,7 +188,11 @@
     const btnReceptionVenue = document.getElementById('btn-reception-venue');
     if (btnReceptionVenue) {
       btnReceptionVenue.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
+        if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionToScreen4 === 'function') {
+          window.WeddingVenueDirections.transitionToScreen4();
+        }
       });
     }
 
@@ -685,12 +689,23 @@
     if (isScreenTransitioning) return;
     if (screen2El && screen2El.classList.contains('screen-active') && !screen2El.classList.contains('screen-hidden')) {
       transitionToScreen3();
+    } else if (screen3El && screen3El.classList.contains('screen-active') && !screen3El.classList.contains('screen-hidden')) {
+      if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionToScreen4 === 'function') {
+        window.WeddingVenueDirections.transitionToScreen4();
+      }
     }
   }
 
   function handleScrollUp() {
     if (isScreenTransitioning) return;
-    if (screen3El && screen3El.classList.contains('screen-active') && !screen3El.classList.contains('screen-hidden')) {
+    const screen4El = document.getElementById('invitation-screen-4');
+    if (screen4El && screen4El.classList.contains('screen-active') && !screen4El.classList.contains('screen-hidden')) {
+      if (screen4El.scrollTop <= 10) {
+        if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionBackToScreen3 === 'function') {
+          window.WeddingVenueDirections.transitionBackToScreen3();
+        }
+      }
+    } else if (screen3El && screen3El.classList.contains('screen-active') && !screen3El.classList.contains('screen-hidden')) {
       transitionBackToScreen2();
     }
   }
@@ -1154,6 +1169,11 @@
       screen3El.style.removeProperty('transform');
       screen3El.style.display = 'none';
       screen3El.style.opacity = '0';
+    }
+
+    // Reset Screen 4 (Venue & Directions)
+    if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.reset === 'function') {
+      window.WeddingVenueDirections.reset();
     }
 
     // Reset Golden Lotus Bridge & Floating Replay FAB
