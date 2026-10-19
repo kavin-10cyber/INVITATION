@@ -14,23 +14,28 @@
   // 1. CONFIGURABLE GOOGLE MAPS URLS & CALENDAR CONSTANTS
   // --------------------------------------------------------------------------
   const VENUE_CONFIG = {
-    // Reception Google Maps URL (User can easily update anytime)
-    receptionMapsUrl: "https://www.google.com/maps/search/?api=1&query=Sengundhar+Thirumana+Mandabam,+New+Bus+Stand+Back+Side,+P.N+Road,+Tirupur",
+    // Reception Google Maps URL (Exact location: Sengunthar Kalyana Mandapam, Tirupur)
+    receptionMapsUrl: "https://maps.app.goo.gl/fxFxH68HeiaVmsk88",
 
-    // Wedding Ceremony Google Maps URL (User will provide actual URL later)
-    ceremonyMapsUrl: "https://www.google.com/maps/search/?api=1&query=Wedding+Ceremony+Venue+Tirupur",
+    // Wedding Ceremony Google Maps URL (Exact location: Arulmigu Thirumuruganadha Swamy Temple, Tirupur)
+    ceremonyMapsUrl: "https://maps.app.goo.gl/KnThmrxYPq4JMzhS8",
 
-    // Grand Reception Calendar Event Information (21 Nov 2026, 6:00 PM – 9:00 PM IST)
-    calendar: {
+    // Grand Reception Event (Saturday, 21 Nov 2026, 6:00 PM – 9:00 PM IST)
+    receptionCalendar: {
       title: "Deepak & Vikashini — Grand Reception",
-      description: "With joy and blessings of our families, we invite you to celebrate the Grand Reception of Deepak & Vikashini.",
+      description: "With joy and blessings of our families, we warmly invite you to celebrate the Grand Reception of Deepak & Vikashini at Sengundhar Thirumana Mandabam, Tirupur.",
       location: "Sengundhar Thirumana Mandabam, New Bus Stand Back Side, P.N Road, Tirupur",
-      // UTC timestamps for 21 November 2026, 6:00 PM – 9:00 PM IST (UTC+5:30 -> 12:30 UTC – 15:30 UTC)
       startUtc: "20261121T123000Z",
-      endUtc: "20261121T153000Z",
-      // Local ISO string for device calendar
-      startLocal: "20261121T180000",
-      endLocal: "20261121T210000"
+      endUtc: "20261121T153000Z"
+    },
+
+    // Auspicious Muhurtham Ceremony Event (Sunday, 22 Nov 2026, 5:00 AM – 6:00 AM IST)
+    ceremonyCalendar: {
+      title: "Deepak & Vikashini — Auspicious Muhurtham",
+      description: "With divine grace, join us in celebrating the sacred wedding ceremony (Muhurtham) of Deepak & Vikashini at Arulmigu Thirumuruganadha Swamy Temple, Tirupur.",
+      location: "Arulmigu Thirumuruganadha Swamy Temple, Thirumurugan Poondi, Tirupur",
+      startUtc: "20261121T233000Z",
+      endUtc: "20261122T003000Z"
     }
   };
 
@@ -62,7 +67,8 @@
     btnVenueBack = document.getElementById('btn-venue-back');
     modalBackdrop = document.getElementById('calendar-confirm-modal');
     btnModalIcs = document.getElementById('btn-modal-download-ics');
-    btnModalGoogle = document.getElementById('btn-modal-google-cal');
+    const btnModalReceptionGoogle = document.getElementById('btn-modal-reception-cal');
+    const btnModalCeremonyGoogle = document.getElementById('btn-modal-ceremony-cal');
     btnModalCancel = document.getElementById('btn-modal-cancel');
 
     // 1. Reception Card Click & Keyboard Activation
@@ -111,10 +117,18 @@
       });
     }
 
-    if (btnModalGoogle) {
-      btnModalGoogle.addEventListener('click', (e) => {
+    if (btnModalReceptionGoogle) {
+      btnModalReceptionGoogle.addEventListener('click', (e) => {
         e.preventDefault();
-        openGoogleCalendar();
+        openGoogleCalendar('reception');
+        closeCalendarModal();
+      });
+    }
+
+    if (btnModalCeremonyGoogle) {
+      btnModalCeremonyGoogle.addEventListener('click', (e) => {
+        e.preventDefault();
+        openGoogleCalendar('ceremony');
         closeCalendarModal();
       });
     }
@@ -204,10 +218,13 @@
   }
 
   /**
-   * Generates and downloads a valid RFC-5545 .ics file for Grand Reception.
+   * Generates and downloads a valid RFC-5545 .ics file containing BOTH events:
+   * 1. Grand Reception (21 Nov 2026, 6:00 PM – 9:00 PM IST)
+   * 2. Sacred Muhurtham (22 Nov 2026, 5:00 AM – 6:00 AM IST)
    */
   function downloadIcsFile() {
-    const cal = VENUE_CONFIG.calendar;
+    const rec = VENUE_CONFIG.receptionCalendar;
+    const cer = VENUE_CONFIG.ceremonyCalendar;
     const nowUtc = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 
     const icsData = [
@@ -216,14 +233,18 @@
       'PRODID:-//Deepak & Vikashini Wedding//EN',
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH',
+      'X-WR-CALNAME:Deepak & Vikashini Wedding Celebrations',
+      'X-WR-TIMEZONE:Asia/Kolkata',
+
+      // EVENT 1: GRAND RECEPTION
       'BEGIN:VEVENT',
       `UID:reception-20261121-${Date.now()}@deepakvikashini.wedding`,
       `DTSTAMP:${nowUtc}`,
-      `DTSTART:${cal.startUtc}`,
-      `DTEND:${cal.endUtc}`,
-      `SUMMARY:${cal.title}`,
-      `DESCRIPTION:${cal.description}`,
-      `LOCATION:${cal.location}`,
+      `DTSTART:${rec.startUtc}`,
+      `DTEND:${rec.endUtc}`,
+      `SUMMARY:${rec.title}`,
+      `DESCRIPTION:${rec.description}`,
+      `LOCATION:${rec.location}`,
       'STATUS:CONFIRMED',
       'SEQUENCE:0',
       'BEGIN:VALARM',
@@ -232,6 +253,25 @@
       'DESCRIPTION:Reminder: Deepak & Vikashini Grand Reception tomorrow',
       'END:VALARM',
       'END:VEVENT',
+
+      // EVENT 2: AUSPICIOUS MUHURTHAM
+      'BEGIN:VEVENT',
+      `UID:muhurtham-20261122-${Date.now()}@deepakvikashini.wedding`,
+      `DTSTAMP:${nowUtc}`,
+      `DTSTART:${cer.startUtc}`,
+      `DTEND:${cer.endUtc}`,
+      `SUMMARY:${cer.title}`,
+      `DESCRIPTION:${cer.description}`,
+      `LOCATION:${cer.location}`,
+      'STATUS:CONFIRMED',
+      'SEQUENCE:0',
+      'BEGIN:VALARM',
+      'TRIGGER:-PT12H',
+      'ACTION:DISPLAY',
+      'DESCRIPTION:Reminder: Deepak & Vikashini Auspicious Muhurtham Ceremony tomorrow morning',
+      'END:VALARM',
+      'END:VEVENT',
+
       'END:VCALENDAR'
     ].join('\r\n');
 
@@ -239,7 +279,7 @@
     const blobUrl = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = blobUrl;
-    link.setAttribute('download', 'Deepak-Vikashini-Reception.ics');
+    link.setAttribute('download', 'Deepak-Vikashini-Wedding-Events.ics');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -248,9 +288,10 @@
 
   /**
    * Opens Google Calendar event creation web page in a new tab.
+   * @param {'reception'|'ceremony'} type
    */
-  function openGoogleCalendar() {
-    const cal = VENUE_CONFIG.calendar;
+  function openGoogleCalendar(type) {
+    const cal = (type === 'ceremony') ? VENUE_CONFIG.ceremonyCalendar : VENUE_CONFIG.receptionCalendar;
     const googleUrl = new URL('https://calendar.google.com/calendar/render');
     googleUrl.searchParams.set('action', 'TEMPLATE');
     googleUrl.searchParams.set('text', cal.title);

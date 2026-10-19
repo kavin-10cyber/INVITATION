@@ -317,6 +317,7 @@
   max-height: 100% !important;
   position: relative !important;
   overflow: hidden !important; /* Zero independent scrolling — single composed invitation artwork */
+  touch-action: pan-y !important;
   overscroll-behavior: none !important;
   scrollbar-width: none !important;
   padding: 0 !important;
@@ -408,6 +409,7 @@
   display: flex !important;
   opacity: 1;
   pointer-events: auto !important;
+  touch-action: pan-y !important;
   z-index: 30 !important;
   animation: screen2GentleHop 2.5s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
   will-change: transform;
@@ -452,6 +454,7 @@
   display: flex !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+  touch-action: pan-y !important;
   z-index: 35 !important;
   animation: screen3GentleHop 2.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
   will-change: transform;

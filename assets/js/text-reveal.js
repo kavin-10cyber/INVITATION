@@ -196,27 +196,57 @@
       });
     }
 
-    // Wheel & Touch swipe navigation between Screen 2 and Screen 3
-    window.addEventListener('wheel', handleScrollNavigation, { passive: true });
+    // Robust Wheel & Touch swipe navigation between Screen 2, Screen 3, and Screen 4
+    window.addEventListener('wheel', handleScrollNavigation, { passive: true, capture: true });
+
+    let isTouchActive = false;
+
+    function handleSwipe(diffY, diffX) {
+      if (isScreenTransitioning) return;
+      if (Math.abs(diffY) >= 35 && Math.abs(diffY) > diffX * 1.1) {
+        if (diffY > 0) {
+          handleScrollDown();
+        } else {
+          handleScrollUp();
+        }
+      }
+    }
+
     window.addEventListener('touchstart', (e) => {
       if (e.touches && e.touches.length > 0) {
         touchStartY = e.touches[0].clientY;
         touchStartX = e.touches[0].clientX;
+        isTouchActive = true;
       }
-    }, { passive: true });
+    }, { passive: true, capture: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isTouchActive || isScreenTransitioning) return;
+      if (e.touches && e.touches.length > 0) {
+        const currentY = e.touches[0].clientY;
+        const currentX = e.touches[0].clientX;
+        const diffY = touchStartY - currentY;
+        const diffX = Math.abs(touchStartX - currentX);
+        if (Math.abs(diffY) >= 42 && Math.abs(diffY) > diffX * 1.15) {
+          isTouchActive = false;
+          handleSwipe(diffY, diffX);
+        }
+      }
+    }, { passive: true, capture: true });
+
     window.addEventListener('touchend', (e) => {
+      if (!isTouchActive) return;
+      isTouchActive = false;
       if (e.changedTouches && e.changedTouches.length > 0) {
         const diffY = touchStartY - e.changedTouches[0].clientY;
         const diffX = Math.abs(touchStartX - e.changedTouches[0].clientX);
-        if (Math.abs(diffY) > 40 && Math.abs(diffY) > diffX * 1.2) {
-          if (diffY > 0) {
-            handleScrollDown();
-          } else {
-            handleScrollUp();
-          }
-        }
+        handleSwipe(diffY, diffX);
       }
-    }, { passive: true });
+    }, { passive: true, capture: true });
+
+    window.addEventListener('touchcancel', () => {
+      isTouchActive = false;
+    }, { passive: true, capture: true });
 
     resetAll();
     isInitialized = true;
@@ -726,6 +756,7 @@
   function transitionToScreen3() {
     if (isScreenTransitioning || !screen3El || !screen2El) return;
     isScreenTransitioning = true;
+    setTimeout(() => { isScreenTransitioning = false; }, 2800);
 
     const btnReplayFab = document.getElementById('btn-replay-fab');
     if (btnReplayFab) {
@@ -962,6 +993,7 @@
   function transitionBackToScreen2() {
     if (isScreenTransitioning || !screen3El || !screen2El) return;
     isScreenTransitioning = true;
+    setTimeout(() => { isScreenTransitioning = false; }, 2800);
 
     const btnReplayFab = document.getElementById('btn-replay-fab');
 

@@ -152,16 +152,6 @@
           openEnvelope();
         }
       }, { passive: false });
-      invitationCard.addEventListener('pointerdown', (e) => {
-        if (isEnvelopeOpened) {
-          e.stopPropagation();
-        }
-      });
-      invitationCard.addEventListener('touchstart', (e) => {
-        if (isEnvelopeOpened) {
-          e.stopPropagation();
-        }
-      }, { passive: true });
     }
 
     if (btnReplay) {
