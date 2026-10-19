@@ -387,7 +387,7 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
   font-size: clamp(1.02rem, 3.25vw, 1.23rem);
   font-weight: 600;
   line-height: 1.62;
-  color: #7E5516;
+  color: #4A0B16;
   text-align: center;
   max-width: clamp(280px, 88vw, 360px);
   margin: 0;
