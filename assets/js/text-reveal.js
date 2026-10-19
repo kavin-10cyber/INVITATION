@@ -534,7 +534,7 @@
       if (currentState === STATES.TRANSITIONING) {
         showScreen2Final();
       }
-    }, 2400);
+    }, 2900);
     activeTimeouts.push(fallbackTimer);
 
     if (typeof gsap === 'undefined') {
@@ -572,7 +572,7 @@
       });
     }
 
-    // 2.0-second cinematic Warm Antique-Gold page transition timeline
+    // 2.5-second cinematic Warm Antique-Gold page transition timeline
     const tl = gsap.timeline({
       onComplete: () => {
         clearTimeout(fallbackTimer);
@@ -580,45 +580,45 @@
       }
     });
 
-    // 1. Soft warm antique-gold veil glides in with rich radiance (0.65s)
+    // 1. Soft warm antique-gold veil glides in with rich radiance (0.80s)
     if (overlayEl) {
       tl.to(overlayEl, {
         opacity: 0.68,
-        duration: 0.65,
+        duration: 0.80,
         ease: 'power2.out'
       }, 0);
     }
 
-    // 2. Screen 1 recedes smoothly into the golden mist (0.90s)
+    // 2. Screen 1 recedes smoothly into the golden mist (1.10s)
     if (screen1El) {
       tl.to(screen1El, {
         opacity: 0,
         scale: 0.95,
         y: -12,
-        duration: 0.90,
+        duration: 1.10,
         ease: 'power2.inOut'
-      }, 0.25);
+      }, 0.30);
     }
 
-    // 3. Screen 2 emerges gracefully from the golden warmth (1.25s)
+    // 3. Screen 2 emerges gracefully from the golden warmth (1.55s)
     if (screen2El) {
       tl.to(screen2El, {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 1.25,
+        duration: 1.55,
         ease: 'power2.out',
         clearProps: 'transform'
-      }, 0.60);
+      }, 0.75);
     }
 
-    // 4. Gold veil dissolves away cleanly into Screen 2 (0.90s, finishing at exactly 2.0s)
+    // 4. Gold veil dissolves away cleanly into Screen 2 (1.15s, finishing at exactly 2.50s)
     if (overlayEl) {
       tl.to(overlayEl, {
         opacity: 0,
-        duration: 0.90,
+        duration: 1.15,
         ease: 'power2.inOut'
-      }, 1.10);
+      }, 1.35);
     }
   }
 
