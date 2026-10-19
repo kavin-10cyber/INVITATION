@@ -190,7 +190,10 @@
       btnReceptionVenue.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        if (isScreenTransitioning) return;
         if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionToScreen4 === 'function') {
+          isScreenTransitioning = true;
+          setTimeout(() => { isScreenTransitioning = false; }, 1800);
           window.WeddingVenueDirections.transitionToScreen4();
         }
       });
@@ -721,6 +724,8 @@
       transitionToScreen3();
     } else if (screen3El && screen3El.classList.contains('screen-active') && !screen3El.classList.contains('screen-hidden')) {
       if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionToScreen4 === 'function') {
+        isScreenTransitioning = true;
+        setTimeout(() => { isScreenTransitioning = false; }, 1800);
         window.WeddingVenueDirections.transitionToScreen4();
       }
     }
@@ -732,6 +737,8 @@
     if (screen4El && screen4El.classList.contains('screen-active') && !screen4El.classList.contains('screen-hidden')) {
       if (screen4El.scrollTop <= 10) {
         if (window.WeddingVenueDirections && typeof window.WeddingVenueDirections.transitionBackToScreen3 === 'function') {
+          isScreenTransitioning = true;
+          setTimeout(() => { isScreenTransitioning = false; }, 800);
           window.WeddingVenueDirections.transitionBackToScreen3();
         }
       }

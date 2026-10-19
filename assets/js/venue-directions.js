@@ -355,13 +355,7 @@
         gsap.set(rings, { scale: 0.25, opacity: 0 });
       }
 
-      // Prepare Screen 4 initial states (hidden until aperture zoom)
-      gsap.set(screen4El, {
-        display: 'none',
-        opacity: 0,
-        scale: 0.94
-      });
-
+      // Prepare Screen 4 initial states
       if (headerEl) gsap.set(headerEl, { opacity: 0, y: -16 });
       if (cardsEl) gsap.set(cardsEl, { opacity: 0, y: 24, scale: 0.95 });
       if (calBtnEl) gsap.set(calBtnEl, { opacity: 0, y: 16, scale: 0.92 });
@@ -369,18 +363,10 @@
 
       const tl = gsap.timeline({
         onComplete: () => {
-          if (screen3El) {
-            screen3El.classList.remove('screen-active');
-            screen3El.classList.add('screen-hidden');
-            screen3El.style.display = 'none';
-          }
           radarBridgeEl.classList.remove('active');
           radarBridgeEl.style.display = 'none';
           gsap.set(radarBridgeEl, { clearProps: 'all' });
           gsap.set(glassDiscEl, { clearProps: 'all' });
-
-          screen4El.classList.remove('screen-hidden');
-          screen4El.classList.add('screen-active');
           gsap.set(screen4El, { clearProps: 'transform' });
           isTransitioning = false;
         }
@@ -391,10 +377,26 @@
         tl.to(screen3El, {
           opacity: 0,
           scale: 0.94,
-          duration: 0.35,
+          duration: 0.22,
           ease: 'power2.inOut'
         }, 0);
       }
+
+      // CRITICAL FIX: The instant the radar bridge is fully covering the card (0.20s),
+      // remove Screen 3 from display and make Screen 4 active right behind the bridge!
+      tl.add(() => {
+        if (screen3El) {
+          screen3El.classList.remove('screen-active');
+          screen3El.classList.add('screen-hidden');
+          screen3El.style.display = 'none';
+          screen3El.style.opacity = '0';
+        }
+        screen4El.classList.remove('screen-hidden');
+        screen4El.classList.add('screen-active');
+        screen4El.style.display = 'flex';
+        screen4El.style.opacity = '1';
+        screen4El.scrollTop = 0;
+      }, 0.20);
 
       // Step 2: 3D Frosted Acrylic Glass Disc emerges with spring tilt
       tl.to(glassDiscEl, {
@@ -402,7 +404,7 @@
         scale: 1.0,
         rotateX: 6,
         rotateY: -4,
-        duration: 0.45,
+        duration: 0.40,
         ease: 'back.out(1.5)'
       }, 0.15);
 
@@ -410,18 +412,18 @@
       tl.to(glassDiscEl, {
         rotateX: 0,
         rotateY: 0,
-        duration: 0.35,
+        duration: 0.30,
         ease: 'power2.out'
-      }, 0.50);
+      }, 0.48);
 
       // Specular light sheen sweeps across glass disc
       if (sheenEl) {
         tl.to(sheenEl, {
           opacity: 0.95,
           xPercent: 140,
-          duration: 0.65,
+          duration: 0.60,
           ease: 'power2.inOut'
-        }, 0.25);
+        }, 0.22);
       }
 
       // Step 3: Liquid Gold Location Pin pops up at center with bounce
@@ -429,9 +431,9 @@
         tl.to(pinEl, {
           opacity: 1,
           scale: 1.0,
-          duration: 0.45,
+          duration: 0.40,
           ease: 'back.out(2.0)'
-        }, 0.40);
+        }, 0.38);
       }
 
       // Telemetry badge fades in
@@ -439,73 +441,64 @@
         tl.to(telemetryEl, {
           opacity: 1,
           y: 0,
-          duration: 0.35,
+          duration: 0.30,
           ease: 'power2.out'
-        }, 0.52);
+        }, 0.48);
       }
 
       // Step 4: 3 Sonar radar ripple rings pulse outwards from pin tip
       if (rings && rings.length > 0) {
         rings.forEach((ring, index) => {
-          const startAt = 0.55 + (index * 0.14);
+          const startAt = 0.50 + (index * 0.12);
           tl.fromTo(ring,
             { scale: 0.25, opacity: 0.95 },
-            { scale: 2.2 + (index * 0.2), opacity: 0, duration: 0.70, ease: 'power2.out' },
+            { scale: 2.2 + (index * 0.2), opacity: 0, duration: 0.65, ease: 'power2.out' },
             startAt
           );
         });
       }
 
-      // Step 5: Glass Disc expands smoothly (aperture zoom effect) revealing Screen 4
+      // Step 5: Glass Disc expands smoothly (aperture zoom effect) seamlessly revealing Screen 4
       tl.to(glassDiscEl, {
         scale: 2.8,
         opacity: 0,
-        duration: 0.50,
+        duration: 0.45,
         ease: 'expo.in'
-      }, 1.05);
+      }, 0.95);
 
       tl.to(radarBridgeEl, {
         opacity: 0,
-        duration: 0.40,
+        duration: 0.35,
         ease: 'power2.inOut'
-      }, 1.15);
+      }, 1.05);
 
-      // Screen 4 enters seamlessly
-      tl.set(screen4El, { display: 'flex' }, 1.10);
-      tl.to(screen4El, {
-        opacity: 1,
-        scale: 1.0,
-        duration: 0.50,
-        ease: 'power2.out'
-      }, 1.15);
-
-      // Staggered reveal of Screen 4 components
+      // Staggered reveal of Screen 4 components directly as aperture opens
       if (backBtnEl) {
-        tl.to(backBtnEl, { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 1.25);
+        tl.to(backBtnEl, { opacity: 1, x: 0, duration: 0.30, ease: 'power2.out' }, 1.10);
       }
       if (headerEl) {
-        tl.to(headerEl, { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(1.2)' }, 1.30);
+        tl.to(headerEl, { opacity: 1, y: 0, duration: 0.40, ease: 'back.out(1.2)' }, 1.15);
       }
       if (cardsEl && cardsEl.length > 0) {
         tl.to(cardsEl, {
           opacity: 1,
           y: 0,
           scale: 1.0,
-          stagger: 0.14,
-          duration: 0.50,
+          stagger: 0.12,
+          duration: 0.45,
           ease: 'back.out(1.3)',
           clearProps: 'transform'
-        }, 1.35);
+        }, 1.20);
       }
       if (calBtnEl) {
         tl.to(calBtnEl, {
           opacity: 1,
           y: 0,
           scale: 1.0,
-          duration: 0.45,
+          duration: 0.40,
           ease: 'back.out(1.5)',
           clearProps: 'transform'
-        }, 1.55);
+        }, 1.38);
       }
 
     } else {
