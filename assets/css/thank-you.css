@@ -479,3 +479,186 @@ body:has(#invitation-screen-5.screen-active) #btn-replay-fab {
     opacity: 0.4 !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   14. Modern Rose-Gold Prismatic Crystal Refraction Bridge (Screen 4 -> Screen 5)
+   Ultra-Luxury Jewelry / Cartier-Inspired Transition with Soft Blush-Pink Wash
+   -------------------------------------------------------------------------- */
+.venue-crystal-bridge-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 70 !important;
+  pointer-events: none !important;
+  display: none;
+  opacity: 0;
+  will-change: transform, opacity;
+  border-radius: inherit !important;
+  overflow: hidden !important;
+}
+
+.venue-crystal-bridge-overlay.active {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 14.1 Dark Midnight Backdrop Scrim (Smoothly masks Screen 4 Navy) */
+.crystal-backdrop-scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(12, 18, 32, 0.94) 0%, rgba(5, 11, 24, 0.98) 70%, rgba(2, 6, 15, 1) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  pointer-events: none;
+}
+
+/* 14.2 Prismatic Caustics & Refraction Rays Layer */
+.crystal-caustics-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Soft Ethereal Blush-Pink & Champagne Radial Aurora */
+.crystal-radial-aurora {
+  position: absolute;
+  width: clamp(280px, 80vw, 380px);
+  height: clamp(280px, 80vw, 380px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 235, 242, 0.6) 0%, rgba(247, 192, 208, 0.4) 35%, rgba(224, 193, 124, 0.22) 60%, transparent 75%);
+  filter: blur(28px);
+  transform: scale(0.6);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Multi-Chromatic Prismatic Caustic Fan */
+.crystal-refraction-rays {
+  position: absolute;
+  width: clamp(340px, 95vw, 460px);
+  height: clamp(340px, 95vw, 460px);
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(255, 240, 245, 0.45) 20deg,
+    transparent 45deg,
+    rgba(247, 185, 202, 0.55) 75deg,
+    transparent 110deg,
+    rgba(254, 219, 226, 0.45) 150deg,
+    transparent 185deg,
+    rgba(224, 193, 124, 0.38) 220deg,
+    transparent 260deg,
+    rgba(255, 215, 228, 0.5) 300deg,
+    transparent 340deg,
+    rgba(255, 240, 245, 0.45) 360deg
+  );
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* 14.3 3D Perspective Stage for Faceted Crystal Prism */
+.crystal-perspective-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.crystal-gem-assembly {
+  position: relative;
+  width: 140px;
+  height: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.crystal-prism-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 14px 30px rgba(194, 116, 132, 0.45)) drop-shadow(0 0 25px rgba(255, 240, 245, 0.65));
+  will-change: transform;
+}
+
+/* Specular Shimmer Sheen across Crystal Facets */
+.crystal-specular-sweep {
+  position: absolute;
+  top: -55%;
+  left: -65%;
+  width: 50%;
+  height: 210%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 45%,
+    rgba(255, 245, 248, 0.95) 50%,
+    rgba(255, 255, 255, 0.6) 55%,
+    transparent 100%
+  );
+  transform: rotate(38deg);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* 14.4 Floating Rose-Gold Sparkle Glints */
+.crystal-sparkles-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.crystal-glint {
+  position: absolute;
+  color: #FFF0F5;
+  text-shadow: 0 0 8px #F492A7, 0 0 16px #FFFFFF;
+  font-size: 14px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.c-glint-1 { top: 32%; left: 24%; font-size: 16px; }
+.c-glint-2 { top: 26%; right: 26%; font-size: 12px; }
+.c-glint-3 { bottom: 34%; left: 28%; font-size: 14px; }
+.c-glint-4 { bottom: 28%; right: 23%; font-size: 15px; }
+.c-glint-5 { top: 48%; right: 18%; font-size: 11px; }
+
+/* 14.5 Full-Screen Radiant Pearlescent Blush-Pink & Rose-Gold Exposure Bloom
+   CRITICAL BRIDGE ELEMENT: Fills screen with soft, ethereal pink morning light
+   to flawlessly wash out the dark navy and reveal the light blush-pink Thank You theme! */
+.crystal-pink-bloom {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 48%,
+    #FFFFFF 0%,
+    #FFF2F6 26%,
+    #FDE4EB 52%,
+    #F8C8D4 78%,
+    #F0B2C0 100%
+  );
+  opacity: 0;
+  z-index: 25;
+  will-change: transform, opacity;
+}

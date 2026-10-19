@@ -84,8 +84,8 @@
   }
 
   /**
-   * Slow, regal cinematic transition from Screen 4 (Venue & Directions) into Screen 5 (Thank You).
-   * Follows user-specified 9-phase staggered animation sequence.
+   * Ultra-Luxury Prismatic Crystal Refraction Transition with Soft Blush-Pink Light Bloom
+   * Bridges Screen 4 (Midnight Navy Venue) to Screen 5 (Light Blush-Pink Thank You).
    */
   function transitionToScreen5() {
     if (isTransitioning || !screen5El) return;
@@ -100,7 +100,16 @@
       btnReplayFab.style.pointerEvents = 'none';
     }
 
-    // Elements inside Screen 5 to animate
+    const crystalBridgeEl = document.getElementById('venue-crystal-bridge');
+    const crystalGemEl = document.getElementById('crystal-gem-assembly');
+    const crystalScrimEl = crystalBridgeEl ? crystalBridgeEl.querySelector('.crystal-backdrop-scrim') : null;
+    const crystalAuroraEl = crystalBridgeEl ? crystalBridgeEl.querySelector('.crystal-radial-aurora') : null;
+    const crystalRaysEl = crystalBridgeEl ? crystalBridgeEl.querySelector('.crystal-refraction-rays') : null;
+    const crystalSheenEl = crystalBridgeEl ? crystalBridgeEl.querySelector('.crystal-specular-sweep') : null;
+    const crystalBloomEl = document.getElementById('crystal-pink-bloom');
+    const crystalGlints = crystalBridgeEl ? crystalBridgeEl.querySelectorAll('.crystal-glint') : null;
+
+    // Screen 5 interior elements
     const headerEl = screen5El.querySelector('.ty-header-section');
     const pipEl = screen5El.querySelector('.ty-top-pip-wrap');
     const eyebrowEl = screen5El.querySelector('.ty-eyebrow-text');
@@ -117,16 +126,43 @@
     // Scroll to top of Screen 5
     screen5El.scrollTop = 0;
 
-    if (typeof gsap !== 'undefined') {
+    if (typeof gsap !== 'undefined' && crystalBridgeEl && crystalGemEl && crystalBloomEl) {
       if (screen4El) gsap.killTweensOf(screen4El);
       gsap.killTweensOf([
-        screen5El, headerEl, pipEl, eyebrowEl, titleEl, flourishEl,
-        supportingEl, monogramEl, coupleNamesEl, taglineEl, messageEl
+        crystalBridgeEl, crystalGemEl, crystalBloomEl, screen5El, headerEl, pipEl, eyebrowEl,
+        titleEl, flourishEl, supportingEl, monogramEl, coupleNamesEl, taglineEl, messageEl
       ]);
+      if (crystalScrimEl) gsap.killTweensOf(crystalScrimEl);
+      if (crystalAuroraEl) gsap.killTweensOf(crystalAuroraEl);
+      if (crystalRaysEl) gsap.killTweensOf(crystalRaysEl);
+      if (crystalSheenEl) gsap.killTweensOf(crystalSheenEl);
+      if (crystalGlints) gsap.killTweensOf(crystalGlints);
       if (dividers) gsap.killTweensOf(dividers);
 
-      // Pre-set initial states for hardware-accelerated fluid entrance
-      gsap.set(screen5El, { display: 'flex', opacity: 0 });
+      // Pre-set Bridge States
+      crystalBridgeEl.classList.add('active');
+      crystalBridgeEl.style.display = 'flex';
+      gsap.set(crystalBridgeEl, { opacity: 1 });
+
+      if (crystalScrimEl) gsap.set(crystalScrimEl, { opacity: 0 });
+      gsap.set(crystalGemEl, {
+        opacity: 0,
+        scale: 0.65,
+        rotateY: -35,
+        rotateZ: -8,
+        y: 25,
+        transformPerspective: 1000
+      });
+      if (crystalAuroraEl) gsap.set(crystalAuroraEl, { opacity: 0, scale: 0.5 });
+      if (crystalRaysEl) gsap.set(crystalRaysEl, { opacity: 0, scale: 0.6, rotation: 0 });
+      if (crystalSheenEl) gsap.set(crystalSheenEl, { xPercent: -120, opacity: 0 });
+      gsap.set(crystalBloomEl, { opacity: 0, scale: 0.75 });
+      if (crystalGlints && crystalGlints.length > 0) {
+        gsap.set(crystalGlints, { opacity: 0, scale: 0.3 });
+      }
+
+      // Pre-set Screen 5 Initial States for graceful reveal
+      gsap.set(screen5El, { display: 'none', opacity: 0 });
       if (pipEl) gsap.set(pipEl, { opacity: 0, y: -6, scale: 0.8 });
       if (eyebrowEl) gsap.set(eyebrowEl, { opacity: 0, y: -6 });
       if (titleEl) gsap.set(titleEl, { opacity: 0, scale: 0.86, y: -10 });
@@ -141,44 +177,133 @@
 
       const tl = gsap.timeline({
         onComplete: () => {
-          if (screen4El) {
-            screen4El.classList.remove('screen-active');
-            screen4El.classList.add('screen-hidden');
-            screen4El.style.display = 'none';
-          }
-          screen5El.classList.remove('screen-hidden');
-          screen5El.classList.add('screen-active');
+          crystalBridgeEl.classList.remove('active');
+          crystalBridgeEl.style.display = 'none';
+          gsap.set(crystalBridgeEl, { clearProps: 'all' });
+          gsap.set(crystalGemEl, { clearProps: 'all' });
+          gsap.set(crystalBloomEl, { clearProps: 'all' });
           gsap.set(screen5El, { clearProps: 'transform' });
           isTransitioning = false;
         }
       });
 
-      // 1. Screen 4 gently dissolves away (0.40s)
-      if (screen4El) {
-        tl.to(screen4El, {
-          opacity: 0,
-          scale: 0.96,
-          duration: 0.40,
+      // 1. Dark Backdrop Scrim smoothly blankets Venue Screen (0.35s)
+      if (crystalScrimEl) {
+        tl.to(crystalScrimEl, {
+          opacity: 0.88,
+          duration: 0.35,
           ease: 'power2.inOut'
         }, 0);
       }
 
-      // 2. Phase 1: Screen 5 Ivory background and floral frame fade in gently (0.60s)
-      tl.to(screen5El, {
+      // 2. Faceted Crystal Prism pops into 3D view with subtle bounce (0.45s)
+      tl.to(crystalGemEl, {
         opacity: 1,
-        duration: 0.60,
+        scale: 1.05,
+        rotateY: 10,
+        rotateZ: 2,
+        y: 0,
+        duration: 0.45,
+        ease: 'back.out(1.6)'
+      }, 0.08);
+
+      // Specular light sheen slices across crystal facets
+      if (crystalSheenEl) {
+        tl.to(crystalSheenEl, {
+          opacity: 0.95,
+          xPercent: 140,
+          duration: 0.55,
+          ease: 'power2.inOut'
+        }, 0.22);
+      }
+
+      // 3. Ethereal Blush-Pink & Champagne Radial Aurora expands (0.55s)
+      if (crystalAuroraEl) {
+        tl.to(crystalAuroraEl, {
+          opacity: 0.92,
+          scale: 1.25,
+          duration: 0.55,
+          ease: 'power2.out'
+        }, 0.18);
+      }
+
+      // 4. Prismatic caustic fan of light rays refracts and spins (0.65s)
+      if (crystalRaysEl) {
+        tl.to(crystalRaysEl, {
+          opacity: 0.85,
+          scale: 1.35,
+          rotation: 65,
+          duration: 0.65,
+          ease: 'power2.out'
+        }, 0.28);
+      }
+
+      // 5. Floating diamond/rose-gold glints sparkle
+      if (crystalGlints && crystalGlints.length > 0) {
+        crystalGlints.forEach((glint, idx) => {
+          tl.fromTo(glint,
+            { opacity: 0, scale: 0.3 },
+            { opacity: 1, scale: 1.2, yoyo: true, repeat: 1, duration: 0.35, ease: 'sine.inOut' },
+            0.28 + (idx * 0.06)
+          );
+        });
+      }
+
+      // 6. Crystal performs 3D refraction rotation (0.42s)
+      tl.to(crystalGemEl, {
+        rotateY: 180,
+        scale: 1.32,
+        duration: 0.42,
+        ease: 'power2.in'
+      }, 0.52);
+
+      // 7. CRITICAL PINK LIGHT BLOOM: Full-Screen Radiant Pearlescent Blush-Pink Bloom Wash (0.38s)
+      // Completely bathes the screen in luminous pink morning light, flawlessly bridging Dark Navy to Light Pink!
+      tl.to(crystalBloomEl, {
+        opacity: 1,
+        scale: 1.15,
+        duration: 0.38,
+        ease: 'expo.in'
+      }, 0.68);
+
+      // 8. Seamless Screen Swap at Peak Flare (0.95s)
+      tl.add(() => {
+        if (screen4El) {
+          screen4El.classList.remove('screen-active');
+          screen4El.classList.add('screen-hidden');
+          screen4El.style.display = 'none';
+          screen4El.style.opacity = '0';
+        }
+        screen5El.classList.remove('screen-hidden');
+        screen5El.classList.add('screen-active');
+        screen5El.style.display = 'flex';
+        screen5El.style.opacity = '1';
+        screen5El.scrollTop = 0;
+      }, 0.95);
+
+      // 9. Soft Blush Bloom gracefully dissolves away, revealing Screen 5 (0.65s)
+      tl.to(crystalBloomEl, {
+        opacity: 0,
+        duration: 0.65,
         ease: 'power2.out'
-      }, 0.20);
+      }, 0.98);
+
+      // Fade out bridge overlay behind the bloom
+      tl.to(crystalBridgeEl, {
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.out'
+      }, 1.15);
 
       if (shimmerEl) {
         tl.to(shimmerEl, {
           opacity: 1,
-          duration: 0.90,
+          duration: 0.85,
           ease: 'sine.out'
-        }, 0.25);
+        }, 1.05);
       }
 
-      // 3. Phase 2: Top gold ornament pip and "WITH LOVE & GRATITUDE" eyebrow appear (0.50s)
+      // 10. Sequential Staggered Cascade of Screen 5 Typography
       if (pipEl) {
         tl.to(pipEl, {
           opacity: 1,
@@ -186,7 +311,7 @@
           scale: 1.0,
           duration: 0.45,
           ease: 'back.out(1.4)'
-        }, 0.45);
+        }, 1.10);
       }
       if (eyebrowEl) {
         tl.to(eyebrowEl, {
@@ -194,10 +319,10 @@
           y: 0,
           duration: 0.50,
           ease: 'power2.out'
-        }, 0.52);
+        }, 1.18);
       }
 
-      // 4. Phase 3: "Thank You" Calligraphy Heading reveals gracefully (0.80s)
+      // "Thank You" Calligraphy Heading
       if (titleEl) {
         tl.to(titleEl, {
           opacity: 1,
@@ -205,27 +330,27 @@
           y: 0,
           duration: 0.80,
           ease: 'power2.out'
-        }, 0.70);
+        }, 1.30);
       }
 
-      // 5. Phase 4: Gold heart flourish smoothly draws & fades into view beneath heading (0.55s)
+      // Gold heart flourish beneath heading
       if (flourishEl) {
         tl.to(flourishEl, {
           opacity: 1,
           scaleX: 1.0,
           duration: 0.55,
           ease: 'back.out(1.3)'
-        }, 0.95);
+        }, 1.50);
       }
 
-      // 6. Phase 5: "For Gracing Us With Your Presence & Blessings" fades in with slight upward movement (0.55s)
+      // "For Gracing Us With Your Presence & Blessings"
       if (supportingEl) {
         tl.to(supportingEl, {
           opacity: 1,
           y: 0,
           duration: 0.55,
           ease: 'power2.out'
-        }, 1.15);
+        }, 1.68);
       }
 
       // First divider expands
@@ -235,27 +360,27 @@
           scaleX: 1.0,
           duration: 0.45,
           ease: 'power2.out'
-        }, 1.30);
+        }, 1.82);
       }
 
-      // 7. Phase 6: Circular Antique-Gold D & V Monogram appears with gentle scale-and-fade (0.75s)
+      // Circular Antique-Gold D & V Monogram appears
       if (monogramEl) {
         tl.to(monogramEl, {
           opacity: 1,
           scale: 1.0,
-          duration: 0.75,
+          duration: 0.70,
           ease: 'back.out(1.35)'
-        }, 1.45);
+        }, 1.95);
       }
 
-      // 8. Phase 7: Couple Names "Deepak & Vikashini" and tagline appear sequentially (0.55s)
+      // Couple Names "Deepak & Vikashini" and tagline
       if (coupleNamesEl) {
         tl.to(coupleNamesEl, {
           opacity: 1,
           y: 0,
           duration: 0.50,
           ease: 'power2.out'
-        }, 1.70);
+        }, 2.15);
       }
       if (taglineEl) {
         tl.to(taglineEl, {
@@ -263,7 +388,7 @@
           y: 0,
           duration: 0.45,
           ease: 'power2.out'
-        }, 1.85);
+        }, 2.30);
       }
 
       // Second divider expands
@@ -273,17 +398,17 @@
           scaleX: 1.0,
           duration: 0.45,
           ease: 'power2.out'
-        }, 1.95);
+        }, 2.40);
       }
 
-      // 9. Phase 8: Exact Replacement Paragraph fades in with smooth, elegant text reveal (0.75s)
+      // Exact Replacement Paragraph
       if (messageEl) {
         tl.to(messageEl, {
           opacity: 1,
           y: 0,
           duration: 0.75,
           ease: 'power2.out'
-        }, 2.05);
+        }, 2.50);
       }
 
     } else {
@@ -378,6 +503,14 @@
       screen5El.style.display = 'none';
       screen5El.style.opacity = '0';
       screen5El.scrollTop = 0;
+    }
+
+    const crystalBridgeEl = document.getElementById('venue-crystal-bridge');
+    if (crystalBridgeEl) {
+      if (typeof gsap !== 'undefined') gsap.killTweensOf(crystalBridgeEl);
+      crystalBridgeEl.classList.remove('active');
+      crystalBridgeEl.style.display = 'none';
+      if (typeof gsap !== 'undefined') gsap.set(crystalBridgeEl, { clearProps: 'all' });
     }
   }
 
