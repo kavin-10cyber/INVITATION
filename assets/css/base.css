@@ -45,6 +45,37 @@ body {
   padding: clamp(0px, 1.5vw, 16px);
 }
 
+/* Mobile Native Full-Bleed Edge-to-Edge: Removes desktop preview padding & outer margins */
+@media (max-width: 600px) {
+  .screen-wrapper {
+    padding: 0 !important;
+  }
+
+  .app-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* When invitation card is unfolded/docked fullscreen, expand completely edge-to-edge */
+body.card-fullscreen-active .screen-wrapper {
+  padding: 0 !important;
+}
+
+body.card-fullscreen-active .app-container {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 600px) {
+  body.card-fullscreen-active .app-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
 /* Ambient Canvas for Floating Petals and Gold Sparkles */
 .ambient-canvas {
   position: fixed;

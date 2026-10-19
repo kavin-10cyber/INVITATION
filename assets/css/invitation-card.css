@@ -217,7 +217,7 @@
   box-sizing: border-box;
   background-color: #FFF5F7;
   background-image: url('../images/card_blush_roses.jpg');
-  background-size: 100% 100% !important;
+  background-size: calc(100% + 6mm) calc(100% + 6mm) !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
   border: 1.2px solid rgba(168, 124, 46, 0.55);
@@ -262,13 +262,13 @@
    DOCKED FULLSCREEN STATE (Stationery Takeover)
    Docks the unfolded invitation card directly to the viewport/app container.
    The background with antique gold borders & English roses seamlessly covers
-   the entire screen without any artificial zooming or empty margins!
+   the entire screen edge-to-edge with 3mm zoom fill on all 4 sides!
    ========================================================================== */
 .invitation-card.card-docked-fullscreen {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
-  max-width: 440px !important;
+  max-width: 100% !important;
   height: 100% !important;
   height: 100vh !important;
   height: 100dvh !important;
@@ -280,13 +280,14 @@
   transform: none !important;
   z-index: 990 !important;
   pointer-events: auto !important;
-  border-radius: inherit !important;
+  border-radius: 0 !important;
+  border: none !important;
   background-color: #FFF5F7 !important;
   background-image: url('../images/card_blush_roses.jpg') !important;
-  background-size: 100% 100% !important;
+  background-size: calc(100% + 6mm) calc(100% + 6mm) !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.7) !important;
+  box-shadow: none !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;

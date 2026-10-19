@@ -609,9 +609,67 @@
 
   // Initialize on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+      init();
+      setTimeout(checkUrlScreenTrigger, 200);
+    });
   } else {
     init();
+    setTimeout(checkUrlScreenTrigger, 200);
+  }
+
+  function checkUrlScreenTrigger() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('screen') === '4' || window.location.hash === '#screen-4') {
+        const card = document.getElementById('invitation-card');
+        const cardFlipper = document.getElementById('card-flipper');
+        const s1 = document.getElementById('invitation-screen-1');
+        const s2 = document.getElementById('invitation-screen-2');
+        const s3 = document.getElementById('invitation-screen-3');
+        const s4 = document.getElementById('invitation-screen-4');
+        const envelope = document.getElementById('envelope-container');
+        const waxSeal = document.getElementById('wax-seal-wrapper');
+
+        if (envelope) envelope.style.display = 'none';
+        if (waxSeal) waxSeal.style.display = 'none';
+        if (card) {
+          card.classList.add('card-docked-fullscreen');
+          card.style.display = 'block';
+          card.style.opacity = '1';
+          card.style.transform = 'none';
+        }
+        if (cardFlipper) cardFlipper.style.transform = 'none';
+        if (s1) {
+          s1.classList.remove('screen-active');
+          s1.classList.add('screen-hidden');
+          s1.style.display = 'none';
+          s1.style.opacity = '0';
+        }
+        if (s2) {
+          s2.classList.remove('screen-active');
+          s2.classList.add('screen-hidden');
+          s2.style.display = 'none';
+          s2.style.opacity = '0';
+        }
+        if (s3) {
+          s3.classList.remove('screen-active');
+          s3.classList.add('screen-hidden');
+          s3.style.display = 'none';
+          s3.style.opacity = '0';
+        }
+        if (s4) {
+          s4.classList.remove('screen-hidden');
+          s4.classList.add('screen-active');
+          s4.style.display = 'flex';
+          s4.style.opacity = '1';
+          s4.style.transform = 'none';
+          s4.style.pointerEvents = 'auto';
+        }
+      }
+    } catch (e) {
+      console.warn('URL screen trigger error:', e);
+    }
   }
 
   // Export module to global scope
