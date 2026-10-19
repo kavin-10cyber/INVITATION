@@ -50,7 +50,7 @@
           const diffX = Math.abs(touchStartX - e.changedTouches[0].clientX);
           // Swiping up (diffY > 45) while near bottom of screen 4
           if (diffY > 45 && Math.abs(diffY) > diffX * 1.2) {
-            const isNearBottom = (screen4El.scrollHeight - screen4El.scrollTop - screen4El.clientHeight) <= 40;
+            const isNearBottom = (screen4El.scrollHeight - screen4El.scrollTop - screen4El.clientHeight) <= 80;
             if (isNearBottom) {
               transitionToScreen5();
             }
@@ -97,15 +97,16 @@
 
     const btnReplayFab = document.getElementById('btn-replay-fab');
 
-    // Ensure Replay FAB is completely hidden on Thank You screen
+    // Keep Replay FAB active and accessible on Thank You screen
     if (btnReplayFab) {
-      btnReplayFab.style.opacity = '0';
-      btnReplayFab.style.pointerEvents = 'none';
+      btnReplayFab.style.opacity = '1';
+      btnReplayFab.style.pointerEvents = 'auto';
     }
 
     const flareBridgeEl = document.getElementById('venue-flare-bridge');
     const flareScrimEl = flareBridgeEl ? flareBridgeEl.querySelector('.flare-scrim') : null;
     const flareLightLeakEl = document.getElementById('flare-light-leak');
+    const flareBlushVeilEl = document.getElementById('flare-blush-veil');
     const flareStageEl = document.getElementById('flare-stage');
     const flareStreakEl = flareBridgeEl ? flareBridgeEl.querySelector('.flare-anamorphic-streak') : null;
     const flareGlowEl = flareBridgeEl ? flareBridgeEl.querySelector('.flare-anamorphic-glow') : null;
@@ -138,6 +139,7 @@
         titleEl, flourishEl, supportingEl, monogramEl, coupleNamesEl, taglineEl, messageEl
       ]);
       if (flareScrimEl) gsap.killTweensOf(flareScrimEl);
+      if (flareBlushVeilEl) gsap.killTweensOf(flareBlushVeilEl);
       if (flareStageEl) gsap.killTweensOf(flareStageEl);
       if (flareStreakEl) gsap.killTweensOf(flareStreakEl);
       if (flareGlowEl) gsap.killTweensOf(flareGlowEl);
@@ -153,6 +155,7 @@
       gsap.set(flareBridgeEl, { opacity: 1 });
 
       if (flareScrimEl) gsap.set(flareScrimEl, { opacity: 0 });
+      if (flareBlushVeilEl) gsap.set(flareBlushVeilEl, { opacity: 0 });
       if (flareLightLeakEl) gsap.set(flareLightLeakEl, { opacity: 0, scale: 0.7, x: 20, y: -20 });
       if (flareStageEl) gsap.set(flareStageEl, { opacity: 1, xPercent: 0 });
       if (flareStreakEl) gsap.set(flareStreakEl, { scaleX: 0, opacity: 0 });
@@ -186,69 +189,70 @@
           flareBridgeEl.style.display = 'none';
           gsap.set(flareBridgeEl, { clearProps: 'all' });
           if (flareLightLeakEl) gsap.set(flareLightLeakEl, { clearProps: 'all' });
+          if (flareBlushVeilEl) gsap.set(flareBlushVeilEl, { clearProps: 'all' });
           if (flareStageEl) gsap.set(flareStageEl, { clearProps: 'all' });
           gsap.set(screen5El, { clearProps: 'transform' });
           isTransitioning = false;
         }
       });
 
-      // 1. Filmic dark scrim sets the camera aperture mood (0.25s)
+      // 1. Filmic dark scrim sets the camera aperture mood over Screen 4 (0.22s)
       if (flareScrimEl) {
         tl.to(flareScrimEl, {
-          opacity: 0.85,
-          duration: 0.25,
+          opacity: 0.75,
+          duration: 0.22,
           ease: 'power2.inOut'
         }, 0);
       }
 
-      // 2. Optical Glint: Radiant lens core & starburst ignite at center (0.35s)
+      // 2. Optical Glint: Radiant lens core & starburst ignite at center (0.32s)
       if (flareCoreEl) {
         tl.to(flareCoreEl, {
           opacity: 1,
-          scale: 1.25,
-          duration: 0.35,
+          scale: 1.3,
+          duration: 0.32,
           ease: 'power2.out'
-        }, 0.05);
+        }, 0.04);
       }
       if (flareStarburstEl) {
         tl.to(flareStarburstEl, {
-          opacity: 0.9,
-          scale: 1.15,
+          opacity: 0.95,
+          scale: 1.2,
           rotation: 45,
-          duration: 0.35,
+          duration: 0.32,
           ease: 'power2.out'
-        }, 0.08);
+        }, 0.06);
       }
 
-      // 3. Ultra-wide Anamorphic Horizontal Laser Streak shoots across screen (0.45s)
+      // 3. Ultra-wide Anamorphic Horizontal Laser Streak shoots across screen (0.40s)
       if (flareStreakEl) {
         tl.to(flareStreakEl, {
-          scaleX: 1.35,
+          scaleX: 1.4,
           opacity: 1,
-          duration: 0.45,
+          duration: 0.40,
           ease: 'power3.out'
-        }, 0.12);
+        }, 0.10);
       }
       if (flareGlowEl) {
         tl.to(flareGlowEl, {
-          scaleX: 1.2,
+          scaleX: 1.25,
           opacity: 0.95,
-          duration: 0.50,
+          duration: 0.44,
           ease: 'power2.out'
-        }, 0.15);
+        }, 0.12);
       }
 
-      // 4. Soft Optical Bokeh Orbs drift across the lens (0.55s)
+      // 4. Soft Optical Bokeh Orbs drift across the lens (0.50s)
       if (flareBokehs && flareBokehs.length > 0) {
         flareBokehs.forEach((bokeh, idx) => {
           tl.to(bokeh, {
-            opacity: 0.75,
-            scale: 1.1,
+            opacity: 0.8,
+            scale: 1.15,
             x: (idx % 2 === 0 ? 18 : -18),
             y: (idx % 2 === 0 ? -12 : 12),
-            duration: 0.55,
+            duration: 0.50,
             ease: 'sine.out'
-          }, 0.18 + (idx * 0.05));
+          }, 0.15 + (idx * 0.05));
         });
       }
 
@@ -258,26 +262,41 @@
           tl.to(dust, {
             opacity: 0.95,
             y: -15,
-            duration: 0.60,
+            duration: 0.55,
             ease: 'power1.out'
-          }, 0.20 + (idx * 0.04));
+          }, 0.16 + (idx * 0.04));
         });
       }
 
-      // 5. CRITICAL SUNLIGHT LEAK BLOOM: Organic warm rose-gold sunlight wash pours in (0.40s)
-      // Completely washes the dark navy into warm, ethereal blush-pink morning light!
+      // 5. CRITICAL SUNLIGHT LEAK & BLUSH VEIL BLOOM (0.35s)
+      // Completely bathes the dark navy into warm, ethereal blush-pink & champagne morning light!
       if (flareLightLeakEl) {
         tl.to(flareLightLeakEl, {
           opacity: 1,
           scale: 1.35,
           x: 0,
           y: 0,
-          duration: 0.40,
+          duration: 0.38,
           ease: 'expo.in'
-        }, 0.32);
+        }, 0.22);
+      }
+      if (flareBlushVeilEl) {
+        tl.to(flareBlushVeilEl, {
+          opacity: 1,
+          duration: 0.35,
+          ease: 'power2.in'
+        }, 0.25);
       }
 
-      // 6. Seamless Screen Swap at Peak Flare (0.72s)
+      // Clear dark scrim before screen swap so it never darkens Screen 5
+      if (flareScrimEl) {
+        tl.to(flareScrimEl, {
+          opacity: 0,
+          duration: 0.10
+        }, 0.55);
+      }
+
+      // 6. Seamless Screen Swap Underneath Radiant Blush Light Peak (0.60s)
       tl.add(() => {
         if (screen4El) {
           screen4El.classList.remove('screen-active');
@@ -290,38 +309,44 @@
         screen5El.style.display = 'flex';
         screen5El.style.opacity = '1';
         screen5El.scrollTop = 0;
-      }, 0.72);
+      }, 0.60);
 
-      // 7. Light Flare sweeps smoothly away, and Light Leak dissolves like morning mist (0.60s)
-      if (flareStageEl) {
-        tl.to(flareStageEl, {
-          xPercent: 40,
+      // 7. Light Veil dissolves like morning mist, revealing pristine Screen 5 (0.45s)
+      if (flareBlushVeilEl) {
+        tl.to(flareBlushVeilEl, {
           opacity: 0,
           duration: 0.45,
-          ease: 'power2.in'
-        }, 0.70);
+          ease: 'power2.out'
+        }, 0.60);
       }
-
       if (flareLightLeakEl) {
         tl.to(flareLightLeakEl, {
           opacity: 0,
-          duration: 0.60,
+          duration: 0.50,
           ease: 'power2.out'
-        }, 0.74);
+        }, 0.62);
+      }
+      if (flareStageEl) {
+        tl.to(flareStageEl, {
+          xPercent: 35,
+          opacity: 0,
+          duration: 0.40,
+          ease: 'power2.in'
+        }, 0.60);
       }
 
       tl.to(flareBridgeEl, {
         opacity: 0,
-        duration: 0.35,
+        duration: 0.30,
         ease: 'power2.out'
-      }, 0.90);
+      }, 0.75);
 
       if (shimmerEl) {
         tl.to(shimmerEl, {
           opacity: 1,
           duration: 0.85,
           ease: 'sine.out'
-        }, 0.80);
+        }, 0.70);
       }
 
       // 8. Staggered Entrance of Screen 5 Typography & Ornaments
@@ -332,7 +357,7 @@
           scale: 1.0,
           duration: 0.45,
           ease: 'back.out(1.4)'
-        }, 0.85);
+        }, 0.75);
       }
       if (eyebrowEl) {
         tl.to(eyebrowEl, {
@@ -452,7 +477,10 @@
    * Smooth return from Screen 5 (Thank You) back to Screen 4 (Venue & Directions).
    */
   function transitionBackToScreen4() {
-    if (isTransitioning || !screen4El || !screen5El) return;
+    if (isTransitioning) return;
+    if (!screen4El) screen4El = document.getElementById('invitation-screen-4');
+    if (!screen5El) screen5El = document.getElementById('invitation-screen-5');
+    if (!screen4El || !screen5El) return;
     isTransitioning = true;
 
     if (typeof gsap !== 'undefined') {
@@ -567,8 +595,8 @@
         if (envelope) envelope.style.display = 'none';
         if (waxSeal) waxSeal.style.display = 'none';
         if (btnReplayFab) {
-          btnReplayFab.style.opacity = '0';
-          btnReplayFab.style.pointerEvents = 'none';
+          btnReplayFab.style.opacity = '1';
+          btnReplayFab.style.pointerEvents = 'auto';
         }
         if (card) {
           card.classList.add('card-docked-fullscreen');

@@ -190,7 +190,11 @@
           return;
         }
 
-        if (isEnvelopeOpened && !isClosing && !isOpening) {
+        const isCardDocked = invitationCard && (
+          invitationCard.classList.contains('card-docked-fullscreen') ||
+          invitationCard.classList.contains('card-unfolded')
+        );
+        if ((isEnvelopeOpened || isCardDocked) && !isClosing && !isOpening) {
           closeEnvelope();
         } else if (!isEnvelopeOpened && !isOpening && !isClosing) {
           openEnvelope();
@@ -748,7 +752,9 @@
           tl.to(btnFold, { opacity: 0, duration: 0.18, ease: 'power2.out' }, 0);
         }
 
-        const contentSectionsToFade = invitationCard.querySelectorAll('.card-section, .screen2-section, .scratch-card-wrapper, .card-sheen-sweep');
+        const contentSectionsToFade = invitationCard.querySelectorAll(
+          '.card-section, .screen2-section, .scratch-card-wrapper, .card-sheen-sweep, .screen-3, .screen-4, .screen-5, .ty-content-wrapper'
+        );
         const transitionOverlay = document.getElementById('page-transition-overlay');
         const elementsToFade = Array.from(contentSectionsToFade);
         if (transitionOverlay) elementsToFade.push(transitionOverlay);
@@ -760,14 +766,19 @@
             ease: 'power2.out',
             onComplete: () => {
               // Once inner text content has dissolved away cleanly:
-              // 1. Hide Screen 2
+              // 1. Hide Screens 2, 3, 4, 5
               const s2 = document.getElementById('invitation-screen-2');
-              if (s2) {
-                s2.classList.remove('screen-active');
-                s2.classList.add('screen-hidden');
-                s2.style.display = 'none';
-                s2.style.opacity = '0';
-              }
+              const s3 = document.getElementById('invitation-screen-3');
+              const s4 = document.getElementById('invitation-screen-4');
+              const s5 = document.getElementById('invitation-screen-5');
+              [s2, s3, s4, s5].forEach(s => {
+                if (s) {
+                  s.classList.remove('screen-active');
+                  s.classList.add('screen-hidden');
+                  s.style.display = 'none';
+                  s.style.opacity = '0';
+                }
+              });
               // 2. Keep Screen 1 active with its pristine floral stationery & gold border FULLY VISIBLE
               const s1 = document.getElementById('invitation-screen-1');
               if (s1) {

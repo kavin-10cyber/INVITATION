@@ -731,7 +731,7 @@
     } else {
       const screen4El = document.getElementById('invitation-screen-4');
       if (screen4El && screen4El.classList.contains('screen-active') && !screen4El.classList.contains('screen-hidden')) {
-        const isNearBottom = (screen4El.scrollHeight - screen4El.scrollTop - screen4El.clientHeight) <= 50;
+        const isNearBottom = (screen4El.scrollHeight - screen4El.scrollTop - screen4El.clientHeight) <= 80;
         if (isNearBottom) {
           if (window.WeddingThankYou && typeof window.WeddingThankYou.transitionToScreen5 === 'function') {
             isScreenTransitioning = true;
