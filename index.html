@@ -16,24 +16,23 @@
     href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap">
 
   <!-- Performance Preloads for Zero-Latency Rendering -->
-  <link rel="preload" as="image" href="assets/images/reference_composite.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/images/stage_couple_swing.png">
+  <link rel="preload" as="image" href="assets/images/bg_stage_clean.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/images/stage_rings.png">
+  <link rel="preload" as="image" href="assets/images/stage_couple_swing.png">
   <link rel="preload" as="image" href="assets/images/stage_lotus_left.png">
   <link rel="preload" as="image" href="assets/images/stage_lotus_right.png">
-  <link rel="preload" as="image" href="assets/images/scratch_plaque_rose_cartouche.png?v=6.0">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=8.5">
-  <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.2">
+  <link rel="stylesheet" href="assets/css/style.css?v=8.6">
+  <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.3">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 </head>
 
 <body>
 
-  <!-- Background Music Audio Element -->
-  <audio id="bg-audio" preload="auto" loop autoplay playsinline>
+  <!-- Background Music Audio Element (Deferred streaming on user interaction to save 3.3MB initial latency) -->
+  <audio id="bg-audio" preload="none" loop playsinline>
     <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
     <source src="assets/audio/audio.mp3" type="audio/mpeg">
   </audio>
@@ -716,14 +715,14 @@
   <!-- ================================================================ -->
   <!-- MODULAR JAVASCRIPT ARCHITECTURE                                 -->
   <!-- ================================================================ -->
-  <script src="assets/js/audio.js"></script>
-  <script src="assets/js/stage.js"></script>
-  <script src="assets/js/particles.js?v=3.0"></script>
-  <script src="assets/js/text-reveal.js?v=3.9"></script>
-  <script src="assets/js/scratch-card.js?v=5.7"></script>
-  <script src="assets/js/envelope.js?v=10.1"></script>
-  <script src="assets/js/theme-switcher.js"></script>
-  <script src="assets/js/main.js?v=3.1"></script>
+  <script src="assets/js/audio.js" defer></script>
+  <script src="assets/js/stage.js" defer></script>
+  <script src="assets/js/particles.js?v=3.0" defer></script>
+  <script src="assets/js/text-reveal.js?v=3.9" defer></script>
+  <script src="assets/js/scratch-card.js?v=5.7" defer></script>
+  <script src="assets/js/envelope.js?v=10.1" defer></script>
+  <script src="assets/js/theme-switcher.js" defer></script>
+  <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
 
 </html>
