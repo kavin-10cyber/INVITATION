@@ -32,5 +32,8 @@
 /* 5. Screen 4: Venue & Directions Screen */
 @import './venue-directions.css';
 
-/* 6. Live Color Themes & Selector Bar */
+/* 6. Screen 5: Thank You Closing Screen */
+@import './thank-you.css';
+
+/* 7. Live Color Themes & Selector Bar */
 @import './themes.css';

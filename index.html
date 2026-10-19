@@ -22,9 +22,10 @@
   <link rel="preload" as="image" href="assets/images/stage_lotus_left.png">
   <link rel="preload" as="image" href="assets/images/stage_lotus_right.png">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=9.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=9.1">
   <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.6">
-  <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.2">
+  <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.3">
+  <link rel="stylesheet" href="assets/css/thank-you.css?v=1.0">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -889,16 +890,118 @@
                               <span class="calendar-btn-text">Add to Calendar</span>
                             </button>
 
-                            <!-- S4 Scroll Indicator Button (Exact venue button style with hopping arrow) -->
-                            <button type="button" id="btn-venue-scroll" class="btn-venue-scroll" aria-label="Scroll Venue Screen" title="Scroll down">
+                            <!-- S4 Next Action Button: Continues to Thank You Screen -->
+                            <button type="button" id="btn-venue-scroll" class="btn-venue-scroll" aria-label="Scroll to Thank You Screen" title="Scroll to Thank You Screen">
                               <span class="venue-btn-text">SCROLL</span>
-                              <svg class="venue-btn-arrow" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                              <svg class="venue-btn-arrow" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                                <path d="M12 3c-.55 0-1 .45-1 1v11.17l-3.59-3.58a.996.996 0 1 0-1.41 1.41l5.3 5.29c.39.39 1.02.39 1.41 0l5.3-5.29a.996.996 0 1 0-1.41-1.41L13 15.17V4c0-.55-.45-1-1-1z"/>
                               </svg>
                             </button>
                           </div>
 
                         </div> <!-- /#invitation-screen-4 -->
+
+                        <!-- SCREEN 5: THANK YOU CLOSING SCREEN -->
+                        <div class="royal-frame-card modern-editorial-card invitation-screen screen-5 screen-hidden" id="invitation-screen-5" aria-label="Thank You and Blessings">
+
+                          <!-- Ambient Light Shimmer Overlay & Floating Petals Layer -->
+                          <div class="ty-shimmer-scrim" aria-hidden="true"></div>
+                          <div class="ty-petals-container" id="ty-petals-layer" aria-hidden="true">
+                            <span class="ty-petal ty-petal-1">🌸</span>
+                            <span class="ty-petal ty-petal-2">🌸</span>
+                            <span class="ty-petal ty-petal-3">🌸</span>
+                            <span class="ty-petal ty-petal-4">🌸</span>
+                          </div>
+
+                          <!-- Content Wrapper: Centered vertical flex container -->
+                          <div class="ty-content-wrapper">
+
+                            <!-- 1. Top Hanging Gold Finial & Eyebrow -->
+                            <header class="ty-header-section" aria-label="Thank You Header">
+                              <div class="ty-top-pip-wrap" aria-hidden="true">
+                                <svg class="ty-top-pip-svg" viewBox="0 0 40 16" width="34" height="14" fill="none">
+                                  <circle cx="20" cy="8" r="2.5" fill="url(#tyGoldGrad)" />
+                                  <path d="M 6 8 L 16 8 M 24 8 L 34 8" stroke="url(#tyGoldGrad)" stroke-width="1.0" stroke-linecap="round" />
+                                  <path d="M 20 2 L 21.5 6 L 20 7.5 L 18.5 6 Z" fill="url(#tyGoldGrad)" />
+                                  <path d="M 20 8.5 L 21.5 10 L 20 14 L 18.5 10 Z" fill="url(#tyGoldGrad)" />
+                                </svg>
+                              </div>
+                              <p class="ty-eyebrow-text">WITH LOVE &amp; GRATITUDE</p>
+                            </header>
+
+                            <!-- 2. Main Animated Heading: "Thank You" -->
+                            <div class="ty-title-section">
+                              <h1 class="ty-main-heading">Thank You</h1>
+                              <!-- Fine Champagne-Gold Flourish with Small Heart -->
+                              <div class="ty-flourish-wrap" aria-hidden="true">
+                                <svg class="ty-heart-flourish-svg" viewBox="0 0 200 24" fill="none">
+                                  <defs>
+                                    <linearGradient id="tyGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="#EED59B" />
+                                      <stop offset="35%" stop-color="#C6A15B" />
+                                      <stop offset="70%" stop-color="#8F6B35" />
+                                      <stop offset="100%" stop-color="#C6A15B" />
+                                    </linearGradient>
+                                  </defs>
+                                  <!-- Left flourishes -->
+                                  <path d="M 12 12 C 35 12, 50 6, 70 12 C 80 15, 88 12, 92 12" stroke="url(#tyGoldGrad)" stroke-width="1.2" stroke-linecap="round" />
+                                  <circle cx="10" cy="12" r="1.8" fill="url(#tyGoldGrad)" />
+                                  <!-- Center Heart with soft glow -->
+                                  <path d="M 100 16.5 C 98.2 14.8, 93 10.5, 93 7 A 3.8 3.8 0 0 1 100 4.8 A 3.8 3.8 0 0 1 107 7 C 107 10.5, 101.8 14.8, 100 16.5 Z" fill="url(#tyGoldGrad)" />
+                                  <!-- Right flourishes -->
+                                  <path d="M 108 12 C 112 12, 120 15, 130 12 C 150 6, 165 12, 188 12" stroke="url(#tyGoldGrad)" stroke-width="1.2" stroke-linecap="round" />
+                                  <circle cx="190" cy="12" r="1.8" fill="url(#tyGoldGrad)" />
+                                </svg>
+                              </div>
+                            </div>
+
+                            <!-- 3. Supporting Heading -->
+                            <h2 class="ty-supporting-heading">
+                              For Gracing Us With Your Presence &amp; Blessings
+                            </h2>
+
+                            <!-- Delicate Gold Section Divider -->
+                            <div class="ty-divider-ornament" aria-hidden="true">
+                              <span class="ty-div-line left"></span>
+                              <span class="ty-div-gem">✦</span>
+                              <span class="ty-div-line right"></span>
+                            </div>
+
+                            <!-- 4. Circular Antique-Gold Couple Monogram (D & V) -->
+                            <div class="ty-monogram-section">
+                              <div class="ty-monogram-container">
+                                <!-- Delicate Blush Floral Frame Image -->
+                                <img src="assets/images/thank_you_monogram_frame.png" alt="" class="ty-monogram-wreath-img" aria-hidden="true" />
+                                <!-- Inner Antique Gold Initial Crest -->
+                                <div class="ty-monogram-core">
+                                  <span class="ty-monogram-initials">D <span class="ty-monogram-amp">&amp;</span> V</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- 5. Couple Names & Tagline -->
+                            <div class="ty-names-section">
+                              <h3 class="ty-couple-names">Deepak <span class="ty-names-amp">&amp;</span> Vikashini</h3>
+                              <p class="ty-couple-tagline">TOGETHER WITH LOVE, FOREVER IN OUR HEARTS</p>
+                            </div>
+
+                            <!-- Delicate Gold Section Divider -->
+                            <div class="ty-divider-ornament" aria-hidden="true">
+                              <span class="ty-div-line left"></span>
+                              <span class="ty-div-gem">✦</span>
+                              <span class="ty-div-line right"></span>
+                            </div>
+
+                            <!-- 6. Exact Replacement Paragraph -->
+                            <div class="ty-message-section">
+                              <p class="ty-message-paragraph">
+                                &ldquo;Your love, blessings, and good wishes mean the world to us. We are grateful to share this beautiful new beginning with you.&rdquo;
+                              </p>
+                            </div>
+
+                          </div> <!-- /.ty-content-wrapper -->
+
+                        </div> <!-- /#invitation-screen-5 -->
                       </div> <!-- /.invitation-card-scroll -->
                     </div> <!-- /.invitation-front -->
 
@@ -1049,11 +1152,12 @@
   <script src="assets/js/audio.js" defer></script>
   <script src="assets/js/stage.js" defer></script>
   <script src="assets/js/particles.js?v=3.0" defer></script>
-  <script src="assets/js/text-reveal.js?v=4.2" defer></script>
+  <script src="assets/js/text-reveal.js?v=4.3" defer></script>
   <script src="assets/js/scratch-card.js?v=5.7" defer></script>
   <script src="assets/js/envelope.js?v=10.3" defer></script>
   <script src="assets/js/theme-switcher.js" defer></script>
-  <script src="assets/js/venue-directions.js?v=3.2" defer></script>
+  <script src="assets/js/venue-directions.js?v=3.3" defer></script>
+  <script src="assets/js/thank-you.js?v=1.0" defer></script>
   <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
 

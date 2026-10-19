@@ -632,8 +632,8 @@
 }
 
 .btn-venue-scroll .venue-btn-arrow {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   fill: currentColor;
   color: #3A050E;
   display: block;
@@ -643,14 +643,6 @@
 
 .btn-venue-scroll:hover .venue-btn-arrow {
   transform: translateY(2.5px);
-}
-
-.btn-venue-scroll.is-scrolled-down .venue-btn-arrow {
-  transform: rotate(180deg);
-}
-
-.btn-venue-scroll.is-scrolled-down:hover .venue-btn-arrow {
-  transform: rotate(180deg) translateY(2.5px);
 }
 
 @keyframes scrollBtnHop {
