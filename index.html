@@ -12,17 +12,31 @@
   <!-- Google Fonts: Great Vibes (for calligraphy), Cinzel (royal serif), Playfair Display, Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap">
 
-  <link rel="stylesheet" href="style.css">
+  <!-- Performance Preloads for Zero-Latency Rendering -->
+  <link rel="preload" as="image" href="assets/images/reference_composite.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/stage_couple_swing.png">
+  <link rel="preload" as="image" href="assets/images/stage_rings.png">
+  <link rel="preload" as="image" href="assets/images/stage_lotus_left.png">
+  <link rel="preload" as="image" href="assets/images/stage_lotus_right.png">
+  <link rel="preload" as="image" href="assets/images/scratch_plaque_rose_cartouche.png?v=6.0">
+
+  <link rel="stylesheet" href="assets/css/style.css?v=8.4">
+  <link rel="stylesheet" href="assets/css/invitation-card.css?v=15.7">
+
+  <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 
 <body>
 
   <!-- Background Music Audio Element -->
-  <audio id="bg-audio" src="bg-music.mp3" preload="auto" loop></audio>
+  <audio id="bg-audio" preload="auto" loop autoplay playsinline>
+    <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
+    <source src="assets/audio/audio.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- Floating Audio Toggle Button (Bottom Right) -->
   <aside class="audio-control-bar" aria-label="Music Controls">
@@ -40,6 +54,16 @@
     </button>
   </aside>
 
+  <!-- Floating Replay Button (Bottom Left) -->
+  <aside class="replay-control-bar" aria-label="Replay Invitation">
+    <button id="btn-replay-fab" class="btn-replay-fab" type="button" aria-label="Replay invitation envelope"
+      title="Replay Envelope">
+      <svg class="replay-arrow-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M12 4.5V0.5L4.5 6.5l7.5 6V8.5c2.49 0 4.5 2.01 4.5 4.5s-2.01 4.5-4.5 4.5-4.5-2.01-4.5-4.5H3.5c0 4.7 3.8 8.5 8.5 8.5s8.5-3.8 8.5-8.5-3.8-8.5-8.5-8.5z"/>
+      </svg>
+    </button>
+  </aside>
+
   <!-- Ambient Flower Petals & Gold Sparkles Canvas -->
   <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
 
@@ -52,16 +76,46 @@
       <!-- ================================================================ -->
       <!-- SCREEN 1: TRADITIONAL MANDAP BACKDROP & 3D ENVELOPE COMPONENT    -->
       <!-- ================================================================ -->
-      <section id="cover-screen" class="cover-screen" role="region"
+      <section id="cover-screen" class="app-screen cover-screen" role="region"
         aria-label="Traditional Wedding Invitation Envelope">
 
-        <!-- Top Hanging Bells & Sacred Invocations Decor -->
-        <header class="header-container">
-          <div class="sacred-mantra-badge">
-            <span class="divine-star">✦</span>
-            <span class="mantra-text">|| ஓம் முருகா ||</span>
-            <span class="divine-star">✦</span>
+        <!-- Animated Multi-Layer Artwork Stage (Flows into position) -->
+        <div class="stage-canvas-wrapper" id="stage-canvas-wrapper" aria-hidden="true">
+          <!-- 1. Background Palace Arch & Mandala -->
+          <div class="stage-layer stage-bg" id="stage-bg"></div>
+
+          <!-- 2. Top-Left & Top-Right Lotus Blooms -->
+          <div class="stage-layer stage-lotus-left" id="stage-lotus-left">
+            <img src="assets/images/stage_lotus_left.png" alt="" />
           </div>
+          <div class="stage-layer stage-lotus-right" id="stage-lotus-right">
+            <img src="assets/images/stage_lotus_right.png" alt="" />
+          </div>
+
+          <!-- 3. Golden Wedding Rings relocated directly above You're Invited text -->
+
+          <!-- 4. Royal Peacocks (Right Foliage & Lower Gazebo) -->
+          <div class="stage-layer stage-peacock-upper" id="stage-peacock-upper">
+            <img src="assets/images/stage_peacock_upper.png" alt="" />
+          </div>
+          <div class="stage-layer stage-peacock-lower" id="stage-peacock-lower">
+            <img src="assets/images/stage_peacock_lower.png" alt="" />
+          </div>
+
+          <!-- 5. Couple on Swing (Bottom Left) -->
+          <div class="stage-layer stage-couple" id="stage-couple">
+            <img src="assets/images/stage_couple_swing.png" alt="" />
+          </div>
+        </div>
+
+
+        <!-- Top Header & Modern Badge -->
+        <header class="header-container">
+          <!-- <div class="sacred-mantra-badge modern-header-badge">
+            <span class="divine-star">✦</span>
+            <span class="mantra-text">YOU ARE CORDIALLY INVITED</span>
+            <span class="divine-star">✦</span>
+          </div> -->
           <h1 id="invocation-title" class="invocation-title"></h1>
           <div class="ornamental-divider" aria-hidden="true">
             <span class="line left-line"></span>
@@ -70,82 +124,557 @@
           </div>
         </header>
 
-        <!-- Centered 3D Responsive Envelope Component -->
+        <!-- ================================================================ -->
+        <!-- CENTERED 3D RESPONSIVE ENVELOPE COMPONENT                       -->
+        <!-- ================================================================ -->
         <div class="envelope-section">
-          <!-- The Signature Calligraphy Script: "You're Invited" (Relocated below header & above tap cue) -->
+          <!-- Golden Wedding Rings (Positioned on top of "You're Invited" text) -->
+          <div class="stage-rings" id="stage-rings" aria-label="Interlocking Wedding Rings">
+            <img src="assets/images/stage_rings.png" alt="Interlocking Wedding Rings" />
+            <div class="rings-gleam-container">
+              <span class="ring-sparkle sparkle-1">✦</span>
+              <span class="ring-sparkle sparkle-2">✧</span>
+              <span class="ring-sparkle sparkle-3">✦</span>
+            </div>
+          </div>
+
+          <!-- The Signature Calligraphy Script: "You're Invited" -->
           <div class="invitation-calligraphy-wrapper">
             <h2 class="youre-invited-text">You're Invited</h2>
           </div>
 
-          <!-- Pulsing Call-to-Action Indicator -->
-          <div class="cta-container" id="cta-container">
-            <div class="tap-indicator" aria-hidden="true">
-              <svg class="tap-finger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path
-                  d="M12 2a3 3 0 0 0-3 3v7l-1.5-1.5a2.12 2.12 0 0 0-3 3L9 18a8 8 0 0 0 8 8h1a8 8 0 0 0 8-8V9a3 3 0 0 0-6 0v1"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-            <p class="cta-text" id="cta-text">TAP TO OPEN INVITATION</p>
-            <div class="cta-sparkles" aria-hidden="true">
-              <span>✨</span>
-              <span>✦</span>
-              <span>✨</span>
-            </div>
-          </div>
-
           <div class="envelope-scene" id="envelope-scene">
 
-            <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap to open invitation envelope">
+            <div class="envelope theme-navy" id="envelope" role="button" tabindex="0"
+              aria-label="Tap to open invitation envelope">
 
               <!-- Interior Lining of Envelope with Gold Starlet Pattern -->
               <div class="envelope-back">
                 <div class="lining-pattern"></div>
               </div>
 
-              <!-- 3D Top Flap (Letter fold type with 180deg unroll animation) -->
+              <!-- Elegant V-Fold Flap with Antique Gold Border & Center Embossed Lotus Seal -->
               <div class="envelope-flap" id="envelope-flap">
-                <div class="flap-texture"></div>
-                <div class="flap-gold-edge"></div>
+                <!-- Front Face: Royal Navy Satin Texture with Delicate Antique Gold Edge Trim -->
+                <div class="flap-front">
+                  <div class="flap-texture"></div>
+                  <svg class="flap-v-vector" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
+                    <!-- Clean V-fold with subtle softened tip matching reference -->
+                    <path class="flap-gold-stroke" d="M 0,0 L 0,40 Q 20,40 50,56 L 490,490 Q 500,500 510,490 L 950,56 Q 980,40 1000,40 L 1000,0" fill="none" />
+                  </svg>
+                </div>
 
-                <!-- 3D Golden Wax Seal (#D4AF37) centered over the flap fold with initials D & V -->
+                <!-- Back Face: Deep Royal Navy Inner Lining -->
+                <div class="flap-back">
+                  <div class="flap-back-texture"></div>
+                  <div class="flap-back-gold-trim"></div>
+                </div>
+
+                <!-- Central Embossed Lotus Wax Seal Medallion (Exact Reference Seal) -->
                 <div class="wax-seal-wrapper" id="wax-seal-wrapper">
                   <div class="wax-seal" id="wax-seal" title="Click or tap to open invitation">
-                    <div class="seal-glow-ring"></div>
-                    <div class="seal-ring outer-ring"></div>
-                    <div class="seal-ring inner-ring"></div>
-                    <div class="seal-content">
-                      <span class="seal-monogram">D &amp; V</span>
-                    </div>
-                    <div class="seal-highlight"></div>
+                    <img class="wax-seal-img" src="assets/images/reference_seal_extracted.png" alt="Embossed Lotus Gold Wax Seal" />
                   </div>
                 </div>
               </div>
 
-              <!-- Inner Invitation Card (slides vertically upward upon unsealing) -->
-              <div class="inner-card" id="inner-card" aria-hidden="true">
-                <div class="inner-card-border">
-                  <div class="inner-card-corner top-left"></div>
-                  <div class="inner-card-corner top-right"></div>
-                  <div class="inner-card-corner bottom-left"></div>
-                  <div class="inner-card-corner bottom-right"></div>
+              <!-- Enclosed Card Chamber: Clamps bottom to envelope base so card emerges strictly from INSIDE -->
+              <div class="envelope-card-slot" id="envelope-card-slot">
+                <!-- Royal Wedding Invitation Card with 3D Double-Sided Spin Extraction & Scratch Card Reveal -->
+                <article class="invitation-card" id="invitation-card" aria-label="Official Wedding Invitation">
+                  <div class="invitation-card-flipper">
 
-                  <div class="inner-card-content">
-                    <span class="card-auspicious">॥ அன்புடன் அழைக்கிறோம் ॥</span>
-                    <h2 class="card-couple">Deepak &amp; Vikashini</h2>
-                    <div class="card-date-badge">
-                      <span>NOVEMBER 22, 2026</span>
-                    </div>
-                    <p class="card-note">Join us as we step into our new beginning!</p>
-                    <div class="card-mini-seal">&#10084;</div>
-                  </div>
-                </div>
-              </div>
+                    <!-- FRONT FACE: Warm Ivory, Deep Maroon & Antique Gold Indian Wedding Invitation Card -->
+                    <div class="invitation-face invitation-front">
+                      <div class="invitation-card-scroll" id="invitation-card-scroll">
 
-              <!-- Front Envelope Pocket with Aari Embroidery Artwork -->
+                        <!-- Floating Fold Envelope Affordance (Removed per user request) -->
+                        <button type="button" class="btn-fold-envelope" id="btn-fold-envelope" aria-label="Fold card back into envelope" title="Fold envelope" style="display: none !important;">
+                          <span class="fold-envelope-icon">&#9993;</span>
+                          <span class="fold-envelope-text">Fold</span>
+                        </button>
+
+                        <!-- Warm Ivory / Antique-Gold Page Transition Layer -->
+                        <div class="page-transition-overlay" id="page-transition-overlay" aria-hidden="true"></div>
+
+                        <!-- Golden Lotus Transition Bridge (Screen 2 -> Screen 3) -->
+                        <div class="reception-lotus-bridge-overlay" id="reception-lotus-bridge" aria-hidden="true">
+                          <div class="bridge-lotus-aura"></div>
+                          <div class="bridge-lotus-rays"></div>
+                          <div class="bridge-lotus-shimmer"></div>
+                          <div class="bridge-lotus-sparkles">
+                            <span class="bridge-glint glint-1">✦</span>
+                            <span class="bridge-glint glint-2">✧</span>
+                            <span class="bridge-glint glint-3">✦</span>
+                            <span class="bridge-glint glint-4">✧</span>
+                            <span class="bridge-glint glint-5">✦</span>
+                          </div>
+                        </div>
+
+                        <!-- SCREEN 1: EMOTIONAL INTRODUCTION -->
+                        <div class="royal-frame-card modern-editorial-card invitation-screen screen-1" id="invitation-screen-1">
+
+                          <!-- Faint Low-Contrast Botanical Floral Watermark -->
+                          <div class="card-botanical-watermark" aria-hidden="true">
+                            <svg viewBox="0 0 200 200" width="100%" height="100%" fill="none">
+                              <circle cx="100" cy="100" r="88" stroke="#C6A15B" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.6"/>
+                              <circle cx="100" cy="100" r="76" stroke="#C6A15B" stroke-width="0.75" opacity="0.7"/>
+                              <circle cx="100" cy="100" r="64" stroke="#C27484" stroke-width="0.6" opacity="0.5"/>
+                              <path d="M 100,32 C 108,52 120,68 100,92 C 80,68 92,52 100,32 Z" stroke="#C27484" stroke-width="0.75" opacity="0.65"/>
+                              <path d="M 100,168 C 108,148 120,132 100,108 C 80,132 92,148 100,168 Z" stroke="#C27484" stroke-width="0.75" opacity="0.65"/>
+                              <path d="M 32,100 C 52,108 68,120 92,100 C 68,80 52,92 32,100 Z" stroke="#C27484" stroke-width="0.75" opacity="0.65"/>
+                              <path d="M 168,100 C 148,108 132,120 108,100 C 132,80 148,92 168,100 Z" stroke="#C27484" stroke-width="0.75" opacity="0.65"/>
+                              <circle cx="100" cy="100" r="14" stroke="#C6A15B" stroke-width="0.75" opacity="0.8"/>
+                              <circle cx="100" cy="100" r="4" fill="#C6A15B" opacity="0.5"/>
+                            </svg>
+                          </div>
+
+                          <!-- Crisp Thin Double-Line Antique Champagne Gold Frame -->
+                          <div class="card-inner-border" aria-hidden="true"></div>
+
+                          <!-- Collection 5: Real Soft Watercolor English Roses & Delicate Buds (Option 2 Reference) -->
+                          <!-- Top-Left Botanical Corner: Authentic soft watercolor English rose, delicate buds & trailing sage leaves -->
+                          <div class="card-botanical-corner top-left" aria-hidden="true">
+                            <img src="assets/images/botanical_rose_corner_tl.png" alt="" class="botanical-corner-img" />
+                          </div>
+
+                          <!-- Top-Right Botanical Corner: Authentic soft watercolor English rose, delicate buds & trailing sage leaves -->
+                          <div class="card-botanical-corner top-right" aria-hidden="true">
+                            <img src="assets/images/botanical_rose_corner_tr.png" alt="" class="botanical-corner-img" />
+                          </div>
+
+                          <!-- Bottom-Left Botanical Corner (Lighter, graceful spray with buds & leaves) -->
+                          <div class="card-botanical-corner bottom-left" aria-hidden="true">
+                            <svg viewBox="0 0 95 95" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <defs>
+                                <linearGradient id="dr-petal-grad-bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#E2A2AE" />
+                                  <stop offset="60%" stop-color="#C27484" />
+                                  <stop offset="100%" stop-color="#A25466" />
+                                </linearGradient>
+                                <linearGradient id="dr-petal-light-bl" x1="0%" y1="0%" x2="90%" y2="100%">
+                                  <stop offset="0%" stop-color="#ECD0D6" />
+                                  <stop offset="50%" stop-color="#DB9BA8" />
+                                  <stop offset="100%" stop-color="#C57A8B" />
+                                </linearGradient>
+                                <linearGradient id="dr-leaf-grad-bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#A4AF95" />
+                                  <stop offset="60%" stop-color="#889679" />
+                                  <stop offset="100%" stop-color="#707D62" />
+                                </linearGradient>
+                                <linearGradient id="dr-gold-grad-bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#DFC48B" />
+                                  <stop offset="50%" stop-color="#C6A15B" />
+                                  <stop offset="100%" stop-color="#A7833E" />
+                                </linearGradient>
+                              </defs>
+                              <path d="M 5,50 L 5,14 C 5,9 9,5 14,5 L 50,5" stroke="url(#dr-gold-grad-bl)" stroke-width="1.1" stroke-linecap="round" />
+                              <path d="M 9,40 L 9,15 C 9,11 11,9 15,9 L 40,9" stroke="url(#dr-gold-grad-bl)" stroke-width="0.65" stroke-dasharray="2 3" opacity="0.8" />
+                              <path d="M 9,20 C 14,20 17,16 17,11 C 17,7 13,5 11,7 C 8,9 9,13 13,14" stroke="url(#dr-gold-grad-bl)" stroke-width="0.75" />
+                              <path d="M 20,9 C 20,14 16,17 11,17 C 7,17 5,13 7,11 C 9,8 13,9 14,13" stroke="url(#dr-gold-grad-bl)" stroke-width="0.75" />
+                              <circle cx="7" cy="7" r="2" fill="url(#dr-gold-grad-bl)" />
+                              <path d="M 12,12 Q 28,24 46,32 Q 58,38 72,40" stroke="#9A6571" stroke-width="0.85" stroke-linecap="round" />
+                              <path d="M 12,12 Q 26,22 42,30" stroke="url(#dr-gold-grad-bl)" stroke-width="0.5" opacity="0.9" />
+                              <path d="M 22,14 C 28,8 37,10 39,16 C 34,20 26,18 22,14 Z" fill="url(#dr-leaf-grad-bl)" opacity="0.9" />
+                              <path d="M 22,14 Q 31,14 39,16" stroke="url(#dr-gold-grad-bl)" stroke-width="0.45" />
+                              <path d="M 16,24 C 11,30 13,38 19,38 C 23,34 22,26 16,24 Z" fill="url(#dr-leaf-grad-bl)" opacity="0.9" />
+                              <path d="M 16,24 Q 16,32 19,38" stroke="url(#dr-gold-grad-bl)" stroke-width="0.45" />
+                              <path d="M 60,40 C 67,40 76,46 74,53 C 67,51 62,45 60,40 Z" fill="url(#dr-leaf-grad-bl)" opacity="0.85" />
+                              <path d="M 60,40 Q 67,46 74,53" stroke="url(#dr-gold-grad-bl)" stroke-width="0.4" />
+                              <path d="M 40,26 C 40,18 52,16 56,24 C 60,30 52,36 40,26 Z" fill="url(#dr-petal-light-bl)" opacity="0.88" stroke="url(#dr-gold-grad-bl)" stroke-width="0.6" />
+                              <path d="M 44,28 C 47,22 57,24 55,32 C 51,38 43,36 44,28 Z" fill="url(#dr-petal-grad-bl)" stroke="url(#dr-gold-grad-bl)" stroke-width="0.7" />
+                              <path d="M 47,29 C 48,25 54,26 53,30 C 51,34 46,33 47,29 Z" fill="#9C5063" opacity="0.4" />
+                              <path d="M 28,27 C 30,23 36,25 35,29 C 33,32 29,31 28,27 Z" fill="url(#dr-petal-grad-bl)" opacity="0.85" stroke="url(#dr-gold-grad-bl)" stroke-width="0.45" />
+                            </svg>
+                          </div>
+
+                          <!-- Bottom-Right Botanical Corner -->
+                          <div class="card-botanical-corner bottom-right" aria-hidden="true">
+                            <svg viewBox="0 0 95 95" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <defs>
+                                <linearGradient id="dr-petal-grad-br" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#E2A2AE" />
+                                  <stop offset="60%" stop-color="#C27484" />
+                                  <stop offset="100%" stop-color="#A25466" />
+                                </linearGradient>
+                                <linearGradient id="dr-petal-light-br" x1="0%" y1="0%" x2="90%" y2="100%">
+                                  <stop offset="0%" stop-color="#ECD0D6" />
+                                  <stop offset="50%" stop-color="#DB9BA8" />
+                                  <stop offset="100%" stop-color="#C57A8B" />
+                                </linearGradient>
+                                <linearGradient id="dr-leaf-grad-br" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#A4AF95" />
+                                  <stop offset="60%" stop-color="#889679" />
+                                  <stop offset="100%" stop-color="#707D62" />
+                                </linearGradient>
+                                <linearGradient id="dr-gold-grad-br" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#DFC48B" />
+                                  <stop offset="50%" stop-color="#C6A15B" />
+                                  <stop offset="100%" stop-color="#A7833E" />
+                                </linearGradient>
+                              </defs>
+                              <path d="M 5,50 L 5,14 C 5,9 9,5 14,5 L 50,5" stroke="url(#dr-gold-grad-br)" stroke-width="1.1" stroke-linecap="round" />
+                              <path d="M 9,40 L 9,15 C 9,11 11,9 15,9 L 40,9" stroke="url(#dr-gold-grad-br)" stroke-width="0.65" stroke-dasharray="2 3" opacity="0.8" />
+                              <path d="M 9,20 C 14,20 17,16 17,11 C 17,7 13,5 11,7 C 8,9 9,13 13,14" stroke="url(#dr-gold-grad-br)" stroke-width="0.75" />
+                              <path d="M 20,9 C 20,14 16,17 11,17 C 7,17 5,13 7,11 C 9,8 13,9 14,13" stroke="url(#dr-gold-grad-br)" stroke-width="0.75" />
+                              <circle cx="7" cy="7" r="2" fill="url(#dr-gold-grad-br)" />
+                              <path d="M 12,12 Q 28,24 46,32 Q 58,38 72,40" stroke="#9A6571" stroke-width="0.85" stroke-linecap="round" />
+                              <path d="M 12,12 Q 26,22 42,30" stroke="url(#dr-gold-grad-br)" stroke-width="0.5" opacity="0.9" />
+                              <path d="M 22,14 C 28,8 37,10 39,16 C 34,20 26,18 22,14 Z" fill="url(#dr-leaf-grad-br)" opacity="0.9" />
+                              <path d="M 22,14 Q 31,14 39,16" stroke="url(#dr-gold-grad-br)" stroke-width="0.45" />
+                              <path d="M 16,24 C 11,30 13,38 19,38 C 23,34 22,26 16,24 Z" fill="url(#dr-leaf-grad-br)" opacity="0.9" />
+                              <path d="M 16,24 Q 16,32 19,38" stroke="url(#dr-gold-grad-br)" stroke-width="0.45" />
+                              <path d="M 60,40 C 67,40 76,46 74,53 C 67,51 62,45 60,40 Z" fill="url(#dr-leaf-grad-br)" opacity="0.85" />
+                              <path d="M 60,40 Q 67,46 74,53" stroke="url(#dr-gold-grad-br)" stroke-width="0.4" />
+                              <path d="M 40,26 C 40,18 52,16 56,24 C 60,30 52,36 40,26 Z" fill="url(#dr-petal-light-br)" opacity="0.88" stroke="url(#dr-gold-grad-br)" stroke-width="0.6" />
+                              <path d="M 44,28 C 47,22 57,24 55,32 C 51,38 43,36 44,28 Z" fill="url(#dr-petal-grad-br)" stroke="url(#dr-gold-grad-br)" stroke-width="0.7" />
+                              <path d="M 47,29 C 48,25 54,26 53,30 C 51,34 46,33 47,29 Z" fill="#9C5063" opacity="0.4" />
+                              <path d="M 28,27 C 30,23 36,25 35,29 C 33,32 29,31 28,27 Z" fill="url(#dr-petal-grad-br)" opacity="0.85" stroke="url(#dr-gold-grad-br)" stroke-width="0.45" />
+                            </svg>
+                          </div>
+
+                          <!-- Dynamic Antique-Gold Sheen Highlight Sweep -->
+                          <div class="card-sheen-sweep" aria-hidden="true"></div>
+
+                          <!-- SECTION A — INVITATION HEADING -->
+                          <header class="card-section card-header-section" aria-label="Invitation Introduction">
+                            <span class="card-eyebrow">TOGETHER WITH THEIR FAMILIES</span>
+                          </header>
+
+                          <!-- SECTION B — COUPLE'S NAMES (PRIMARY TYPOGRAPHIC FOCAL POINT) -->
+                          <section class="card-section card-names-section" aria-label="Couple Names">
+                            <h1 class="card-couple-title">
+                              <span class="name-part groom">Deepak</span>
+                              <span class="name-ampersand" aria-hidden="true">&amp;</span>
+                              <span class="name-part bride">Vikashini</span>
+                            </h1>
+                            <div class="couple-editorial-sub">
+                              <span class="person-cred">S. Deepak &bull; B.Com(PA)., MBA</span>
+                              <span class="person-cred">P. Vikashini &bull; B.Sc.(IT)</span>
+                            </div>
+                          </section>
+
+                          <!-- SECTION C — COUPLE PORTRAIT: HERO CENTERPIECE -->
+                          <section class="card-section card-portrait-section" aria-label="Couple Portrait">
+                            <div class="portrait-hero-container">
+                              <div class="portrait-editorial-frame">
+                                <img src="assets/images/couple3.jpeg" 
+                                     alt="Deepak and Vikashini in traditional wedding attire" 
+                                     class="couple-portrait-img" 
+                                     loading="eager" />
+                                <div class="portrait-hairline-matting" aria-hidden="true"></div>
+                                <!-- Antique Gold Filigree Corner Brackets -->
+                                <div class="portrait-corner-bracket top-left" aria-hidden="true">
+                                  <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none">
+                                    <path d="M 2 16 L 2 5 C 2 3.3 3.3 2 5 2 L 16 2" stroke="#8A601A" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M 5 11 L 5 6 C 5 5.4 5.4 5 6 5 L 11 5" stroke="#C49B45" stroke-width="1.1" stroke-linecap="round"/>
+                                    <circle cx="3.5" cy="3.5" r="1.3" fill="#8A601A"/>
+                                    <path d="M 7 2 C 7 4.8 4.8 7 2 7" stroke="#8A601A" stroke-width="1"/>
+                                  </svg>
+                                </div>
+                                <div class="portrait-corner-bracket top-right" aria-hidden="true">
+                                  <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none">
+                                    <path d="M 2 16 L 2 5 C 2 3.3 3.3 2 5 2 L 16 2" stroke="#8A601A" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M 5 11 L 5 6 C 5 5.4 5.4 5 6 5 L 11 5" stroke="#C49B45" stroke-width="1.1" stroke-linecap="round"/>
+                                    <circle cx="3.5" cy="3.5" r="1.3" fill="#8A601A"/>
+                                    <path d="M 7 2 C 7 4.8 4.8 7 2 7" stroke="#8A601A" stroke-width="1"/>
+                                  </svg>
+                                </div>
+                                <div class="portrait-corner-bracket bottom-left" aria-hidden="true">
+                                  <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none">
+                                    <path d="M 2 16 L 2 5 C 2 3.3 3.3 2 5 2 L 16 2" stroke="#8A601A" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M 5 11 L 5 6 C 5 5.4 5.4 5 6 5 L 11 5" stroke="#C49B45" stroke-width="1.1" stroke-linecap="round"/>
+                                    <circle cx="3.5" cy="3.5" r="1.3" fill="#8A601A"/>
+                                    <path d="M 7 2 C 7 4.8 4.8 7 2 7" stroke="#8A601A" stroke-width="1"/>
+                                  </svg>
+                                </div>
+                                <div class="portrait-corner-bracket bottom-right" aria-hidden="true">
+                                  <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none">
+                                    <path d="M 2 16 L 2 5 C 2 3.3 3.3 2 5 2 L 16 2" stroke="#8A601A" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M 5 11 L 5 6 C 5 5.4 5.4 5 6 5 L 11 5" stroke="#C49B45" stroke-width="1.1" stroke-linecap="round"/>
+                                    <circle cx="3.5" cy="3.5" r="1.3" fill="#8A601A"/>
+                                    <path d="M 7 2 C 7 4.8 4.8 7 2 7" stroke="#8A601A" stroke-width="1"/>
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+
+                          <!-- SECTION D — HUMAN INVITATION MESSAGE -->
+                          <section class="card-section card-message-section" aria-label="Invitation Message">
+                            <p class="invitation-editorial-message">
+                              With the blessings of our families, we warmly invite you to join us in celebrating the wedding of Deepak &amp; Vikashini.
+                            </p>
+                            <!-- Elegant Antique-Gold Flourish Divider -->
+                            <div class="blessing-flourish-divider" aria-hidden="true">
+                              <svg viewBox="0 0 120 16" width="94" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 6 8 L 44 8" stroke="#C6A15B" stroke-width="0.9" stroke-linecap="round"/>
+                                <circle cx="44" cy="8" r="1.2" fill="#C6A15B"/>
+                                <path d="M 47 8 C 51 4 56 4 60 8 C 64 12 69 12 73 8" stroke="#C6A15B" stroke-width="0.9" fill="none"/>
+                                <path d="M 47 8 C 51 12 56 12 60 8 C 64 4 69 4 73 8" stroke="#C6A15B" stroke-width="0.9" fill="none"/>
+                                <circle cx="60" cy="8" r="1.5" fill="#8C6320"/>
+                                <circle cx="53" cy="8" r="1" fill="#C6A15B"/>
+                                <circle cx="67" cy="8" r="1" fill="#C6A15B"/>
+                                <circle cx="76" cy="8" r="1.2" fill="#C6A15B"/>
+                                <path d="M 76 8 L 114 8" stroke="#C6A15B" stroke-width="0.9" stroke-linecap="round"/>
+                              </svg>
+                            </div>
+                          </section>
+
+                          <!-- SECTION E — SCRATCH TO REVEAL (ORNAMENTAL GOLD PLAQUE) -->
+                          <section class="card-section card-scratch-section" id="ceremony-scratch-section" aria-label="Wedding Date and Time Reveal">
+                            <!-- Unified Ornamental Plaque Container -->
+                            <div class="scratch-plaque-wrapper" id="scratch-card-container">
+
+                              <!-- Underneath Revealed Date & Muhurtham Content -->
+                              <div class="ceremony-date-reveal-content" id="scratch-reveal-content">
+                                <div class="ceremony-date-display" id="reveal-date-block">
+                                  <div class="ceremony-date-heading">
+                                    <span class="date-main-line" id="reveal-date-text">SUNDAY, 22ND NOVEMBER</span>
+                                    <span class="date-year-line" id="reveal-date-year">2026</span>
+                                  </div>
+                                  <div class="ceremony-ornament-pip" aria-hidden="true">
+                                    <svg viewBox="0 0 60 8" width="46" height="6" fill="none">
+                                      <line x1="4" y1="4" x2="24" y2="4" stroke="#C6A15B" stroke-width="0.75" stroke-linecap="round"/>
+                                      <path d="M 30 1.5 L 32.5 4 L 30 6.5 L 27.5 4 Z" fill="#8C6320" stroke="#C6A15B" stroke-width="0.6"/>
+                                      <line x1="36" y1="4" x2="56" y2="4" stroke="#C6A15B" stroke-width="0.75" stroke-linecap="round"/>
+                                    </svg>
+                                  </div>
+                                  <div class="ceremony-time-badge" id="reveal-time-badge">
+                                    <span class="time-label">MUHURTHAM</span>
+                                    <span class="time-dot">&bull;</span>
+                                    <span class="time-value">5:00 A.M. &ndash; 6:00 A.M.</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Real Interactive Scratch Canvas (Draws scratch_plaque_exact.png) -->
+                              <canvas id="scratch-canvas" class="scratch-canvas" aria-label="Scratch to reveal wedding date and time"></canvas>
+
+                            </div> <!-- /.scratch-plaque-wrapper -->
+                          </section>
+
+                          <!-- SECTION F — SMALL CLOSING / ORNAMENTAL ELEMENT -->
+                          <footer class="card-section card-footer-section" id="wedding-footer-section" aria-label="Invitation Footer">
+                            <div class="monogram-flourish-bar">
+                              <span class="mono-line left"></span>
+                              <div class="card-monogram-badge" aria-hidden="true">
+                                <span class="monogram-initials">
+                                  <span class="mono-row top">D &amp;</span>
+                                  <span class="mono-row bot">V</span>
+                                </span>
+                              </div>
+                              <span class="mono-line right"></span>
+                            </div>
+                            <span class="card-motto">&bull; FOREVER BEGINS &bull;</span>
+                          </footer>
+
+                        </div> <!-- /#invitation-screen-1 -->
+
+                        <!-- SCREEN 2: WEDDING CEREMONY & DETAILS (THE NEXT PAGE) -->
+                        <div class="royal-frame-card modern-editorial-card invitation-screen screen-2" id="invitation-screen-2" aria-label="Wedding Details and Venue">
+
+                          <!-- Subtle Center Mandala Watermark -->
+                          <div class="screen2-watermark" aria-hidden="true">
+                            <svg viewBox="0 0 240 240" width="100%" height="100%" fill="none">
+                              <circle cx="120" cy="120" r="105" stroke="#C6A15B" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.35"/>
+                              <circle cx="120" cy="120" r="90" stroke="#C6A15B" stroke-width="0.8" opacity="0.4"/>
+                              <circle cx="120" cy="120" r="75" stroke="#C27484" stroke-width="0.6" opacity="0.25"/>
+                              <path d="M 120,45 C 130,68 144,85 120,112 C 96,85 110,68 120,45 Z" stroke="#C6A15B" stroke-width="0.7" opacity="0.35"/>
+                              <path d="M 120,195 C 130,172 144,155 120,128 C 96,155 110,172 120,195 Z" stroke="#C6A15B" stroke-width="0.7" opacity="0.35"/>
+                              <path d="M 45,120 C 68,130 85,144 112,120 C 85,96 68,110 45,120 Z" stroke="#C6A15B" stroke-width="0.7" opacity="0.35"/>
+                              <path d="M 195,120 C 172,130 155,144 128,120 C 155,96 172,110 195,120 Z" stroke="#C6A15B" stroke-width="0.7" opacity="0.35"/>
+                              <circle cx="120" cy="120" r="16" stroke="#C6A15B" stroke-width="0.8" opacity="0.45"/>
+                              <circle cx="120" cy="120" r="5" fill="#C6A15B" opacity="0.3"/>
+                            </svg>
+                          </div>
+
+                          <!-- S2 - SECTION 1: TOP INVITATION LEAD -->
+                          <header class="screen2-section screen2-header-section" aria-label="Celebration Invitation">
+                            <div class="screen2-joy-badge">&#10022; WITH JOY &#10022;</div>
+                            <div class="screen2-invitation-lead">
+                              <span class="lead-line">WE INVITE YOU TO</span>
+                              <span class="lead-line">CELEBRATE WITH US</span>
+                            </div>
+                            <!-- Gold filigree flourish divider below lead -->
+                            <div class="s2-gold-flourish-bar" aria-hidden="true">
+                              <img src="assets/images/s2_filigree_divider.png" alt="" class="s2-filigree-divider-img" />
+                            </div>
+                          </header>
+
+                          <!-- S2 - SECTION 2: CEREMONY TITLE (AUTHENTIC BURGUNDY CALLIGRAPHY + HEARTS + WATERCOLOR ROSEBUD) -->
+                          <section class="screen2-section screen2-ceremony-section" aria-label="Wedding Ceremony">
+                            <div class="screen2-ceremony-wrapper">
+                              <img src="assets/images/s2_ceremony_title.png?v=3.0" alt="Wedding Ceremony" class="screen2-ceremony-img" />
+                            </div>
+                          </section>
+
+                          <!-- S2 - SECTION 3: DATE (ORNATE BAROQUE PLAQUE WITH CALENDAR MEDALLION & FOLIAGE) -->
+                          <section class="screen2-section screen2-date-section" aria-label="Wedding Date">
+                            <div class="date-refined-plaque-container">
+                              <img src="assets/images/s2_date_plaque.png?v=5.0" alt="Sunday, 22nd November 2026" class="screen2-date-plaque-img" />
+                              <time class="screen2-date-semantic sr-only" datetime="2026-11-22">SUNDAY, 22ND NOVEMBER 2026</time>
+                            </div>
+                          </section>
+
+                          <!-- S2 - SECTION 4: MUHURTHAM + TIME (CLOCK MEDALLION + HAIRLINE WINGS) -->
+                          <section class="screen2-section screen2-muhurtham-section" aria-label="Auspicious Muhurtham">
+                            <div class="s2-badge-row">
+                              <img src="assets/images/s2_clock_badge.svg?v=1.0" alt="Muhurtham" class="s2-clock-badge-img" />
+                            </div>
+                            <span class="screen2-muhurtham-label">MUHURTHAM</span>
+                            <span class="screen2-muhurtham-time">5:00 A.M. &ndash; 6:00 A.M.</span>
+                            <!-- Traditional Wedding Filigree Clover/Diamond Divider -->
+                            <div class="screen2-ornament-divider" aria-hidden="true">
+                              <img src="assets/images/s2_filigree_divider.png" alt="" class="s2-filigree-divider-img" />
+                            </div>
+                          </section>
+
+                          <!-- S2 - SECTION 5: VENUE (PIN BADGE + TEMPLE DETAILS + AUTHENTIC DRAVIDIAN GOPURAM SKETCH) -->
+                          <section class="screen2-section screen2-venue-section" aria-label="Wedding Venue">
+                            <div class="s2-badge-row">
+                              <img src="assets/images/s2_pin_badge.svg?v=1.0" alt="Venue" class="s2-pin-badge-img" />
+                            </div>
+                            <span class="screen2-venue-eyebrow">&#10022; VENUE &#10022;</span>
+                            <div class="venue-combined-layout">
+                              <div class="venue-details-text">
+                                <h3 class="screen2-temple-name">
+                                  <span class="temple-line">ARULMIGU THIRUMURUGANATHA</span>
+                                  <span class="temple-line">SWAMY TEMPLE</span>
+                                </h3>
+                                <p class="screen2-venue-location">Thirumurugan Poondi, Tirupur</p>
+                              </div>
+                              <div class="screen2-temple-sketch" aria-hidden="true">
+                                <img src="assets/images/s2_temple_gopuram.png" alt="Arulmigu Thirumuruganatha Swamy Temple Gopuram" class="s2-gopuram-img" />
+                              </div>
+                            </div>
+                            <!-- Traditional Wedding Filigree Flourish below Venue -->
+                            <div class="s2-venue-bottom-flourish" aria-hidden="true">
+                              <img src="assets/images/s2_filigree_divider.png" alt="" class="s2-filigree-divider-img" />
+                            </div>
+                          </section>
+
+                          <!-- S2 - SECTION 6: COUNTDOWN (4 NOTCHED GOLD TILES WITH DIE-CUT BEVELS & PENDANTS) -->
+                          <section class="screen2-section screen2-countdown-section" id="screen2-countdown-panel" aria-label="Live Wedding Countdown">
+                            <div class="countdown-heading-row">
+                              <span class="cd-line left"></span>
+                              <span class="cd-sparkle">&#10022;</span>
+                              <span class="cd-title">COUNTDOWN</span>
+                              <span class="cd-sparkle">&#10022;</span>
+                              <span class="cd-line right"></span>
+                            </div>
+                            <div class="countdown-digits-row">
+                              <div class="cd-box">
+                                <span class="cd-number" id="cd-days">36</span>
+                                <span class="cd-tag">DAYS</span>
+                              </div>
+                              <div class="cd-box">
+                                <span class="cd-number" id="cd-hours">21</span>
+                                <span class="cd-tag">HOURS</span>
+                              </div>
+                              <div class="cd-box">
+                                <span class="cd-number" id="cd-minutes">14</span>
+                                <span class="cd-tag">MINUTES</span>
+                              </div>
+                              <div class="cd-box">
+                                <span class="cd-number" id="cd-seconds">21</span>
+                                <span class="cd-tag">SECONDS</span>
+                              </div>
+                            </div>
+                          </section>
+
+                          <!-- S2 - SECTION 7: VIEW RECEPTION ACTION (ROYAL GOLD METALLIC PILL BUTTON) -->
+                          <section class="screen2-section screen2-reception-action-section" aria-label="Reception Invitation Action">
+                            <button type="button" id="btn-view-reception" class="btn-view-reception" aria-label="View Reception Invitation">
+                              <span class="reception-btn-sparkle" aria-hidden="true">&#10022;</span>
+                              <span class="reception-btn-text">VIEW RECEPTION</span>
+                              <svg class="reception-btn-arrow" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                                <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.71 12l-8.86-7.85-1.42 1.42L16.86 11H5v2z"/>
+                              </svg>
+                            </button>
+                          </section>
+
+                        </div> <!-- /#invitation-screen-2 -->
+
+                        <!-- SCREEN 3: RECEPTION INVITATION & DETAILS (SATURDAY, 21ST NOVEMBER 2026) -->
+                        <div class="royal-frame-card modern-editorial-card invitation-screen screen-3 screen-hidden" id="invitation-screen-3" aria-label="Reception Invitation Details">
+
+                          <!-- S3 - SECTION 1: DATE (SATURDAY, 21ST NOVEMBER 2026) -->
+                          <header class="screen3-section screen3-date-section" aria-label="Reception Date">
+                            <div class="screen3-date-row">
+                              <span class="s3-date-line left"></span>
+                              <span class="s3-date-diamond">&#10022;</span>
+                              <span class="screen3-date-text">SATURDAY, 21ST NOVEMBER 2026</span>
+                              <span class="s3-date-diamond">&#10022;</span>
+                              <span class="s3-date-line right"></span>
+                            </div>
+                          </header>
+
+                          <!-- S3 - SECTION 2: RECEPTION TITLE (ORNATE GOLD CALLIGRAPHY) -->
+                          <section class="screen3-section screen3-title-section" aria-label="Reception">
+                            <div class="screen3-title-wrapper">
+                              <img src="assets/images/s3_reception_title.png" alt="Reception" class="screen3-title-img" />
+                              <div class="s3-sparkles-container" aria-hidden="true">
+                                <span class="s3-sparkle s3-sparkle-1">✦</span>
+                                <span class="s3-sparkle s3-sparkle-2">✧</span>
+                                <span class="s3-sparkle s3-sparkle-3">✦</span>
+                              </div>
+                            </div>
+                          </section>
+
+                          <!-- S3 - SECTION 3: TIME SECTION (CLOCK BADGE + 6.00 P.M. – 9.00 P.M.) -->
+                          <section class="screen3-section screen3-time-section" aria-label="Reception Time">
+                            <div class="s3-badge-row">
+                              <img src="assets/images/s2_clock_badge.svg?v=1.0" alt="" class="s3-clock-badge-img" aria-hidden="true" />
+                            </div>
+                            <span class="screen3-time-text">6.00 P.M. &ndash; 9.00 P.M.</span>
+                            <div class="s3-ornament-divider" aria-hidden="true">
+                              <span class="s3-div-line left"></span>
+                              <span class="s3-div-diamond">&#9670;</span>
+                              <span class="s3-div-line right"></span>
+                            </div>
+                          </section>
+
+                          <!-- S3 - SECTION 4: VENUE SECTION (PIN BADGE + SENGUNDHAR THIRUMANA MANDABAM) -->
+                          <section class="screen3-section screen3-venue-section" aria-label="Reception Venue">
+                            <div class="s3-badge-row">
+                              <img src="assets/images/s2_pin_badge.svg?v=1.0" alt="" class="s3-pin-badge-img" aria-hidden="true" />
+                            </div>
+                            <h3 class="screen3-venue-name">SENGUNDHAR THIRUMANA MANDABAM</h3>
+                            <p class="screen3-venue-address">New Bus Stand Back Side, P.N Road, Tirupur</p>
+                            <div class="s3-venue-divider" aria-hidden="true">
+                              <span class="s3-div-line left"></span>
+                              <span class="s3-div-diamond">&#9670;</span>
+                              <span class="s3-div-line right"></span>
+                            </div>
+                          </section>
+
+                          <!-- S3 - SECTION 5: BOTTOM BALCONY & COUPLE PLACEHOLDER FOR VERTICAL CLEARANCE -->
+                          <div class="screen3-couple-spacer" aria-hidden="true"></div>
+
+                        </div> <!-- /#invitation-screen-3 -->
+                      </div> <!-- /.invitation-card-scroll -->
+                    </div> <!-- /.invitation-front -->
+
+                    <!-- BACK FACE: Royal Gold Damask & Monogram (Visible mid 360deg spin) -->
+                    <div class="invitation-face invitation-back" aria-hidden="true">
+                      <div class="back-ornament-border">
+                        <div class="back-monogram-crest">
+                          <span class="back-crown-motif">👑</span>
+                          <span class="back-monogram-initials">D &amp; V</span>
+                          <span class="back-monogram-names">Deepak &amp; Vikashini</span>
+                          <span class="back-wedding-date">22 · 11 · 2026</span>
+                        </div>
+                      </div>
+                    </div> <!-- /.invitation-back -->
+
+                  </div> <!-- /.invitation-card-flipper -->
+                </article>
+              </div> <!-- /.envelope-card-slot -->
+
+              <!-- Front Envelope Pocket with Exact Royal Navy Cardstock & Corner Lotus Artwork -->
               <div class="envelope-pocket" id="envelope-pocket">
                 <div class="pocket-floral-art"></div>
-                <div class="pocket-shading"></div>
                 <div class="pocket-gold-trim"></div>
               </div>
 
@@ -154,337 +683,37 @@
         </div>
       </section>
 
-      <!-- ================================================================ -->
-      <!-- SCREEN 2: MAIN COUPLE ANNOUNCEMENT (ROYAL FRAMED SCREEN)         -->
-      <!-- ================================================================ -->
-      <section id="announcement-screen" class="announcement-screen" aria-label="Wedding Couple Announcement">
-        <div class="royal-frame-card">
-
-          <!-- Ornate Gold Corner Flourishes -->
-          <div class="frame-corner top-left" aria-hidden="true"></div>
-          <div class="frame-corner top-right" aria-hidden="true"></div>
-          <div class="frame-corner bottom-left" aria-hidden="true"></div>
-          <div class="frame-corner bottom-right" aria-hidden="true"></div>
-
-          <!-- Auspicious Deity Motif: Lord Murugan Sacred Vel & Mayil Emblem -->
-          <div class="deity-badge-container">
-            <div class="deity-emblem" aria-hidden="true">
-              <svg class="vel-icon" viewBox="0 0 120 154" width="52" height="66" fill="none"
-                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sacred Vel of Lord Murugan">
-                <defs>
-                  <!-- Rich Multi-Stop Metallic Gold Gradients -->
-                  <linearGradient id="velGoldLight" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFFFFF" />
-                    <stop offset="15%" stop-color="#FFF5C0" />
-                    <stop offset="45%" stop-color="#FFDF73" />
-                    <stop offset="75%" stop-color="#D4AF37" />
-                    <stop offset="100%" stop-color="#9A6B15" />
-                  </linearGradient>
-
-                  <linearGradient id="velGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFDF73" />
-                    <stop offset="25%" stop-color="#D4AF37" />
-                    <stop offset="60%" stop-color="#996515" />
-                    <stop offset="90%" stop-color="#664104" />
-                    <stop offset="100%" stop-color="#402600" />
-                  </linearGradient>
-
-                  <linearGradient id="velGoldBevel" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#FFFDE8" />
-                    <stop offset="20%" stop-color="#FFF0A0" />
-                    <stop offset="50%" stop-color="#E5C158" />
-                    <stop offset="80%" stop-color="#AA771C" />
-                    <stop offset="100%" stop-color="#6B4505" />
-                  </linearGradient>
-
-                  <linearGradient id="velShaftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#734907" />
-                    <stop offset="25%" stop-color="#D4AF37" />
-                    <stop offset="50%" stop-color="#FFF8D6" />
-                    <stop offset="75%" stop-color="#D4AF37" />
-                    <stop offset="100%" stop-color="#5E3902" />
-                  </linearGradient>
-
-                  <linearGradient id="velSpineHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#FFFFFF" />
-                    <stop offset="20%" stop-color="#FFF9D2" />
-                    <stop offset="70%" stop-color="#FFDF73" />
-                    <stop offset="100%" stop-color="#D4AF37" />
-                  </linearGradient>
-
-                  <radialGradient id="velDivineAura" cx="50%" cy="42%" r="48%">
-                    <stop offset="0%" stop-color="#FFF2B2" stop-opacity="0.5" />
-                    <stop offset="40%" stop-color="#FFD700" stop-opacity="0.22" />
-                    <stop offset="75%" stop-color="#D4AF37" stop-opacity="0.08" />
-                    <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
-                  </radialGradient>
-
-                  <radialGradient id="kumkumGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#FF2A4B" stop-opacity="0.9" />
-                    <stop offset="60%" stop-color="#C40018" stop-opacity="0.85" />
-                    <stop offset="100%" stop-color="#730009" stop-opacity="0.3" />
-                  </radialGradient>
-
-                  <filter id="kumkumDrop" x="-40%" y="-40%" width="180%" height="180%">
-                    <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#550005" flood-opacity="0.8" />
-                  </filter>
-                </defs>
-
-                <!-- ================= BACKGROUND DIVINE HALO / PRABHAVALI ================= -->
-                <!-- Radiant Aura Disk -->
-                <circle cx="60" cy="56" r="45" fill="url(#velDivineAura)" />
-
-                <!-- Outer Prabhavali Sunburst Rays -->
-                <g stroke="url(#velGoldLight)" opacity="0.75" stroke-linecap="round">
-                  <line x1="60" y1="6" x2="60" y2="12" stroke-width="1.2" />
-                  <line x1="75" y1="9" x2="73" y2="15" stroke-width="0.9" />
-                  <line x1="89" y1="18" x2="84" y2="23" stroke-width="1.1" />
-                  <line x1="99" y1="31" x2="93" y2="35" stroke-width="0.9" />
-                  <line x1="104" y1="46" x2="98" y2="48" stroke-width="1.1" />
-                  <line x1="105" y1="62" x2="99" y2="62" stroke-width="0.9" />
-                  <line x1="100" y1="77" x2="94" y2="75" stroke-width="1.1" />
-                  <line x1="91" y1="90" x2="86" y2="86" stroke-width="0.9" />
-                  <line x1="45" y1="9" x2="47" y2="15" stroke-width="0.9" />
-                  <line x1="31" y1="18" x2="36" y2="23" stroke-width="1.1" />
-                  <line x1="21" y1="31" x2="27" y2="35" stroke-width="0.9" />
-                  <line x1="16" y1="46" x2="22" y2="48" stroke-width="1.1" />
-                  <line x1="15" y1="62" x2="21" y2="62" stroke-width="0.9" />
-                  <line x1="20" y1="77" x2="26" y2="75" stroke-width="1.1" />
-                  <line x1="29" y1="90" x2="34" y2="86" stroke-width="0.9" />
-                </g>
-
-                <!-- Ornate Prabhavali Beaded Arc -->
-                <path d="M 23 78 A 42 42 0 0 1 97 78" fill="none" stroke="url(#velGoldLight)" stroke-width="0.75"
-                  stroke-dasharray="1 3.5" stroke-linecap="round" opacity="0.8" />
-                <path d="M 26 78 A 38 38 0 0 1 94 78" fill="none" stroke="#D4AF37" stroke-width="0.5" opacity="0.5" />
-
-                <!-- Golden Starburst Accent Points -->
-                <circle cx="60" cy="5" r="1.3" fill="#FFF8D6" />
-                <circle cx="89" cy="17" r="1.1" fill="#FFDF73" />
-                <circle cx="31" cy="17" r="1.1" fill="#FFDF73" />
-                <circle cx="104" cy="45" r="1.1" fill="#FFDF73" />
-                <circle cx="16" cy="45" r="1.1" fill="#FFDF73" />
-
-                <!-- ================= SACRED VEL SPEARHEAD (VEERA VEL) ================= -->
-                <!-- Left Blade Facet (Bright Golden Luster) -->
-                <path d="M 60 14 C 47 34, 29 48, 30 70 C 31 83, 42 91, 55 93.5 L 60 94 Z" fill="url(#velGoldLight)"
-                  stroke="#664104" stroke-width="0.7" />
-
-                <!-- Right Blade Facet (Chiselled Shadow Luster for 3D Bevel) -->
-                <path d="M 60 14 C 73 34, 91 48, 90 70 C 89 83, 78 91, 65 93.5 L 60 94 Z" fill="url(#velGoldDark)"
-                  stroke="#4A2D00" stroke-width="0.7" />
-
-                <!-- Inner Embossed Golden Border (Double Rims) -->
-                <path d="M 60 21 C 49 38, 34 51, 35 69 C 36 79, 45 86, 55 88.5" fill="none" stroke="#FFEAA5"
-                  stroke-width="0.85" opacity="0.9" />
-                <path d="M 60 21 C 71 38, 86 51, 85 69 C 84 79, 75 86, 65 88.5" fill="none" stroke="#E5C158"
-                  stroke-width="0.85" opacity="0.8" />
-
-                <!-- Secondary Inner Bead Trim (Swarna Bindu Chain along Blade Edge) -->
-                <path d="M 59 28 C 51 43, 39 54, 40 68 C 41 76, 48 81, 55 83.5" fill="none" stroke="#FFF2B2"
-                  stroke-width="0.75" stroke-dasharray="0.8 2.5" stroke-linecap="round" opacity="0.75" />
-                <path d="M 61 28 C 69 43, 81 54, 80 68 C 79 76, 72 81, 65 83.5" fill="none" stroke="#D4AF37"
-                  stroke-width="0.75" stroke-dasharray="0.8 2.5" stroke-linecap="round" opacity="0.65" />
-
-                <!-- Intricate Temple Filigree Scrollwork (Engraved Leaf Patterns in Wings) -->
-                <!-- Left Wing Filigree -->
-                <g stroke="#996515" stroke-width="0.6" fill="none" opacity="0.55" stroke-linecap="round">
-                  <path d="M 44 64 C 41 68, 43 75, 49 76 C 52 76, 53 72, 51 70 C 49 68, 45 71, 47 73" />
-                  <path d="M 46 53 C 43 56, 42 60, 46 62" />
-                  <path d="M 52 42 C 49 46, 48 50, 52 52" />
-                </g>
-                <!-- Right Wing Filigree -->
-                <g stroke="#664104" stroke-width="0.6" fill="none" opacity="0.55" stroke-linecap="round">
-                  <path d="M 76 64 C 79 68, 77 75, 71 76 C 68 76, 67 72, 69 70 C 71 68, 75 71, 73 73" />
-                  <path d="M 74 53 C 77 56, 78 60, 74 62" />
-                  <path d="M 68 42 C 71 46, 72 50, 68 52" />
-                </g>
-
-                <!-- Central Raised Veera Spine Ridge (Thandu) with Beveled Specular Gleam -->
-                <polygon points="58.7,16 61.3,16 62.1,94 57.9,94" fill="url(#velGoldBevel)" />
-                <line x1="60" y1="15" x2="60" y2="93.5" stroke="url(#velSpineHighlight)" stroke-width="1.1"
-                  stroke-linecap="round" />
-
-                <!-- Sacred Tip (Kūr) Radiant Divine Diamond Crown -->
-                <polygon points="60,9 62.5,14 60,17 57.5,14" fill="#FFFFFF" stroke="#D4AF37" stroke-width="0.5" />
-                <circle cx="60" cy="14" r="0.9" fill="#FFF2B2" />
-
-                <!-- ================= SACRED THIRUNEERU (VIBHUTI) & RED KUMKUM ================= -->
-                <!-- Three Pristine Curved White Holy Ash Stripes (Tripundra) -->
-                <g stroke="#FFFFFF" stroke-linecap="round" opacity="0.97">
-                  <!-- Top Vibhuti Line -->
-                  <path d="M 48 48.5 Q 60 51.5 72 48.5" stroke-width="2.1" />
-                  <path d="M 48 48.5 Q 60 51.5 72 48.5" stroke="#EFEFEF" stroke-width="0.8" />
-
-                  <!-- Middle Vibhuti Line -->
-                  <path d="M 45 54.5 Q 60 58 75 54.5" stroke-width="2.3" />
-                  <path d="M 45 54.5 Q 60 58 75 54.5" stroke="#EFEFEF" stroke-width="0.9" />
-
-                  <!-- Bottom Vibhuti Line -->
-                  <path d="M 48 60.5 Q 60 63.5 72 60.5" stroke-width="2.1" />
-                  <path d="M 48 60.5 Q 60 63.5 72 60.5" stroke="#EFEFEF" stroke-width="0.8" />
-                </g>
-
-                <!-- Sacred Vermilion Kumkum Pottu (Thilakam) with Divine Glow -->
-                <circle cx="60" cy="55" r="4.2" fill="url(#kumkumGlow)" />
-                <circle cx="60" cy="55" r="3" fill="#B30018" stroke="#FFECA8" stroke-width="0.6"
-                  filter="url(#kumkumDrop)" />
-                <circle cx="60" cy="55" r="1.6" fill="#E60021" />
-                <!-- Divine Bindu Spark in Kumkum -->
-                <circle cx="59.2" cy="54.2" r="0.6" fill="#FFFFFF" />
-
-                <!-- ================= PADMA PEEDAM (ORNATE LOTUS PEDESTAL COLLAR) ================= -->
-                <!-- Lotus Petal Base Layer -->
-                <g stroke="#5E3902" stroke-width="0.5" stroke-linejoin="round">
-                  <!-- Outer flanking petals -->
-                  <path d="M 44 94 C 42 90, 49 89, 52 93 C 51 96, 45 97, 44 94 Z" fill="url(#velGoldLight)" />
-                  <path d="M 76 94 C 78 90, 71 89, 68 93 C 69 96, 75 97, 76 94 Z" fill="url(#velGoldDark)" />
-
-                  <!-- Mid-tier lotus petals -->
-                  <path d="M 49 94 C 50 89, 57 88, 57 93.5 C 56 97, 50 98, 49 94 Z" fill="url(#velGoldLight)" />
-                  <path d="M 71 94 C 70 89, 63 88, 63 93.5 C 64 97, 70 98, 71 94 Z" fill="url(#velGoldDark)" />
-
-                  <!-- Central Upright Bloom Petal -->
-                  <path
-                    d="M 56 93.5 C 57 88, 60 86, 60 86 C 60 86, 63 88, 64 93.5 C 64 98, 60 99.5, 60 99.5 C 60 99.5, 56 98, 56 93.5 Z"
-                    fill="#FFF5C0" stroke="#7A5205" stroke-width="0.6" />
-                  <line x1="60" y1="87" x2="60" y2="98" stroke="#E5C158" stroke-width="0.5" />
-
-                  <!-- Lower Lotus Inverted Calyx Base -->
-                  <path d="M 47 98.5 Q 60 101.5 73 98.5 L 74 102.5 Q 60 105.5 46 102.5 Z" fill="url(#velGoldBevel)"
-                    stroke="#5E3902" stroke-width="0.6" />
-                  <!-- Calyx Pearls / Dots -->
-                  <circle cx="51" cy="100.5" r="0.9" fill="#FFFDE8" />
-                  <circle cx="55.5" cy="101.5" r="0.9" fill="#FFFDE8" />
-                  <circle cx="60" cy="102" r="1.1" fill="#FFFDE8" />
-                  <circle cx="64.5" cy="101.5" r="0.9" fill="#FFFDE8" />
-                  <circle cx="69" cy="100.5" r="0.9" fill="#FFFDE8" />
-                </g>
-
-                <!-- ================= GOLDEN SHAFT (DHANDAM) & TEMPLE RINGS ================= -->
-                <!-- Main Cylindrical Shaft -->
-                <rect x="57" y="103" width="6" height="40" fill="url(#velShaftGrad)" stroke="#5E3902"
-                  stroke-width="0.5" />
-                <!-- Center metallic shaft highlight reflection -->
-                <line x1="60" y1="103" x2="60" y2="143" stroke="#FFFCE3" stroke-width="0.9" opacity="0.8" />
-
-                <!-- Ornate Decorative Golden Rings / Bandings along the Staff -->
-                <!-- Ring 1 (Top Neck Collar) -->
-                <g>
-                  <rect x="55" y="105" width="10" height="2.8" rx="1.4" fill="url(#velGoldLight)" stroke="#664104"
-                    stroke-width="0.5" />
-                  <circle cx="60" cy="106.4" r="0.7" fill="#FFFFFF" />
-                </g>
-
-                <!-- Ring 2 (Upper Mid Ring) -->
-                <g>
-                  <rect x="54.5" y="115" width="11" height="3" rx="1.5" fill="url(#velGoldLight)" stroke="#664104"
-                    stroke-width="0.5" />
-                  <line x1="56" y1="116.5" x2="64" y2="116.5" stroke="#FFFFFF" stroke-width="0.6" />
-                </g>
-
-                <!-- Ring 3 (Lower Mid Ring) -->
-                <g>
-                  <rect x="54.5" y="127" width="11" height="3" rx="1.5" fill="url(#velGoldLight)" stroke="#664104"
-                    stroke-width="0.5" />
-                  <line x1="56" y1="128.5" x2="64" y2="128.5" stroke="#FFFFFF" stroke-width="0.6" />
-                </g>
-
-                <!-- Ring 4 (Base Staff Collar) -->
-                <g>
-                  <rect x="55" y="137" width="10" height="2.8" rx="1.4" fill="url(#velGoldLight)" stroke="#664104"
-                    stroke-width="0.5" />
-                </g>
-
-                <!-- Bottom Kalasam / Temple Finial Pommel Knob -->
-                <g stroke="#5E3902" stroke-width="0.5">
-                  <circle cx="60" cy="144" r="3.8" fill="url(#velGoldBevel)" />
-                  <ellipse cx="59.3" cy="142.8" rx="1.4" ry="0.9" fill="#FFFDE8" />
-                  <polygon points="58,146 62,146 60,152" fill="url(#velGoldDark)" stroke="#4A2D00" stroke-width="0.4" />
-                </g>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Top Invocations Header -->
-          <div class="invocations-header">
-            <p class="invocations-text">Sri Angalamman Thunai &bull; Sri Nachiyathal Thunai &bull; Sri Karunambikai
-              Amman Thunai</p>
-          </div>
-
-          <!-- Title & Solicitation -->
-          <div class="announcement-header">
-            <h1 class="wedding-invitation-title">Wedding Invitation</h1>
-            <p class="solicitation-text">
-              Cordial solicitation for your gracious presence with family and friends on the auspicious occasion of the
-              wedding of
-            </p>
-          </div>
-
-          <!-- Groom Details Section -->
-          <div class="person-card groom-card">
-            <div class="person-badge">GROOM</div>
-            <h2 class="person-name groom-name">S. Deepak</h2>
-            <p class="person-qualifications">B.Com(PA)., MBA &nbsp;|&nbsp; ATYATI TECHNOLOGIES PVT LTD - BANGALORE</p>
-            <p class="person-parents">Son of Mr. N. Sivakolundhu &amp; Mrs. S. Aruljothi</p>
-          </div>
-
-          <!-- Ornamental Golden Ampersand Divider -->
-          <div class="royal-ampersand-divider" aria-hidden="true">
-            <span class="ornament-swirl left">❦</span>
-            <span class="gold-ampersand">&amp;</span>
-            <span class="ornament-swirl right">❦</span>
-          </div>
-
-          <!-- Bride Details Section -->
-          <div class="person-card bride-card">
-            <div class="person-badge">BRIDE</div>
-            <h2 class="person-name bride-name">P. Vikashini</h2>
-            <p class="person-qualifications">B.Sc., (IT)</p>
-            <p class="person-parents">Daughter of Mr. R. Palanisamy (Babu) &amp; Mrs. P. Janaki</p>
-          </div>
-
-          <!-- Date & Time Highlight Banner -->
-          <div class="muhurtham-highlight-banner">
-            <div class="banner-inner">
-              <span class="banner-auspicious-tag">AUSPICIOUS SUMUHURTHAM</span>
-              <h3 class="banner-date">SUNDAY, 22ND NOVEMBER 2026</h3>
-              <p class="banner-time">Sumuhurtham: 5:00 AM to 6:00 AM</p>
-            </div>
-          </div>
-
-          <!-- Footer Controls: Scroll Cue & Subtle Replay -->
-          <div class="screen2-footer-controls">
-            <button class="btn-replay-subtle" id="btn-replay" type="button" title="Experience envelope opening again">
-              <span class="replay-icon">↺</span>
-              <span>Replay Envelope</span>
-            </button>
-            <div class="scroll-cue" aria-hidden="true">
-              <span class="scroll-cue-text">Scroll for Event Details</span>
-              <span class="scroll-arrow">↓</span>
-            </div>
-          </div>
-
-        </div> <!-- /.royal-frame-card -->
-      </section>
-
     </main> <!-- /.app-container -->
   </div> <!-- /.screen-wrapper -->
 
-  <!-- SVG Gradients -->
-  <svg width="0" height="0" class="svg-defs" aria-hidden="true">
+  <!-- SVG Gradients & Clip Paths -->
+  <svg width="0" height="0" class="svg-defs" aria-hidden="true" style="position: absolute; width: 0; height: 0; pointer-events: none;">
     <defs>
-      <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#BF953F" />
-        <stop offset="25%" stop-color="#FCF6BA" />
-        <stop offset="50%" stop-color="#B38728" />
-        <stop offset="75%" stop-color="#FBF5B7" />
-        <stop offset="100%" stop-color="#AA771C" />
+      <linearGradient id="antiqueGoldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E0C17C" />
+        <stop offset="45%" stop-color="#C6A15B" />
+        <stop offset="85%" stop-color="#8F6B35" />
+        <stop offset="100%" stop-color="#C6A15B" />
       </linearGradient>
+
+      <!-- Clean geometric V-Flap clip path (Normalized 0.0 to 1.0) -->
+      <clipPath id="vFlapClip" clipPathUnits="objectBoundingBox">
+        <path d="M 0,0 L 0,0.08 Q 0.02,0.08 0.05,0.112 L 0.49,0.98 Q 0.50,1.0 0.51,0.98 L 0.95,0.112 Q 0.98,0.08 1.0,0.08 L 1,0 Z" />
+      </clipPath>
     </defs>
   </svg>
 
-  <script src="script.js"></script>
+  <!-- ================================================================ -->
+  <!-- MODULAR JAVASCRIPT ARCHITECTURE                                 -->
+  <!-- ================================================================ -->
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/stage.js"></script>
+  <script src="assets/js/particles.js?v=3.0"></script>
+  <script src="assets/js/text-reveal.js?v=3.6"></script>
+  <script src="assets/js/scratch-card.js?v=5.7"></script>
+  <script src="assets/js/envelope.js?v=10.0"></script>
+  <script src="assets/js/theme-switcher.js"></script>
+  <script src="assets/js/main.js?v=3.1"></script>
 </body>
 
 </html>

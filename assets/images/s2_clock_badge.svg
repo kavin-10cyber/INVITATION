@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 36" width="260" height="36" aria-label="Muhurtham Clock Icon">
+  <defs>
+    <!-- Metallic Antique Gold Gradient for Outer Bezel & Stars -->
+    <linearGradient id="s2GoldMedallionGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3C4" />
+      <stop offset="22%" stop-color="#E2B755" />
+      <stop offset="55%" stop-color="#9C6B20" />
+      <stop offset="82%" stop-color="#E9C56F" />
+      <stop offset="100%" stop-color="#734710" />
+    </linearGradient>
+
+    <!-- Tapered Hairline Left Gradient -->
+    <linearGradient id="s2LineLeftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C59942" stop-opacity="0" />
+      <stop offset="35%" stop-color="#D8AA42" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#9E6D24" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Tapered Hairline Right Gradient -->
+    <linearGradient id="s2LineRightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9E6D24" stop-opacity="0.95" />
+      <stop offset="65%" stop-color="#D8AA42" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#C59942" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Dial Face Radial Gradient: Warm Soft Champagne to Ivory -->
+    <radialGradient id="s2DialFaceGrad" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFFDF9" />
+      <stop offset="68%" stop-color="#FAF1E6" />
+      <stop offset="100%" stop-color="#EFE0CE" />
+    </radialGradient>
+
+    <!-- Subtle Metallic Drop Shadow -->
+    <filter id="s2BadgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0.8" stdDeviation="1.0" flood-color="#5A3A10" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- Left Flanking Hairline Rule -->
+  <line x1="22" y1="18" x2="104" y2="18" stroke="url(#s2LineLeftGrad)" stroke-width="0.85" stroke-linecap="round" />
+  <!-- Left Diamond Terminal Accent -->
+  <circle cx="104.5" cy="18" r="0.6" fill="#C59942" />
+  <polygon points="109,15.2 110.8,18 109,20.8 107.2,18" fill="url(#s2GoldMedallionGrad)" />
+  <circle cx="113.5" cy="18" r="0.6" fill="#C59942" />
+
+  <!-- Center Antique Gold Clock Medallion -->
+  <g filter="url(#s2BadgeShadow)">
+    <!-- Top Pocket-Watch Crown / Finial -->
+    <circle cx="130" cy="2.2" r="1.6" fill="none" stroke="url(#s2GoldMedallionGrad)" stroke-width="0.75" />
+    <path d="M 128.5 3.8 L 131.5 3.8 Q 132 3.8 132 3.1 L 132 2.5 Q 132 1.9 130 1.9 Q 128 1.9 128 2.5 L 128 3.1 Q 128 3.8 128.5 3.8 Z" fill="url(#s2GoldMedallionGrad)" />
+
+    <!-- Outer Embossed Metallic Gold Bezel -->
+    <circle cx="130" cy="18" r="14" fill="url(#s2DialFaceGrad)" stroke="url(#s2GoldMedallionGrad)" stroke-width="1.3" />
+    <!-- Inner Concentric Hairline Ring -->
+    <circle cx="130" cy="18" r="12.4" fill="none" stroke="#C59942" stroke-width="0.5" stroke-opacity="0.75" />
+
+    <!-- 12, 3, 6, 9 Cardinal Diamonds -->
+    <polygon points="130,7.3 130.7,8.2 130,9.1 129.3,8.2" fill="#8C5E1A" />
+    <polygon points="139.7,17.3 140.6,18 139.7,18.7 138.8,18" fill="#8C5E1A" />
+    <polygon points="130,26.9 130.7,27.8 130,28.7 129.3,27.8" fill="#8C5E1A" />
+    <polygon points="120.3,17.3 121.2,18 120.3,18.7 119.4,18" fill="#8C5E1A" />
+
+    <!-- Intermediate Hour Dots -->
+    <circle cx="134.9" cy="9.5" r="0.45" fill="#A87B2E" />
+    <circle cx="138.5" cy="13.1" r="0.45" fill="#A87B2E" />
+    <circle cx="138.5" cy="22.9" r="0.45" fill="#A87B2E" />
+    <circle cx="134.9" cy="26.5" r="0.45" fill="#A87B2E" />
+    <circle cx="125.1" cy="26.5" r="0.45" fill="#A87B2E" />
+    <circle cx="121.5" cy="22.9" r="0.45" fill="#A87B2E" />
+    <circle cx="121.5" cy="13.1" r="0.45" fill="#A87B2E" />
+    <circle cx="125.1" cy="9.5" r="0.45" fill="#A87B2E" />
+
+    <!-- Clock Hands Accurately Set to Auspicious Muhurtham Time (5:00) -->
+    <!-- Minute Hand pointing straight to 12 o'clock -->
+    <polygon points="129.4,18 130,8.8 130.6,18" fill="#4A0B16" />
+    <line x1="130" y1="17.5" x2="130" y2="9.5" stroke="#DFBA6D" stroke-width="0.35" stroke-linecap="round" />
+
+    <!-- Hour Hand pointing to 5 o'clock (150°) -->
+    <polygon points="129.45,18.3 133.0,23.3 130.55,17.7" fill="#4A0B16" />
+    <line x1="130" y1="18" x2="132.6" y2="22.7" stroke="#DFBA6D" stroke-width="0.35" stroke-linecap="round" />
+
+    <!-- Central Gold Boss & Pivot Cap -->
+    <circle cx="130" cy="18" r="1.6" fill="url(#s2GoldMedallionGrad)" />
+    <circle cx="130" cy="18" r="0.8" fill="#4A0B16" />
+    <circle cx="129.6" cy="17.6" r="0.3" fill="#FFF8E7" />
+  </g>
+
+  <!-- Right Diamond Terminal Accent -->
+  <circle cx="146.5" cy="18" r="0.6" fill="#C59942" />
+  <polygon points="151,15.2 152.8,18 151,20.8 149.2,18" fill="url(#s2GoldMedallionGrad)" />
+  <circle cx="155.5" cy="18" r="0.6" fill="#C59942" />
+  <!-- Right Flanking Hairline Rule -->
+  <line x1="156" y1="18" x2="238" y2="18" stroke="url(#s2LineRightGrad)" stroke-width="0.85" stroke-linecap="round" />
+</svg>

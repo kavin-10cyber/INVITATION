@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment and IDE files
+.env
+.env.local
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Scratch & Temporary crops
+scratch/
+box*.png
+crop_ref_*.png
+elem_*.png
+temple_crop_right.png

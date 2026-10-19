@@ -1,0 +1,275 @@
+/* ==========================================================================
+   WEDDING INVITATION - ENVELOPE COLOR THEMES & PREVIEW SWITCHER
+   File: assets/css/themes.css
+   Purpose: Multiple luxury color themes (Royal Navy, Imperial Emerald, Champagne Ivory)
+            and interactive floating live preview theme switcher bar.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. ROYAL MIDNIGHT SAPPHIRE & NAVY VELVET (Default Theme)
+   ========================================================================== */
+.envelope.theme-navy {
+  box-shadow:
+    0 12px 28px rgba(11, 22, 43, 0.28),
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    0 0 2px rgba(198, 161, 91, 0.35);
+}
+
+.envelope.theme-navy:hover:not(.opened) {
+  box-shadow:
+    0 16px 36px rgba(11, 22, 43, 0.35),
+    0 6px 14px rgba(0, 0, 0, 0.24),
+    0 0 4px rgba(224, 193, 124, 0.45);
+}
+
+.envelope.theme-navy.opened {
+  box-shadow:
+    0 14px 30px rgba(11, 22, 43, 0.28),
+    0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.envelope.theme-navy .envelope-back {
+  background: #0B162B;
+  border: 1px solid #C6A15B;
+}
+
+.envelope.theme-navy .lining-pattern {
+  background-color: #0B162B;
+  background-image:
+    radial-gradient(rgba(198, 161, 91, 0.25) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(198, 161, 91, 0.15) 1.2px, #07101E 1.2px);
+}
+
+.envelope.theme-navy .inner-card {
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 245, 220, 0.12) 28%,
+      rgba(10, 28, 56, 0.42) 65%,
+      rgba(6, 16, 36, 0.68) 100%);
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.7)) drop-shadow(0 14px 32px rgba(4, 12, 28, 0.75));
+}
+
+.envelope.theme-navy.is-closing .inner-card,
+.envelope.theme-navy.closing .inner-card {
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.7)) drop-shadow(0 14px 32px rgba(4, 12, 28, 0.75)) !important;
+}
+
+.envelope.theme-navy .card-mini-seal {
+  color: #D4AF37;
+}
+
+/* ==========================================================================
+   2. IMPERIAL EMERALD & PEACOCK GREEN
+   ========================================================================== */
+.envelope.theme-emerald {
+  box-shadow:
+    0 18px 40px rgba(6, 40, 27, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 26px rgba(212, 175, 55, 0.42);
+}
+
+.envelope.theme-emerald:hover:not(.opened) {
+  box-shadow:
+    0 24px 50px rgba(8, 52, 35, 0.65),
+    0 8px 18px rgba(0, 0, 0, 0.45),
+    0 0 32px rgba(212, 175, 55, 0.52);
+}
+
+.envelope.theme-emerald.opened {
+  box-shadow:
+    0 20px 45px rgba(6, 40, 27, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 26px rgba(212, 175, 55, 0.42);
+}
+
+.envelope.theme-emerald .envelope-back {
+  background: #06281B;
+  border: 0.5mm solid #D4AF37;
+}
+
+.envelope.theme-emerald .lining-pattern {
+  background-color: #083423;
+  background-image:
+    radial-gradient(rgba(212, 175, 55, 0.35) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(212, 175, 55, 0.2) 1.2px, #052217 1.2px);
+}
+
+.envelope.theme-emerald .pocket-floral-art {
+  background-image: url('assets/images/envelope_cover_emerald.jpg'), url('../images/envelope_cover_emerald.jpg');
+}
+
+.envelope.theme-emerald .flap-texture {
+  background-image: url('assets/images/envelope_cover_emerald.jpg'), url('../images/envelope_cover_emerald.jpg');
+}
+
+.envelope.theme-emerald .inner-card {
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 245, 220, 0.12) 28%,
+      rgba(8, 48, 32, 0.42) 65%,
+      rgba(4, 30, 20, 0.68) 100%);
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.7)) drop-shadow(0 14px 32px rgba(4, 25, 16, 0.75));
+}
+
+.envelope.theme-emerald.is-closing .inner-card,
+.envelope.theme-emerald.closing .inner-card {
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.7)) drop-shadow(0 14px 32px rgba(4, 25, 16, 0.75)) !important;
+}
+
+.envelope.theme-emerald .card-mini-seal {
+  color: #D4AF37;
+}
+
+/* ==========================================================================
+   3. CHAMPAGNE IVORY & ROYAL GOLD
+   ========================================================================== */
+.envelope.theme-ivory {
+  box-shadow:
+    0 18px 40px rgba(90, 75, 50, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.2),
+    0 0 26px rgba(212, 175, 55, 0.35);
+}
+
+.envelope.theme-ivory:hover:not(.opened) {
+  box-shadow:
+    0 24px 50px rgba(110, 92, 60, 0.45),
+    0 8px 18px rgba(0, 0, 0, 0.25),
+    0 0 32px rgba(212, 175, 55, 0.45);
+}
+
+.envelope.theme-ivory.opened {
+  box-shadow:
+    0 20px 45px rgba(90, 75, 50, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.2),
+    0 0 26px rgba(212, 175, 55, 0.35);
+}
+
+.envelope.theme-ivory .envelope-back {
+  background: #FAF6ED;
+  border: 0.5mm solid #D4AF37;
+}
+
+.envelope.theme-ivory .lining-pattern {
+  background-color: #F5EEDB;
+  background-image:
+    radial-gradient(rgba(180, 140, 40, 0.35) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(180, 140, 40, 0.2) 1.2px, #EFE3C6 1.2px);
+}
+
+.envelope.theme-ivory .pocket-floral-art {
+  background-image: url('assets/images/envelope_cover_ivory.jpg'), url('../images/envelope_cover_ivory.jpg');
+}
+
+.envelope.theme-ivory .flap-texture {
+  background-image: url('assets/images/envelope_cover_ivory.jpg'), url('../images/envelope_cover_ivory.jpg');
+}
+
+.envelope.theme-ivory .inner-card {
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 250, 240, 0.35) 28%,
+      rgba(240, 225, 195, 0.5) 65%,
+      rgba(225, 205, 165, 0.75) 100%);
+  filter:
+    drop-shadow(0 0 1.5px rgba(212, 175, 55, 0.95)) drop-shadow(0 0 1.5px rgba(212, 175, 55, 0.7)) drop-shadow(0 14px 32px rgba(70, 55, 30, 0.5));
+}
+
+.envelope.theme-ivory.is-closing .inner-card,
+.envelope.theme-ivory.closing .inner-card {
+  filter:
+    drop-shadow(0 0 1.5px rgba(212, 175, 55, 0.95)) drop-shadow(0 0 1.5px rgba(212, 175, 55, 0.7)) drop-shadow(0 14px 32px rgba(70, 55, 30, 0.5)) !important;
+}
+
+.envelope.theme-ivory .card-mini-seal {
+  color: #B87A10;
+}
+
+/* ==========================================================================
+   INTERACTIVE FLOATING THEME SELECTOR BAR (For Live Color Preview)
+   ========================================================================== */
+.theme-preview-bar {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 5px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.14),
+    0 0 16px rgba(212, 175, 55, 0.25);
+  max-width: 95%;
+  white-space: nowrap;
+}
+
+.theme-preview-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #4A3319;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+.theme-btn {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.85);
+  color: #444444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.theme-btn .theme-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(212, 175, 55, 0.65);
+}
+
+.theme-btn[data-theme="theme-navy"] .theme-dot {
+  background: #0D2040;
+}
+
+.theme-btn[data-theme="theme-emerald"] .theme-dot {
+  background: #0A3A26;
+}
+
+.theme-btn[data-theme="theme-ivory"] .theme-dot {
+  background: #EFE4CA;
+}
+
+.theme-btn:hover {
+  border-color: #D4AF37;
+  color: #111111;
+  transform: translateY(-1px);
+}
+
+.theme-btn.active {
+  background: #1C1204;
+  color: #FFFFFF;
+  border-color: #D4AF37;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}

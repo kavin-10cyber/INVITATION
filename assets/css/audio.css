@@ -1,0 +1,160 @@
+/* ==========================================================================
+   WEDDING INVITATION - FLOATING AUDIO CONTROLS
+   File: assets/css/audio.css
+   Purpose: Floating music FAB button, soundwave bars, and playback animation states.
+   ========================================================================== */
+
+.audio-control-bar {
+  position: fixed;
+  bottom: clamp(16px, 3vh, 24px);
+  right: clamp(16px, 3vw, 24px);
+  z-index: 1000;
+}
+
+.btn-music-fab {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at 35% 30%, #FFECA8 0%, #D4AF37 55%, #996515 100%);
+  border: 1.5px solid rgba(255, 242, 178, 0.85);
+  color: #3A050E;
+  cursor: pointer;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(212, 175, 55, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.btn-music-fab:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(212, 175, 55, 0.65);
+}
+
+.btn-music-fab .music-note-icon {
+  transition: opacity 0.25s ease;
+}
+
+.sound-wave-icon {
+  display: none;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+}
+
+.sound-wave-icon .bar {
+  width: 2.5px;
+  background: #3A050E;
+  border-radius: 2px;
+  height: 4px;
+}
+
+.sound-wave-icon.playing {
+  display: flex;
+}
+
+.btn-music-fab.playing .music-note-icon {
+  display: none;
+}
+
+.sound-wave-icon.playing .bar1 {
+  animation: wave 1.1s ease-in-out infinite;
+}
+
+.sound-wave-icon.playing .bar2 {
+  animation: wave 0.8s ease-in-out infinite 0.2s;
+}
+
+.sound-wave-icon.playing .bar3 {
+  animation: wave 1.3s ease-in-out infinite 0.4s;
+}
+
+.sound-wave-icon.playing .bar4 {
+  animation: wave 0.9s ease-in-out infinite 0.1s;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    height: 3px;
+  }
+  50% {
+    height: 14px;
+  }
+}
+
+/* ==========================================================================
+   FLOATING REPLAY BUTTON (BOTTOM LEFT)
+   Matches the bottom-right music FAB in gold gradient, size, and elevation.
+   ========================================================================== */
+.replay-control-bar {
+  position: fixed;
+  bottom: clamp(16px, 3vh, 24px);
+  left: clamp(16px, 3vw, 24px);
+  z-index: 1000;
+}
+
+.btn-replay-fab {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at 35% 30%, #FFECA8 0%, #D4AF37 55%, #996515 100%);
+  border: 1.5px solid rgba(255, 242, 178, 0.85);
+  color: #3A050E;
+  cursor: pointer;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(212, 175, 55, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  outline: none;
+}
+
+.btn-replay-fab:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(212, 175, 55, 0.65);
+}
+
+.btn-replay-fab:active {
+  transform: scale(0.94);
+}
+
+.btn-replay-fab .replay-arrow-icon {
+  width: 21px;
+  height: 21px;
+  color: #3A050E;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  display: block;
+}
+
+.btn-replay-fab:hover .replay-arrow-icon {
+  transform: rotate(-180deg);
+}
+
+.btn-replay-fab.is-spinning .replay-arrow-icon {
+  animation: replaySpin 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes replaySpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}

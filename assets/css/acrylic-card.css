@@ -1,0 +1,250 @@
+/* ==========================================================================
+   WEDDING INVITATION - ACRYLIC POP-OUT ARCH CARD
+   File: assets/css/acrylic-card.css
+   Purpose: Transparent acrylic royal arch pop-out card, glassmorphism reflections,
+            gold filigree corners, embossed couple names, and date badge.
+   ========================================================================== */
+
+/* ==========================================================================
+   TRANSPARENT ACRYLIC ROYAL ARCH POP-OUT CARD (Museum-Grade Glassmorphism)
+   ========================================================================== */
+.inner-card {
+  position: absolute;
+  top: calc((var(--envelope-h) - var(--card-h)) / 2);
+  left: calc((var(--envelope-w) - var(--card-w)) / 2);
+  width: var(--card-w);
+  height: var(--card-h);
+  /* Mughal Palace Gate Arch — pointed peak, square corners */
+  clip-path: polygon(0% 100%,
+      0% 30%,
+      2% 22%,
+      6% 15%,
+      12% 9%,
+      21% 4.5%,
+      32% 1.5%,
+      42% 0.2%,
+      50% 0%,
+      58% 0.2%,
+      68% 1.5%,
+      79% 4.5%,
+      88% 9%,
+      94% 15%,
+      98% 22%,
+      100% 30%,
+      100% 100%);
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 245, 220, 0.12) 28%,
+      rgba(70, 8, 42, 0.38) 65%,
+      rgba(40, 4, 24, 0.62) 100%);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.7)) drop-shadow(0 14px 32px rgba(25, 2, 14, 0.7));
+  z-index: 5;
+  transform: translateY(0) translateZ(10px) scale(1);
+  transition: transform 0.85s cubic-bezier(0.2, 0.9, 0.3, 1), filter 0.8s ease;
+  will-change: transform;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Diagonal Specular Ambient Light Reflection Across Clear Glass */
+.acrylic-glass-reflection {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(118deg,
+      transparent 15%,
+      rgba(255, 255, 255, 0.15) 32%,
+      rgba(255, 255, 255, 0.45) 45%,
+      rgba(255, 255, 255, 0.18) 52%,
+      transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Polished Beveled Gold Inset Rim */
+.acrylic-gold-rim {
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Opened State: Mughal Arch card rises fully in 3D out of the envelope pocket */
+.envelope.opened .inner-card {
+  transform: translateY(-145px) translateZ(60px) scale(1.04);
+  z-index: 100 !important;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 2px rgba(255, 225, 120, 0.7)) drop-shadow(0 28px 55px rgba(18, 1, 10, 0.85)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+  /* Delay card rise by 0.22s so the flap clears first */
+  transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1) 0.22s, filter 0.32s ease 0.22s;
+}
+
+/* Closing Glide-In: Decelerates silkily back into envelope pocket */
+.envelope.is-closing .inner-card,
+.envelope.closing .inner-card {
+  transform: translateY(0) translateZ(10px) scale(1) !important;
+  z-index: 5 !important;
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.95)) drop-shadow(0 0 1.5px rgba(255, 225, 120, 0.7)) drop-shadow(0 14px 32px rgba(25, 2, 14, 0.7)) !important;
+  transition: transform 0.28s cubic-bezier(0.32, 1, 0.32, 1), filter 0.28s ease !important;
+  will-change: transform, filter;
+}
+
+.inner-card-border {
+  height: calc(100% - 10px);
+  margin: 5px;
+  border: 1px solid rgba(190, 145, 25, 0.72);
+  outline: 1px dashed rgba(160, 115, 15, 0.5);
+  outline-offset: -3px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: clamp(10px, 2.5vh, 18px);
+  background: transparent;
+  z-index: 2;
+}
+
+/* Archway Crown 3D Interlocking Rings Crest */
+.acrylic-rings-crest {
+  position: relative;
+  width: clamp(34px, 10vw, 42px);
+  height: auto;
+  margin: 0 auto 3px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+}
+
+.acrylic-rings-crest img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.crest-sparkle {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  font-size: 0.75rem;
+  color: #D4AF37;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.9));
+  animation: ringGlint 2.8s ease-in-out infinite;
+}
+
+/* Royal Corner Filigree */
+.inner-card-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid #A67515;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.7));
+  pointer-events: none;
+}
+
+.inner-card-corner.top-left {
+  top: 36%;
+  left: 6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.inner-card-corner.top-right {
+  top: 36%;
+  right: 6px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.inner-card-corner.bottom-left {
+  bottom: 6px;
+  left: 6px;
+  border-right: none;
+  border-top: none;
+}
+
+.inner-card-corner.bottom-right {
+  bottom: 6px;
+  right: 6px;
+  border-left: none;
+  border-top: none;
+}
+
+/* High-Contrast Floating Embossed Crimson & Metallic Gold Foil Typography */
+.inner-card-content {
+  text-align: center;
+  padding: 0.15rem 0.5rem;
+  z-index: 3;
+}
+
+.card-auspicious {
+  display: block;
+  font-family: var(--font-royal);
+  font-size: clamp(0.6rem, 1.9vw, 0.72rem);
+  letter-spacing: 0.2em;
+  color: #7A5C0A;
+  font-weight: 800;
+  margin-bottom: 4px;
+  text-shadow:
+    0 1px 0 rgba(255, 240, 180, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.card-couple {
+  font-family: var(--font-royal);
+  font-size: clamp(0.96rem, 3.6vw, 1.28rem);
+  font-weight: 800;
+  color: #5C0018;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 6px rgba(60, 0, 18, 0.35),
+    0 0 1px rgba(212, 175, 55, 0.6);
+}
+
+/* Polished Royal Crimson & Gold Inset Date Badge */
+.card-date-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #78021E 0%, #4D0010 100%);
+  color: #FFF2B2;
+  font-family: var(--font-sans);
+  font-size: clamp(0.58rem, 1.7vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid #D4AF37;
+  box-shadow:
+    0 3px 10px rgba(50, 0, 15, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  margin-bottom: 6px;
+}
+
+.card-note {
+  font-family: var(--font-serif);
+  font-size: clamp(0.62rem, 1.9vw, 0.72rem);
+  font-style: italic;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 1),
+    0 2px 8px rgba(0, 0, 0, 1),
+    0 0 14px rgba(0, 0, 0, 0.9);
+  margin-bottom: 3px;
+}
+
+.card-mini-seal {
+  font-size: 0.75rem;
+  color: #8C0022;
+  filter: drop-shadow(0 1px 2px rgba(60, 0, 15, 0.3));
+}

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   WEDDING INVITATION - BASE RESET & GLOBAL LAYOUT SETUP
+   File: assets/css/base.css
+   Purpose: Global resets, body styling, desktop preview wrapper, and mobile app-container shell.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #2D080E 0%, #150205 100%);
+  color: var(--text-cream);
+  font-family: var(--font-serif);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Outer Desktop Frame for Tablet/Mobile Preview */
+.screen-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  padding: clamp(0px, 1.5vw, 16px);
+}
+
+/* Ambient Canvas for Floating Petals and Gold Sparkles */
+.ambient-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 28;
+}
+
+/* ==========================================================================
+   APP CONTAINER (Mobile Native Shell)
+   ========================================================================== */
+.app-container {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  box-shadow:
+    0 0 50px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(212, 175, 55, 0.25);
+  border-radius: clamp(0px, 2vw, 24px);
+  background-color: #2D080E;
+}
+
+/* Custom Scrollbar for App Container */
+.app-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.app-container::-webkit-scrollbar-thumb {
+  background: var(--gold-primary);
+  border-radius: 4px;
+}

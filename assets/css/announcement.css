@@ -1,0 +1,412 @@
+/* ==========================================================================
+   WEDDING INVITATION - SCREEN 2: MAIN COUPLE ANNOUNCEMENT
+   File: assets/css/announcement.css
+   Purpose: Royal framed announcement screen, groom details, bride details,
+            royal ampersand divider, muhurtham highlight banner, and replay controls.
+   ========================================================================== */
+
+/* ==========================================================================
+   SCREEN 2: MAIN COUPLE ANNOUNCEMENT (FULL ROYAL FRAMED SCREEN)
+   ========================================================================== */
+.announcement-screen {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 2.5vh, 1.4rem) clamp(0.75rem, 3vw, 1.25rem);
+  position: relative;
+  z-index: 20;
+  background-color: #f4f8fa;
+  overflow: hidden;
+  will-change: opacity;
+  opacity: 1;
+  pointer-events: auto;
+  scroll-snap-align: start;
+}
+
+/* Seamless Parallax Background Layer */
+.announcement-bg-parallax {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/images/pg2_blue_floral.png'), url('../images/pg2_blue_floral.png');
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Feathered Transition Band: Soft edge at top */
+.announcement-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: linear-gradient(to bottom,
+      rgba(247, 238, 223, 0.4) 0%,
+      rgba(247, 238, 223, 0) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   CONTINUOUS SCROLL SCRUBBING: ROYAL FRAME & DETAILS
+   ========================================================================== */
+.announcement-screen .royal-frame-card {
+  width: 100%;
+  max-width: clamp(320px, 88vw, 380px);
+  position: relative;
+  z-index: 3;
+  background: transparent;
+  border: 3px solid var(--gold-primary);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: clamp(1rem, 2.8vh, 1.6rem) clamp(0.9rem, 3vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto 0;
+
+  /* Initial scroll scrub state */
+  opacity: 0;
+  transform: translate3d(0, 45px, 0) scale(0.94);
+  transform-origin: center center;
+  will-change: opacity, transform;
+}
+
+/* Staggered entrance for internal announcement elements */
+.announcement-screen .person-card,
+.announcement-screen .royal-ampersand-divider,
+.announcement-screen .muhurtham-highlight-banner {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  will-change: opacity, transform;
+}
+
+/* Inner Double Gold Border */
+.announcement-screen .royal-frame-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(212, 175, 55, 0.55);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* Ornate Corner Vectors */
+.announcement-screen .frame-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--gold-mid);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.frame-corner::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold-bright);
+}
+
+.frame-corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.frame-corner.top-left::after {
+  top: 2px;
+  left: 2px;
+}
+
+.frame-corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.frame-corner.top-right::after {
+  top: 2px;
+  right: 2px;
+}
+
+.frame-corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.frame-corner.bottom-left::after {
+  bottom: 2px;
+  left: 2px;
+}
+
+.frame-corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+.frame-corner.bottom-right::after {
+  bottom: 2px;
+  right: 2px;
+}
+
+/* Deity Badge: Sacred Motif */
+.deity-badge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 3;
+}
+
+.deity-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.55)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.deity-emblem:hover {
+  transform: scale(1.05);
+}
+
+.vel-icon {
+  width: clamp(48px, 12.8vw, 58px);
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Invocations Header */
+.invocations-header {
+  margin: 6px 0 10px;
+  width: 100%;
+}
+
+.invocations-text {
+  font-family: var(--font-royal);
+  font-size: clamp(0.7rem, 2.2vw, 0.78rem);
+  font-weight: 700;
+  color: #4A3000;
+  letter-spacing: 0.8px;
+  line-height: 1.45;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* Title & Solicitation */
+.announcement-header {
+  margin-bottom: 12px;
+}
+
+.wedding-invitation-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 8vw, 3rem);
+  font-weight: 400;
+  color: #7A5C00;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.solicitation-text {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #1E3A5F;
+  line-height: 1.5;
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+/* Person Cards (Groom & Bride) */
+.person-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.person-badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #5A3A00;
+  background: rgba(180, 130, 20, 0.18);
+  border: 1px solid rgba(140, 100, 10, 0.55);
+  border-radius: 12px;
+  padding: 2px 8px;
+  margin-bottom: 4px;
+}
+
+.person-name {
+  font-family: var(--font-royal);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #1A2A4A;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin-bottom: 3px;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.person-qualifications {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: #2E4A6B;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  margin-bottom: 4px;
+  line-height: 1.35;
+}
+
+.person-parents {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #2C3E50;
+  line-height: 1.4;
+}
+
+/* Royal Ampersand Divider */
+.royal-ampersand-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 4px 0;
+}
+
+.ornament-swirl {
+  color: #7A5500;
+  font-size: 0.9rem;
+}
+
+.gold-ampersand {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #7A5C00;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  line-height: 1;
+}
+
+/* Date & Time Highlight Banner */
+.muhurtham-highlight-banner {
+  width: 100%;
+  margin-top: 14px;
+  background: rgba(35, 2, 7, 0.7);
+  border: 1.5px solid #D4AF37;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 12px rgba(212, 175, 55, 0.25),
+    0 4px 15px rgba(0, 0, 0, 0.5);
+  padding: 10px 12px;
+}
+
+.banner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner-auspicious-tag {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #FFDF73;
+  margin-bottom: 3px;
+}
+
+.banner-date {
+  font-family: var(--font-royal);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FFF8E7;
+  margin-bottom: 2px;
+}
+
+.banner-time {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #FFE28A;
+  letter-spacing: 0.04em;
+}
+
+/* Screen 2 Footer Controls (Scroll Cue & Replay) */
+.screen2-footer-controls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.btn-replay-subtle {
+  background: none;
+  border: none;
+  color: #D1B894;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-replay-subtle:hover {
+  color: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
+.scroll-cue {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #FFE28A;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}

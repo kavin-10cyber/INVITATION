@@ -1,0 +1,36 @@
+/* ==========================================================================
+   WEDDING INVITATION - MASTER STYLESHEET ENTRYPOINT
+   Couple: Deepak & Vikashini (D & V)
+   
+   MODULAR FILE ARCHITECTURE:
+   - variables.css      : Design tokens, colors, typography, sizing clamp()
+   - base.css           : Global resets, body layout, ambient canvas, app container
+   - audio.css          : Floating music toggle FAB button, sound wave bars
+   - stage.css          : Palace arch backdrop, lotuses, peacocks, swing, rings, header
+   - envelope.css       : 3D envelope structure, pocket, scalloped die-cut flap, wax seal
+   - acrylic-card.css   : Transparent acrylic royal arch pop-out card & reflections
+   - announcement.css   : Screen 2: Royal frame card, groom/bride cards, muhurtham banner
+   - themes.css         : Royal Navy, Imperial Emerald, Champagne Ivory palettes + preview bar
+   - animations.css     : Keyframe physics, screen popping bounce, and transitions
+   ========================================================================== */
+
+/* 1. Tokens & Base Resets */
+@import './variables.css';
+@import './base.css';
+
+/* 2. Audio & Micro-Animations */
+@import './audio.css';
+@import './animations.css';
+
+/* 3. Screen 1: Stage Artwork, Rings & Calligraphy */
+@import './stage.css';
+
+/* 4. Screen 1: 3D Envelope & Acrylic Pop-Out Card */
+@import './envelope.css';
+@import './invitation-card.css';
+
+/* 5. Screen 2: Royal Announcement Card (Preserved for future use) */
+/* @import './announcement.css'; */
+
+/* 6. Live Color Themes & Selector Bar */
+@import './themes.css';

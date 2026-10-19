@@ -1,0 +1,620 @@
+/* ==========================================================================
+   WEDDING INVITATION - STAGE & BACKDROP (SCREEN 1)
+   File: assets/css/stage.css
+   Purpose: Mandap palace arch backdrop, animated multi-layer artwork layers,
+            royal peacocks, lotuses, couple on swing, rings, header, and calligraphy.
+   ========================================================================== */
+
+/* ==========================================================================
+   SCREEN 1: COVER SCREEN (Multi-Layer Animated Stage Backdrop)
+   ========================================================================== */
+.cover-screen {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(0.75rem, 2vh, 1.25rem) clamp(0.85rem, 3.5vw, 1.4rem);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  /* Animated Multi-Layer Stage renders in stage-canvas-wrapper */
+  background-color: #f7eedf;
+
+  /* GPU hardware-accelerated continuous scroll scrubbing */
+  will-change: opacity, transform, filter;
+  transform-origin: center center;
+  overflow: hidden;
+  opacity: 1;
+  pointer-events: auto;
+  scroll-snap-align: start;
+}
+
+.cover-screen::after {
+  display: none;
+}
+
+/* Ambient contrast overlay removed to preserve 100% full brightness and golden radiance */
+.cover-overlay {
+  display: none;
+}
+
+/* ==========================================================================
+   ANIMATED MULTI-LAYER ARTWORK STAGE (SCREEN 1)
+   Each element flows into its exact coordinates with smooth easing
+   ========================================================================== */
+.stage-canvas-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.stage-layer {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.stage-layer img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* 1. Base Palace Arch & Mandala Backdrop */
+.stage-bg {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/bg_stage_clean.png');
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  animation: stageBgFlow 1.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 2. Top-Left & Top-Right Lotus Blooms */
+.stage-lotus-left {
+  top: 0;
+  left: 0;
+  width: 36.46%;
+  height: 25.39%;
+  transform-origin: 30% 85%;
+  z-index: 2;
+  animation:
+    lotusLeftFlow 2.1s cubic-bezier(0.2, 0.9, 0.3, 1.05) 0.25s both,
+    lotusBreezeLeft 4.5s ease-in-out infinite 2.35s;
+}
+
+.stage-lotus-right {
+  top: 0;
+  right: 0;
+  width: 37.5%;
+  height: 25.39%;
+  transform-origin: 70% 85%;
+  z-index: 2;
+  animation:
+    lotusRightFlow 2.1s cubic-bezier(0.2, 0.9, 0.3, 1.05) 0.35s both,
+    lotusBreezeRight 4.8s ease-in-out infinite 2.45s;
+}
+
+/* 3. Golden Wedding Rings (Positioned on Top of "You're Invited" text) */
+.stage-rings {
+  position: relative;
+  top: -0.5cm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(62px, 16.5vw, 80px);
+  height: auto;
+  margin: 0 auto 1.5cm auto;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Fade wedding rings and calligraphy text as soon as the envelope opens */
+.envelope-section.opened .stage-rings,
+.envelope-section.opened .invitation-calligraphy-wrapper,
+.cover-screen.envelope-opened .stage-rings,
+.cover-screen.envelope-opened .invitation-calligraphy-wrapper {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.stage-rings img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+  pointer-events: none;
+}
+
+/* Golden Rings Shimmer Sparkles */
+.rings-gleam-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.ring-sparkle {
+  position: absolute;
+  color: #FFE28A;
+  font-size: 1.05rem;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.8));
+  animation: ringGlint 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.sparkle-1 {
+  left: 20%;
+  top: 32%;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  left: 74%;
+  top: 54%;
+  font-size: 0.9rem;
+  animation-delay: 1.1s;
+}
+
+.sparkle-3 {
+  left: 50%;
+  top: 22%;
+  font-size: 0.75rem;
+  animation-delay: 2.2s;
+}
+
+@keyframes ringGlint {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.35) rotate(45deg);
+  }
+  55% {
+    opacity: 0.9;
+    transform: scale(1) rotate(90deg);
+  }
+  75% {
+    opacity: 0;
+    transform: scale(0.2) rotate(140deg);
+  }
+}
+
+/* 4. Royal Peacocks */
+.stage-peacock-upper {
+  top: 41.02%;
+  right: 0;
+  width: 23.61%;
+  height: 30.27%;
+  z-index: 2;
+  animation:
+    peacockUpperFlow 2.1s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both,
+    peacockFloat 4.2s ease-in-out infinite 2.65s;
+}
+
+.stage-peacock-lower {
+  top: 76.17%;
+  left: 52.08%;
+  width: 41.67%;
+  height: 22.46%;
+  z-index: 2;
+  animation:
+    peacockLowerFlow 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both,
+    peacockGardenFloat 5s ease-in-out infinite 2.85s;
+}
+
+/* 5. Couple on Swing */
+.stage-couple {
+  top: 60.55%;
+  left: 0;
+  width: 50.35%;
+  height: 39.45%;
+  z-index: 3;
+  transform-origin: 22% 2%;
+  animation:
+    coupleSwingFlow 2.35s cubic-bezier(0.16, 1, 0.3, 1.05) 0.45s both,
+    coupleSwingSway 5.5s ease-in-out infinite 2.8s;
+}
+
+/* ==========================================================================
+   TOP SACRED MANTRA & INVOCATION
+   ========================================================================== */
+.header-container {
+  position: absolute;
+  top: clamp(0.5rem, 1.8vh, 1.2rem);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 6;
+  pointer-events: none;
+  animation: headerFlow 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+.sacred-mantra-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(13, 27, 42, 0.88);
+  border: 1px solid var(--gold-primary);
+  border-radius: 20px;
+  padding: 3px 14px;
+  margin-bottom: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.sacred-mantra-badge .divine-star {
+  color: var(--gold-bright);
+  font-size: 0.65rem;
+}
+
+.sacred-mantra-badge .mantra-text {
+  font-family: var(--font-royal);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold-bright);
+}
+
+.invocation-title {
+  font-family: var(--font-royal);
+  font-size: clamp(0.92rem, 3vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3B0000;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.8),
+    0 2px 10px rgba(212, 175, 55, 0.5);
+  margin: 2px 0;
+  line-height: 1.2;
+}
+
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3px;
+  width: min(150px, 45vw);
+}
+
+.ornamental-divider .line {
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #AA771C, transparent);
+}
+
+.ornamental-divider .gem {
+  color: #8C590E;
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   THE SIGNATURE "You're Invited" CALLIGRAPHY (Exact match to reference photo)
+   ========================================================================== */
+.invitation-calligraphy-wrapper {
+  margin-top: -1.5cm;
+  margin-bottom: 1.5cm;
+  text-align: center;
+  z-index: 2;
+}
+
+.youre-invited-text {
+  font-family: var(--font-script);
+  font-size: clamp(1.85rem, 6vw, 2.45rem);
+  font-weight: 400;
+  color: #7A3E00;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.9),
+    0 0 14px rgba(255, 215, 0, 0.6),
+    0 2px 8px rgba(120, 60, 0, 0.35);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  animation: glowInvite 3.5s ease-in-out infinite;
+}
+
+@keyframes glowInvite {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.75));
+  }
+}
+
+/* ==========================================================================
+   PULSING CALL-TO-ACTION INDICATOR
+   ========================================================================== */
+.cta-container {
+  display: none !important;
+}
+
+.tap-indicator {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4A1A00;
+  animation: tapPulse 1.8s ease-in-out infinite;
+  margin-bottom: 0;
+}
+
+.tap-finger {
+  width: 17px;
+  height: 17px;
+  stroke: #4A1A00;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8));
+}
+
+@keyframes tapPulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(4px) scale(1.08);
+    opacity: 1;
+  }
+}
+
+.cta-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.7rem, 2vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4A1A00;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  margin-bottom: 2px;
+}
+
+.cta-sparkles {
+  display: flex;
+  gap: 6px;
+  color: #996515;
+  font-size: 0.7rem;
+}
+
+/* ==========================================================================
+   STAGE ENTRANCE & IDLE KEYFRAMES
+   ========================================================================== */
+@keyframes stageBgFlow {
+  0% {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: brightness(1.2) blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1) blur(0);
+  }
+}
+
+@keyframes lotusLeftFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(-60px, -80px, 0) rotate(-14deg) scale(0.85);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(2px, 3px, 0) rotate(1deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes lotusBreezeLeft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(2px, -4px, 0) rotate(1.2deg);
+  }
+}
+
+@keyframes lotusRightFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(60px, -80px, 0) rotate(14deg) scale(0.85);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(-2px, 3px, 0) rotate(-1deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes lotusBreezeRight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-2px, -4px, 0) rotate(-1.2deg);
+  }
+}
+
+@keyframes ringsFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0) scale(0.6) rotate(-8deg);
+  }
+  65% {
+    opacity: 1;
+    transform: translate3d(0, 4px, 0) scale(1.08) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes ringsGlintHover {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+@keyframes peacockUpperFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(70px, -15px, 0) scale(0.92);
+  }
+  75% {
+    opacity: 1;
+    transform: translate3d(-3px, 1px, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes peacockFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3.5px);
+  }
+}
+
+@keyframes peacockLowerFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(80px, 45px, 0) scale(0.9);
+  }
+  75% {
+    opacity: 1;
+    transform: translate3d(-2px, -1px, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes peacockGardenFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-1.5px, -3px, 0);
+  }
+}
+
+@keyframes coupleSwingFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(-110px, 15px, 0) rotate(-3.5deg);
+  }
+  75% {
+    opacity: 1;
+    transform: translate3d(3px, -1px, 0) rotate(0.8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes coupleSwingSway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(1px, -2px, 0) rotate(1.35deg);
+  }
+}
+
+@keyframes envelopeFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 35px, 0) scale(0.85);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(0, -3px, 0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes headerFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -25px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ==========================================================================
+   PURE STATIONERY TAKEOVER (Triggered ONLY when card reaches full screen)
+   Stage background (.stage-canvas-wrapper) is preserved 100% so folding back
+   always displays the royal front page background!
+   ========================================================================== */
+.cover-screen.envelope-opened .stage-rings,
+.cover-screen.envelope-opened .header-container,
+.cover-screen.envelope-opened .invitation-calligraphy-wrapper {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.4, 1) !important;
+}
+
+/* Lock outer shell scroll when card is docked as primary screen */
+body.card-fullscreen-active,
+.app-container.card-fullscreen-active {
+  overflow: hidden !important;
+}
+
+

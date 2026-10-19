@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 36" width="260" height="36" aria-label="Venue Location Marker Icon">
+  <defs>
+    <!-- Metallic Antique Gold Gradient for Outer Bezel & Stars -->
+    <linearGradient id="s2GoldPinGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3C4" />
+      <stop offset="22%" stop-color="#E2B755" />
+      <stop offset="55%" stop-color="#9C6B20" />
+      <stop offset="82%" stop-color="#E9C56F" />
+      <stop offset="100%" stop-color="#734710" />
+    </linearGradient>
+
+    <!-- Metallic Embossed Pin Body Gradient -->
+    <linearGradient id="s2PinBodyGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFE8B0" />
+      <stop offset="28%" stop-color="#DDA944" />
+      <stop offset="65%" stop-color="#A16E1D" />
+      <stop offset="88%" stop-color="#D6A440" />
+      <stop offset="100%" stop-color="#6E440D" />
+    </linearGradient>
+
+    <!-- Tapered Hairline Left Gradient -->
+    <linearGradient id="s2PinLineLeftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C59942" stop-opacity="0" />
+      <stop offset="35%" stop-color="#D8AA42" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#9E6D24" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Tapered Hairline Right Gradient -->
+    <linearGradient id="s2PinLineRightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9E6D24" stop-opacity="0.95" />
+      <stop offset="65%" stop-color="#D8AA42" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#C59942" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Dial Face Radial Gradient: Warm Soft Champagne to Ivory -->
+    <radialGradient id="s2PinDialFaceGrad" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFFDF9" />
+      <stop offset="68%" stop-color="#FAF1E6" />
+      <stop offset="100%" stop-color="#EFE0CE" />
+    </radialGradient>
+
+    <!-- Subtle Metallic Drop Shadow -->
+    <filter id="s2PinBadgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0.8" stdDeviation="1.0" flood-color="#5A3A10" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- Left Flanking Hairline Rule -->
+  <line x1="22" y1="18" x2="104" y2="18" stroke="url(#s2PinLineLeftGrad)" stroke-width="0.85" stroke-linecap="round" />
+  <!-- Left Diamond Terminal Accent -->
+  <circle cx="104.5" cy="18" r="0.6" fill="#C59942" />
+  <polygon points="109,15.2 110.8,18 109,20.8 107.2,18" fill="url(#s2GoldPinGrad)" />
+  <circle cx="113.5" cy="18" r="0.6" fill="#C59942" />
+
+  <!-- Center Antique Gold Location Marker Medallion -->
+  <g filter="url(#s2PinBadgeShadow)">
+    <!-- Top Antique Crown / Ring matching Clock -->
+    <circle cx="130" cy="2.2" r="1.6" fill="none" stroke="url(#s2GoldPinGrad)" stroke-width="0.75" />
+    <path d="M 128.5 3.8 L 131.5 3.8 Q 132 3.8 132 3.1 L 132 2.5 Q 132 1.9 130 1.9 Q 128 1.9 128 2.5 L 128 3.1 Q 128 3.8 128.5 3.8 Z" fill="url(#s2GoldPinGrad)" />
+
+    <!-- Outer Embossed Metallic Gold Bezel -->
+    <circle cx="130" cy="18" r="14" fill="url(#s2PinDialFaceGrad)" stroke="url(#s2GoldPinGrad)" stroke-width="1.3" />
+    <!-- Inner Concentric Hairline Ring -->
+    <circle cx="130" cy="18" r="12.4" fill="none" stroke="#C59942" stroke-width="0.5" stroke-opacity="0.75" />
+
+    <!-- Subtle Grounding Shadow below Pin Tip -->
+    <ellipse cx="130" cy="25.5" rx="3.0" ry="0.75" fill="#8C5E1A" opacity="0.3" />
+
+    <!-- Premium Antique Gold Location Marker Pin -->
+    <!-- Outer Embossed Gold Teardrop Body -->
+    <path d="M 130 9.8
+             C 133.3 9.8 136.0 12.4 136.0 15.6
+             C 136.0 18.5 132.8 22.3 130 24.8
+             C 127.2 22.3 124.0 18.5 124.0 15.6
+             C 124.0 12.4 126.7 9.8 130 9.8 Z"
+          fill="url(#s2PinBodyGrad)"
+          stroke="#734710"
+          stroke-width="0.45" />
+
+    <!-- Inner Embossed Edge Highlight (Bevel) -->
+    <path d="M 130 10.5
+             C 132.8 10.5 135.1 12.7 135.1 15.4
+             C 135.1 17.8 132.4 21.3 130 23.8
+             C 127.6 21.3 124.9 17.8 124.9 15.4
+             C 124.9 12.7 127.2 10.5 130 10.5 Z"
+          fill="none"
+          stroke="#FFF2BC"
+          stroke-width="0.35"
+          opacity="0.7" />
+
+    <!-- Inner Core: Deep Royal Burgundy Jewel with Gold Rim -->
+    <circle cx="130" cy="15.2" r="2.7" fill="#4A0B16" stroke="url(#s2GoldPinGrad)" stroke-width="0.7" />
+    <!-- Inner Gold Center Dot -->
+    <circle cx="130" cy="15.2" r="1.1" fill="url(#s2GoldPinGrad)" />
+    <!-- Specular Highlight Dot -->
+    <circle cx="129.5" cy="14.7" r="0.45" fill="#FFFBE8" />
+  </g>
+
+  <!-- Right Diamond Terminal Accent -->
+  <circle cx="146.5" cy="18" r="0.6" fill="#C59942" />
+  <polygon points="151,15.2 152.8,18 151,20.8 149.2,18" fill="url(#s2GoldPinGrad)" />
+  <circle cx="155.5" cy="18" r="0.6" fill="#C59942" />
+  <!-- Right Flanking Hairline Rule -->
+  <line x1="156" y1="18" x2="238" y2="18" stroke="url(#s2PinLineRightGrad)" stroke-width="0.85" stroke-linecap="round" />
+</svg>

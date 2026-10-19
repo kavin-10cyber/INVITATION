@@ -1,0 +1,61 @@
+/* ==========================================================================
+   WEDDING INVITATION - KEYFRAME ANIMATIONS & MICRO-INTERACTIONS
+   File: assets/css/animations.css
+   Purpose: Global bounce/popping micro-interaction, auto-pause states,
+            and shared entrance transition animations.
+   ========================================================================== */
+
+/* ==========================================================================
+   WHOLE SCREEN GENTLE BOUNCE / POPPING MICRO-INTERACTION (SIGNALS SCROLLABILITY)
+   Active by default on ALL current screens (.cover-screen, .announcement-screen)
+   and all future screens (.app-screen, .screen-bounce)
+/* Screen bounce micro-interaction disabled for single-screen invitation */
+.screen-bounce {
+  animation: none;
+}
+
+/* Loop Physics: True physical 5mm vertical lift with smooth acceleration and gentle landing */
+@keyframes screenGentleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5mm);
+  }
+}
+
+/* Auto-Pause & Resting State when user scrolls, touches, or interacts */
+.app-screen.is-scrolling,
+.app-screen.paused-bounce,
+.cover-screen.is-scrolling,
+.cover-screen.paused-bounce,
+.announcement-screen.is-scrolling,
+.announcement-screen.paused-bounce,
+.screen-bounce.is-scrolling,
+.screen-bounce.paused-bounce {
+  animation-play-state: paused !important;
+}
+
+/* ==========================================================================
+   GENERAL SHARED KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,51 @@
+/* ==========================================================================
+   WEDDING INVITATION - DESIGN TOKENS & SYSTEM VARIABLES
+   File: assets/css/variables.css
+   Purpose: Global design tokens, color palette, typography, and responsive dimensions.
+   ========================================================================== */
+
+:root {
+  /* Rich Traditional Color Palette */
+  --crimson-dark: #3a030d;
+  --crimson-base: #520614;
+  --crimson-light: #730d1f;
+  --crimson-velvet: #5c0d20;
+
+  /* Royal Navy & Antique Gold Stationery Palette */
+  --navy-primary: #142544;
+  --navy-deep: #0B162B;
+  --navy-highlight: #22395B;
+  --gold-antique: #C6A15B;
+  --gold-bright-antique: #E0C17C;
+  --gold-shadow-antique: #8F6B35;
+  --gold-antique-gradient: linear-gradient(135deg, #E0C17C 0%, #C6A15B 50%, #8F6B35 100%);
+
+  /* Metallic Gold Foil Tones */
+  --gold-primary: #C6A15B;
+  --gold-bright: #E0C17C;
+  --gold-mid: #C6A15B;
+  --gold-dark: #8F6B35;
+  --gold-amber: #F4C430;
+  --gold-gradient: linear-gradient(135deg, #FFE89E 0%, #D4AF37 35%, #FFF8D6 55%, #AA771C 85%, #FFDF73 100%);
+  --gold-shadow: rgba(198, 161, 91, 0.4);
+
+  /* Text & Card Neutrals */
+  --text-cream: #FFF8E7;
+  --text-gold: #FBE7A1;
+  --text-muted: #D1B894;
+  --card-parchment: #FCF8F0;
+
+  /* Typography */
+  --font-script: 'Great Vibes', 'Alex Brush', cursive;
+  --font-royal: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Responsive Envelope Proportions - Exact Reference Ratio (447 x 254) */
+  --envelope-w: calc(clamp(255px, 73vw, 305px) - 6mm);
+  --envelope-h: calc(var(--envelope-w) * (254 / 447));
+  /* Exact flap height from reference (162 / 254) matching V-tip and seal */
+  --flap-h: calc(var(--envelope-h) * (162 / 254));
+  --card-w: calc(var(--envelope-w) * 0.92);
+  --card-h: calc(var(--envelope-h) * 0.92);
+}
