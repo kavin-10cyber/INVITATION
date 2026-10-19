@@ -632,12 +632,12 @@
 }
 
 .btn-venue-scroll .venue-btn-arrow {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
   color: #3A050E;
   display: block;
-  stroke: #3A050E;
-  stroke-width: 0.9;
+  flex-shrink: 0;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
