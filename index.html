@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="assets/css/style.css?v=8.7">
   <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.4">
-  <link rel="stylesheet" href="assets/css/venue-directions.css?v=1.0">
+  <link rel="stylesheet" href="assets/css/venue-directions.css?v=1.1">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -654,7 +654,7 @@
 
                           <!-- S3 - SECTION 6: VENUE LOCATION BUTTON (RIGHT OF VIKASHINI AT BOTTOM) -->
                           <div class="screen3-venue-action-wrap">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Sengundhar+Thirumana+Mandabam+Tirupur" target="_blank" rel="noopener noreferrer" id="btn-reception-venue" class="btn-reception-venue" aria-label="Reception Venue Location on Google Maps" title="View Reception Venue on Google Maps">
+                            <a href="https://maps.app.goo.gl/fxFxH68HeiaVmsk88" target="_blank" rel="noopener noreferrer" id="btn-reception-venue" class="btn-reception-venue" aria-label="Reception Venue Location on Google Maps" title="View Reception Venue on Google Maps">
                               <span class="venue-btn-text">VENUE</span>
                               <svg class="venue-btn-arrow" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
                                 <path d="M12 3c-.55 0-1 .45-1 1v11.17l-3.59-3.58a.996.996 0 1 0-1.41 1.41l5.3 5.29c.39.39 1.02.39 1.41 0l5.3-5.29a.996.996 0 1 0-1.41-1.41L13 15.17V4c0-.55-.45-1-1-1z"/>
@@ -755,7 +755,12 @@
                               </div>
                               <div class="venue-card-map-wrap" aria-hidden="true">
                                 <div class="venue-map-inner">
-                                  <img src="assets/images/reception_map_preview.png" alt="" class="venue-map-image" loading="lazy" />
+                                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1284.343613234554!2d77.33998853393017!3d11.131049711933306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba9065a6c663e2d%3A0x3192421aac4611a5!2sSengunthar%20Kalyana%20Mandapam!5e1!3m2!1sen!2sin!4v1792407054228!5m2!1sen!2sin" 
+                                          class="venue-map-iframe" 
+                                          loading="lazy" 
+                                          title="Sengundhar Thirumana Mandabam Location Map" 
+                                          tabindex="-1"></iframe>
+                                  <img src="assets/images/reception_map_preview.png" alt="" class="venue-map-fallback" loading="lazy" />
                                 </div>
                               </div>
                             </article>
@@ -777,7 +782,7 @@
                                       <line x1="8" y1="2" x2="8" y2="6"/>
                                       <line x1="3" y1="10" x2="21" y2="10"/>
                                     </svg>
-                                    <span class="venue-detail-text">Muhurtham Details (To be added)</span>
+                                    <span class="venue-detail-text">Sunday, 22nd November 2026</span>
                                   </div>
                                   <!-- Time -->
                                   <div class="venue-detail-row">
@@ -785,7 +790,7 @@
                                       <circle cx="12" cy="12" r="10"/>
                                       <polyline points="12 6 12 12 16 14"/>
                                     </svg>
-                                    <span class="venue-detail-text">Time (To be added)</span>
+                                    <span class="venue-detail-text">5:00 A.M. &ndash; 6:00 A.M. (Muhurtham)</span>
                                   </div>
                                   <!-- Venue & Address -->
                                   <div class="venue-detail-row">
@@ -794,8 +799,8 @@
                                       <circle cx="12" cy="10" r="3"/>
                                     </svg>
                                     <div class="venue-detail-text">
-                                      <strong class="venue-location-name">Temple Name (To be added)</strong>
-                                      <span class="venue-location-addr">Address (To be added)</span>
+                                      <strong class="venue-location-name">Arulmigu Thirumuruganadha Swamy Temple</strong>
+                                      <span class="venue-location-addr">Thirumurugan Poondi, Tirupur</span>
                                     </div>
                                   </div>
                                 </div>
@@ -811,7 +816,12 @@
                               </div>
                               <div class="venue-card-map-wrap" aria-hidden="true">
                                 <div class="venue-map-inner">
-                                  <img src="assets/images/ceremony_map_preview.png" alt="" class="venue-map-image" loading="lazy" />
+                                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1794.1542654687314!2d77.31234546646196!3d11.162910260013346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba90420486aebf7%3A0xbc618d1714f48df7!2sThirumuruganatha%20Swamy%20Temple!5e1!3m2!1sen!2sin!4v1792407119566!5m2!1sen!2sin" 
+                                          class="venue-map-iframe" 
+                                          loading="lazy" 
+                                          title="Arulmigu Thirumuruganadha Swamy Temple Location Map" 
+                                          tabindex="-1"></iframe>
+                                  <img src="assets/images/ceremony_map_preview.png" alt="" class="venue-map-fallback" loading="lazy" />
                                 </div>
                               </div>
                             </article>
@@ -899,44 +909,72 @@
         </svg>
       </div>
       <h3 class="modal-title" id="modal-cal-title">Add to Calendar</h3>
-      <p class="modal-subtitle">Confirm adding the Grand Reception ceremony to your calendar:</p>
+      <p class="modal-subtitle">Confirm adding the wedding events to your device calendar:</p>
+      
       <div class="modal-event-summary">
-        <div class="modal-summary-line">
-          <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          <strong>Saturday, 21 November 2026</strong>
+        <!-- Event 1: Grand Reception -->
+        <div class="modal-summary-item">
+          <div class="modal-summary-line header-line">
+            <span class="modal-event-tag">01 RECEPTION</span>
+            <strong>Saturday, 21 Nov 2026</strong>
+          </div>
+          <div class="modal-summary-line">
+            <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>6:00 P.M. &ndash; 9:00 P.M. (IST)</span>
+          </div>
+          <div class="modal-summary-line">
+            <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Sengundhar Thirumana Mandabam, Tirupur</span>
+          </div>
         </div>
-        <div class="modal-summary-line">
-          <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <span>6:00 P.M. &ndash; 9:00 P.M. (IST)</span>
-        </div>
-        <div class="modal-summary-line">
-          <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          <span>Sengundhar Thirumana Mandabam, Tirupur</span>
+
+        <!-- Event 2: Auspicious Muhurtham -->
+        <div class="modal-summary-item" style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(224, 193, 124, 0.35);">
+          <div class="modal-summary-line header-line">
+            <span class="modal-event-tag">02 MUHURTHAM</span>
+            <strong>Sunday, 22 Nov 2026</strong>
+          </div>
+          <div class="modal-summary-line">
+            <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>5:00 A.M. &ndash; 6:00 A.M. (IST)</span>
+          </div>
+          <div class="modal-summary-line">
+            <svg class="modal-summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Arulmigu Thirumuruganadha Swamy Temple, Tirupur</span>
+          </div>
         </div>
       </div>
+
       <div class="modal-action-buttons">
         <button type="button" class="btn-modal-action btn-modal-primary" id="btn-modal-download-ics">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
             <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
           </svg>
-          <span>Download .ICS (Apple / Outlook)</span>
+          <span>Save Both Events (.ICS - Apple / Outlook)</span>
         </button>
-        <button type="button" class="btn-modal-action btn-modal-secondary" id="btn-modal-google-cal">
+        <button type="button" class="btn-modal-action btn-modal-secondary" id="btn-modal-reception-cal">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
             <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
           </svg>
-          <span>Add to Google Calendar</span>
+          <span>Add Reception to Google Calendar</span>
+        </button>
+        <button type="button" class="btn-modal-action btn-modal-secondary" id="btn-modal-ceremony-cal">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
+          </svg>
+          <span>Add Muhurtham to Google Calendar</span>
         </button>
         <button type="button" class="btn-modal-action btn-modal-cancel" id="btn-modal-cancel">
           Cancel
@@ -955,7 +993,7 @@
   <script src="assets/js/scratch-card.js?v=5.7" defer></script>
   <script src="assets/js/envelope.js?v=10.3" defer></script>
   <script src="assets/js/theme-switcher.js" defer></script>
-  <script src="assets/js/venue-directions.js?v=1.0" defer></script>
+  <script src="assets/js/venue-directions.js?v=1.1" defer></script>
   <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
 
