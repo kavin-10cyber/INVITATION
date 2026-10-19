@@ -11,7 +11,7 @@
    -------------------------------------------------------------------------- */
 .invitation-card .invitation-screen.screen-5,
 .invitation-card.card-docked-fullscreen #invitation-screen-5 {
-  background: url('../images/thank_you_screen_bg.jpg') center top / 100% 100% no-repeat !important;
+  background: url('../images/thank_you_screen_bg.jpg?v=2.4') center top / 100% 100% no-repeat !important;
   background-color: #FAF6EE !important;
   position: absolute !important;
   inset: 0 !important;
