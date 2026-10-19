@@ -356,3 +356,118 @@
   transition: opacity 0.4s ease, transform 0.4s ease;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   PAGE 1: TAP TO OPEN ENVELOPE ACTION BUTTON
+   Curved Gold Pill Bar in Replay Button Theme:
+   Rich Metallic Gold Radial Gradient, 1.5px Bevel Border, Bold Royal Wine Typography,
+   Gold Glow Elevation, and Gentle Hop Micro-Interaction.
+   ========================================================================== */
+.envelope-tap-action-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: clamp(14px, 2.6vh, 22px);
+  z-index: 10;
+  pointer-events: auto;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+
+.btn-tap-open {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: clamp(34px, 4.4vh, 40px);
+  padding: clamp(7px, 1.2vh, 9px) clamp(18px, 4.8vw, 24px);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 30%, #FFECA8 0%, #D4AF37 55%, #996515 100%);
+  border: 1.5px solid rgba(255, 242, 178, 0.92);
+  color: #3A050E;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(212, 175, 55, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  animation: tapBtnGentleHop 1.6s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+  outline: none;
+  pointer-events: auto;
+  box-sizing: border-box;
+  will-change: transform, box-shadow;
+  white-space: nowrap;
+}
+
+.btn-tap-open:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(212, 175, 55, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+.btn-tap-open:active {
+  transform: scale(0.95);
+}
+
+.btn-tap-open .tap-open-text {
+  font-family: var(--font-royal);
+  font-size: clamp(0.70rem, 2.2vw, 0.80rem);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  color: #3A050E;
+  -webkit-text-stroke: 0.45px #3A050E;
+  text-stroke: 0.45px #3A050E;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.btn-tap-open .tap-open-icon {
+  width: 15px;
+  height: 15px;
+  color: #3A050E;
+  display: block;
+  stroke: #3A050E;
+  stroke-width: 0.6;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-tap-open:hover .tap-open-icon {
+  transform: scale(1.15);
+}
+
+@keyframes tapBtnGentleHop {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.6),
+      0 0 14px rgba(212, 175, 55, 0.45);
+  }
+  25% {
+    transform: translateY(-5px);
+    box-shadow:
+      0 9px 24px rgba(0, 0, 0, 0.7),
+      0 0 20px rgba(212, 175, 55, 0.7);
+  }
+  45% {
+    transform: translateY(0);
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.6),
+      0 0 14px rgba(212, 175, 55, 0.45);
+  }
+}
+
+/* Seamless fadeout when envelope opens */
+.envelope-section.opened .envelope-tap-action-wrap,
+.cover-screen.envelope-opened .envelope-tap-action-wrap {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(10px) scale(0.92) !important;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}

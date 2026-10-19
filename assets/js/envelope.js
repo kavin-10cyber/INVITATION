@@ -97,6 +97,7 @@
     const envelopeSection = document.querySelector('.envelope-section');
     const calligraphy = document.querySelector('.invitation-calligraphy-wrapper');
     const stageRings = document.getElementById('stage-rings');
+    const btnTapOpen = document.getElementById('btn-tap-open');
 
     const openTargets = [
       envelope,
@@ -109,7 +110,8 @@
       ctaContainer,
       envelopeSection,
       calligraphy,
-      stageRings
+      stageRings,
+      btnTapOpen
     ].filter(Boolean);
 
     openTargets.forEach((target) => {
@@ -342,6 +344,25 @@
           ringsEl.style.pointerEvents = 'none';
         }
       });
+    }
+
+    const tapActionWrap = document.getElementById('envelope-tap-action-wrap');
+    if (tapActionWrap && typeof gsap !== 'undefined') {
+      gsap.to(tapActionWrap, {
+        opacity: 0,
+        y: 10,
+        scale: 0.92,
+        duration: 0.35,
+        ease: 'power2.in',
+        onComplete: () => {
+          tapActionWrap.style.visibility = 'hidden';
+          tapActionWrap.style.pointerEvents = 'none';
+        }
+      });
+    } else if (tapActionWrap) {
+      tapActionWrap.style.opacity = '0';
+      tapActionWrap.style.visibility = 'hidden';
+      tapActionWrap.style.pointerEvents = 'none';
     }
 
     if (typeof gsap !== 'undefined' && envelopeFlap) {
@@ -901,6 +922,25 @@
         );
       }
 
+      const tapActionWrap = document.getElementById('envelope-tap-action-wrap');
+      if (tapActionWrap) {
+        tl.fromTo(tapActionWrap,
+          { opacity: 0, y: 10, scale: 0.92 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.38,
+            ease: 'back.out(1.4)',
+            onStart: () => {
+              tapActionWrap.style.visibility = 'visible';
+              tapActionWrap.style.pointerEvents = 'auto';
+            }
+          },
+          '<+=0.04'
+        );
+      }
+
     } else {
       // Standard Fallback
       envelope.classList.remove('flap-closing', 'seal-stamped');
@@ -996,6 +1036,13 @@
       const ringsEl = document.getElementById('stage-rings');
       if (ringsEl) {
         ringsEl.style.opacity = '1';
+      }
+      const tapActionWrap = document.getElementById('envelope-tap-action-wrap');
+      if (tapActionWrap) {
+        tapActionWrap.style.opacity = '1';
+        tapActionWrap.style.visibility = 'visible';
+        tapActionWrap.style.pointerEvents = 'auto';
+        tapActionWrap.style.removeProperty('transform');
       }
 
       if (envelopeCardSlot && typeof gsap !== 'undefined') {

@@ -22,7 +22,7 @@
   <link rel="preload" as="image" href="assets/images/stage_lotus_left.png">
   <link rel="preload" as="image" href="assets/images/stage_lotus_right.png">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=8.6">
+  <link rel="stylesheet" href="assets/css/style.css?v=8.7">
   <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.3">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
@@ -689,7 +689,18 @@
 
             </div> <!-- /.envelope -->
           </div> <!-- /.envelope-scene -->
-        </div>
+
+          <!-- Interactive Action Button: "TAP TO OPEN" Below Envelope -->
+          <div class="envelope-tap-action-wrap" id="envelope-tap-action-wrap">
+            <button type="button" class="btn-tap-open" id="btn-tap-open" aria-label="Tap to open invitation envelope" title="Tap to open invitation">
+              <span class="tap-open-text">TAP TO OPEN</span>
+              <svg class="tap-open-icon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </button>
+          </div>
+
+        </div> <!-- /.envelope-section -->
       </section>
 
     </main> <!-- /.app-container -->
@@ -720,7 +731,7 @@
   <script src="assets/js/particles.js?v=3.0" defer></script>
   <script src="assets/js/text-reveal.js?v=3.9" defer></script>
   <script src="assets/js/scratch-card.js?v=5.7" defer></script>
-  <script src="assets/js/envelope.js?v=10.1" defer></script>
+  <script src="assets/js/envelope.js?v=10.2" defer></script>
   <script src="assets/js/theme-switcher.js" defer></script>
   <script src="assets/js/main.js?v=3.2" defer></script>
 </body>
