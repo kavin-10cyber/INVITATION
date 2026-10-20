@@ -1,100 +1,132 @@
-# Wedding Invitation | Deepak & Vikashini
+# 🌸 Royal Interactive Wedding Invitation | Deepak & Vikashini
 
-An ultra-luxury, mobile-first interactive digital wedding invitation crafted with modern CSS 3D physics, hardware-accelerated GSAP timelines, ambient Pushpavrishti flower petal and gold dust particle simulations, an interactive metallic scratch card, and royal South Indian aesthetics.
+An ultra-luxury, mobile-first interactive digital wedding invitation crafted with modern CSS 3D physics, hardware-accelerated GSAP timelines, Pushpavrishti flower petal and gold dust particle simulations, an interactive metallic scratch card, live Google Maps directions, multi-event calendar integration, and sacred South Indian aesthetics.
 
 ---
 
-## 📁 Project Directory Structure
+## 🏛️ Comprehensive 5-Screen Architecture
+
+| Screen | Title & Experience | Key Interactions & Aesthetics |
+| :---: | :--- | :--- |
+| **01** | **Sacred Mandap & 3D Envelope** | • Traditional palace backdrop with peacocks, lotuses, swing, and glinting rings<br>• 3D letter-fold envelope with embossed lotus gold wax seal<br>• Interactive "TAP TO OPEN" pill button with specular glass sheen sweep<br>• 360° card flip and smooth docked fullscreen elevation |
+| **02** | **Auspicious Wedding Ceremony** | • Editorial couple centerpiece portrait with botanical rose flourishes<br>• Interactive 24K gold foil scratch card revealing the auspicious Muhurtham<br>• Pushpavrishti petal cascade and sparkling gold particle burst<br>• Animated "VIEW RECEPTION" pill button with gentle hop micro-interaction |
+| **03** | **Grand Reception Gala** | • Celestial Day-to-Night Golden Lotus Bridge transition (2.0s)<br>• Starlit night palace balcony with couple portrait<br>• Optical focus snapping and starlight sparkles on calligraphy typography<br>• Two-way vertical swipe & scroll navigation |
+| **04** | **Venue & Google Maps Directions** | • Modern tech-luxury Frosted Glassmorphism Disc & Sonar Radar transition<br>• Dual venue cards (Grand Reception & Sacred Muhurtham) with live map links<br>• One-click multi-event calendar synchronization (RFC-5545 `.ics` & Google Calendar) |
+| **05** | **Sacred Thank You & Blessings** | • Cinematic Hollywood anamorphic rose-gold lens flare & film light leak transition<br>• Serene lakeside marble pavilion backdrop with floating pink lotus petals<br>• Circular monogram crest (`D & V`) with heartfelt gratitude message<br>• Full bottom-left floating replay FAB integration |
+
+---
+
+## 📁 Clean & Modular Project Structure
 
 ```text
 INVITATION/
-├── index.html                   # Master HTML entry point (accessible, semantic, preloaded)
-├── style.css                    # Root stylesheet entrypoint (delegates to assets/css/style.css)
-├── script.js                    # Root script entrypoint (modular fallback aggregator)
-├── package.json                 # Scripts and project metadata
+├── index.html                   # Master semantic HTML5 entrypoint (preloads & accessibility)
+├── package.json                 # Project configuration, metadata & scripts
 ├── README.md                    # Comprehensive documentation & architectural overview
-├── .gitignore                   # Version control ignore definitions
+├── AGENTS.md                    # Multi-agent collaboration contracts & invariants
+├── .gitignore                   # Production version control ignore rules
+├── style.css                    # Root stylesheet entrypoint (delegates to assets/css/style.css)
+├── script.js                    # Root script aggregator fallback
 │
-└── assets/                      # Structured Static Resources
+└── assets/                      # Production Static Resources
     │
-    ├── audio/                   # Traditional Background Audio
-    │   ├── bg-music.mp3         # Primary traditional wedding instrumentals
-    │   └── audio.mp3            # Secondary / fallback audio track
+    ├── audio/                   # Traditional Audio Engine
+    │   ├── bg-music.mp3         # High-fidelity traditional wedding instrumental
+    │   └── audio.mp3            # Dual-channel audio fallback
     │
-    ├── css/                     # Modular CSS Design System
-    │   ├── style.css            # Master stylesheet bundle & import coordinator
-    │   ├── variables.css        # Royal gold palette, deep velvets, fluid clamp() typography
+    ├── css/                     # Modular Scalable Design System
+    │   ├── variables.css        # Design tokens: 24K molten gold, midnight navy, fluid clamp() scales
     │   ├── base.css             # Viewport reset, mobile shell frame, ambient particle canvas
     │   ├── stage.css            # Mandap palace backdrop, peacocks, lotuses, swing, rings
-    │   ├── envelope.css         # 3D letter-fold envelope, V-flap, wax seal, pocket
-    │   ├── invitation-card.css  # Editorial portrait frame, scratch card reveal, docked fullscreen
+    │   ├── envelope.css         # 3D envelope fold, flap texture, wax seal, tap action button
+    │   ├── acrylic-card.css     # Transparent acrylic Mughal arch card physics
+    │   ├── invitation-card.css  # Editorial portrait frame, scratch card reveal, docked fullscreen, Screen 3
+    │   ├── venue-directions.css # Venue cards, live Google Maps embeds, calendar modals, radar bridge
+    │   ├── thank-you.css        # Screen 5 Thank You layout, monogram crest, anamorphic lens flare
     │   ├── audio.css            # Floating gold music FAB, animated equalizer, replay FAB
-    │   ├── themes.css           # Color palettes (Royal Navy, Imperial Emerald, Champagne Ivory)
+    │   ├── themes.css           # Live color themes (Royal Navy, Imperial Emerald, Champagne Ivory)
     │   ├── animations.css       # Micro-animations, keyframe physics, gold shimmers
-    │   └── announcement.css     # Preserved Screen 2 styles
+    │   └── style.css            # Master stylesheet bundle coordinator
     │
-    ├── js/                      # Decoupled JavaScript Modules
+    ├── js/                      # Decoupled Functional Modules
     │   ├── main.js              # Application coordinator & initialization on DOM ready
-    │   ├── audio.js             # Audio playback, user-gesture unlock guard, equalizer sync
-    │   ├── stage.js             # GSAP hardware-accelerated stage entrance choreography
-    │   ├── particles.js         # Pushpavrishti falling petals & gold dust particle engine
-    │   ├── envelope.js          # 3D envelope opening, 360° flip, docked fullscreen scrolling
-    │   ├── scratch-card.js      # Interactive gold foil scratch card with particle bursts
-    │   ├── theme-switcher.js    # Live envelope color theme selector
-    │   └── scroll-transition.js # Smooth scroll transitions & guards
+    │   ├── audio.js             # WeddingAudio: autoplay unlock guard, volume, equalizer sync
+    │   ├── stage.js             # WeddingStage: GSAP hardware-accelerated entrance choreography
+    │   ├── particles.js         # WeddingParticles: Pushpavrishti falling petals & gold dust engine
+    │   ├── envelope.js          # WeddingEnvelope: 3D envelope physics, wax seal breaking/resealing
+    │   ├── scratch-card.js      # WeddingScratch: 24K gold foil scratch canvas with particle bursts
+    │   ├── scroll-transition.js # WeddingScroll: Smooth scroll transitions & touch guards
+    │   ├── text-reveal.js       # WeddingTextReveal: Two-screen & reception reveals, swipe engine
+    │   ├── venue-directions.js  # WeddingVenue: Radar transition, Google Maps, .ics calendar export
+    │   ├── thank-you.js         # WeddingThankYou: Cinematic rose-gold lens flare & Screen 5 choreography
+    │   └── theme-switcher.js    # WeddingTheme: Live envelope color theme switcher
     │
-    └── images/                  # Production Artwork, Textures & Cutouts
-        ├── card_blush_roses.jpg              # Card background: antique gold & blush roses
-        ├── couple3.jpeg                      # Editorial centerpiece couple portrait
-        ├── envelope_cover_navy.jpg           # Royal Navy envelope cardstock texture
-        ├── envelope_cover_emerald.jpg        # Imperial Emerald envelope cardstock texture
-        ├── envelope_cover_ivory.jpg          # Champagne Ivory envelope cardstock texture
+    └── images/                  # Optimized Production Assets & Textures
+        ├── bg_stage_clean.jpg                # Mandap palace arch stage backdrop
+        ├── card_blush_roses.jpg              # Card stationery background: antique gold & blush roses
+        ├── couple3.jpeg                      # Centerpiece couple portrait (Screen 2)
+        ├── reception_card_bg_clean.jpg       # Balcony couple under starry night (Screen 3)
+        ├── reception_lotus_bridge.jpg        # Day-to-night golden lotus transition bridge
+        ├── venue_screen_bg.jpg               # Midnight navy canvas with golden stardust beams (Screen 4)
+        ├── thank_you_screen_bg.jpg           # Marble pavilion & reflective lake water (Screen 5)
+        ├── thank_you_monogram_frame.png      # Gold floral monogram frame (Screen 5)
+        ├── reception_map_preview.png         # Sengundhar Mandabam live map thumbnail
+        ├── ceremony_map_preview.png          # Thirumurugan Temple live map thumbnail
+        ├── scratch_plaque_rose_cartouche.png # 24K gold foil scratch surface
+        ├── scratch_plaque_rose_cartouche_base.png # Base revealed date background
         ├── reference_seal_extracted.png      # Embossed lotus gold wax seal medallion
-        ├── botanical_rose_corner_tl.png      # Top-left watercolor botanical climbing rose
-        ├── botanical_rose_corner_tr.png      # Top-right watercolor botanical climbing rose
-        ├── stage_couple_swing.png            # Couple illustration on royal garden swing
-        ├── stage_rings.png                   # Golden wedding rings motif
+        ├── stage_couple_swing.png            # Royal garden couple on swing cutout
+        ├── stage_rings.png                   # Interlocking wedding rings motif
         ├── stage_lotus_left.png              # Stage lotus bloom (left)
         ├── stage_lotus_right.png             # Stage lotus bloom (right)
         ├── stage_peacock_upper.png           # Stage peacock cutout (upper)
         ├── stage_peacock_lower.png           # Stage peacock cutout (lower)
-        ├── plain_page.jpg                    # Clean plain background preserved for future screens
-        └── archive/                          # Development artifacts, test renders & backups
+        ├── botanical_rose_corner_tl.png      # Watercolor botanical climbing rose (top-left)
+        ├── botanical_rose_corner_tr.png      # Watercolor botanical climbing rose (top-right)
+        ├── s2_ceremony_title.png             # "Wedding Ceremony" gold script title
+        ├── s2_date_plaque.png                # Date plaque container
+        ├── s2_filigree_divider.png           # Royal gold filigree line dividers
+        ├── s2_clock_badge.svg                # Muhurtham clock badge vector
+        ├── s2_pin_badge.svg                  # Venue map pin vector
+        ├── s2_temple_gopuram.png             # Sacred temple gopuram illustration
+        ├── s3_reception_title.png            # "Reception" calligraphy title
+        ├── envelope_cover_navy.jpg           # Royal Navy envelope cardstock texture
+        ├── envelope_cover_emerald.jpg        # Imperial Emerald envelope cardstock texture
+        ├── envelope_cover_ivory.jpg          # Champagne Ivory envelope cardstock texture
+        └── archive/                          # Raw design files, intermediate crops & backups
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Running Locally
 
-### Local Development Server
-
-Run the development server via npm:
-
+### Option 1: Live Server (Recommended)
 ```bash
 npm run dev
 ```
 
-or directly using Python:
-
+### Option 2: Python Local Server
 ```bash
 python -m http.server 3000
 ```
-
-Open `http://localhost:3000` in any modern desktop or mobile browser.
+Open **`http://localhost:3000`** in any mobile or desktop browser.
 
 ---
 
-## 💎 Features & Architecture
+## 🌐 Production Deployment (Vercel / Netlify / GitHub Pages)
 
-1. **3D Envelope Opening & Card Takeover**:
-   - Tapping the embossed lotus wax seal triggers a 3D GSAP timeline unsealing the envelope flap, elevating the invitation card, executing a 360° flip, and docking seamlessly to full screen.
-2. **Docked Fullscreen Smooth Scrolling**:
-   - Upon opening, the card transitions into `.card-docked-fullscreen`, removing all 3D perspective distortion to provide native momentum touch scrolling on mobile and mouse wheel scrolling on desktop.
-3. **Interactive Gold Glitter Scratch Card**:
-   - A canvas-driven metallic gold glitter foil covering the auspicious Sumuhurtham date and ceremony time with sparkling gold particle bursts on scratch.
-4. **Pushpavrishti Canvas Particle Engine**:
-   - Continuous 60fps canvas simulation with soft-falling flower petals and shimmering gold stardust.
-5. **Floating Luxury Controls**:
-   - Bottom-right: Radial gold FAB with animated 4-bar equalizer and music toggle.
-   - Bottom-left: Radial gold FAB with bold replay icon that folds the card back into the envelope and seals it.
-   - Top-right (on card): Floating **Fold** button to fold the card back at any time.
+This project is a 100% static client-side web application requiring **zero build steps** or server runtimes.
+
+* **Vercel**: Push to GitHub and import the repository. Vercel automatically detects `index.html` and serves it on global Edge CDN.
+* **GitHub Pages**: Go to **Settings -> Pages -> Branch: main -> / (root) -> Save**.
+* **Netlify**: Drag and drop the project folder or connect the Git repository with publish directory set to `.`.
+
+---
+
+## 🎨 Design System & Technologies
+
+* **Core**: Pure HTML5 (Semantic & Accessible) + Modern ES6+ JavaScript.
+* **Styling**: Vanilla CSS3 (Custom Properties, 3D Transforms, `backdrop-filter`, Glassmorphism, Fluid `clamp()` typography).
+* **Animations**: GSAP (GreenSock Animation Platform 3.12) for 60/120fps hardware-accelerated physics.
+* **Particle Systems**: HTML5 2D Canvas rendering authentic Pushpavrishti flower petals (roses, lotus, marigold) and drifting stardust.
+* **Calendar Engine**: RFC-5545 compliant `.ics` generator + Google Calendar deep-linking for both Reception and Muhurtham events.

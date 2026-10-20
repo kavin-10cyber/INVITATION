@@ -1,15 +1,24 @@
 {
   "name": "wedding-invitation",
   "version": "1.0.0",
-  "description": "Interactive Digital Wedding Invitation for Deepak & Vikashini",
+  "description": "Ultra-Luxury Interactive South Indian Wedding Invitation for Deepak & Vikashini",
+  "main": "index.html",
   "scripts": {
     "dev": "npx live-server --port=3000 --open=index.html",
-    "start": "npx live-server --port=3000 --open=index.html"
+    "start": "npx live-server --port=3000 --open=index.html",
+    "serve": "python -m http.server 3000",
+    "build": "echo 'Static production assets ready'"
   },
   "keywords": [
     "wedding",
     "invitation",
-    "south-indian"
+    "luxury",
+    "south-indian",
+    "3d-envelope",
+    "interactive",
+    "gsap",
+    "html5-canvas"
   ],
-  "license": "ISC"
+  "author": "Deepak & Vikashini Wedding Team",
+  "license": "MIT"
 }
