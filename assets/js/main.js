@@ -20,7 +20,12 @@
   }
   window.scrollTo(0, 0);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  let hasBootstrapped = false;
+
+  function bootstrap() {
+    if (hasBootstrapped) return;
+    hasBootstrapped = true;
+
     // 1. Initialize Audio Player & Autoplay Guard
     if (window.WeddingAudio) {
       window.WeddingAudio.init();
@@ -56,9 +61,21 @@
       window.WeddingTheme.init();
     }
 
-    // 6. Trigger GSAP Entrance Flow Animation
+    // 7. Trigger GSAP Entrance Flow Animation
     if (window.WeddingStage) {
       window.WeddingStage.playEntranceTimeline();
     }
-  });
+  }
+
+  // Robust Lifecycle Execution:
+  // If document is still loading, bind to DOMContentLoaded.
+  // If document is already interactive or complete (e.g. cold script defer or late execution), run immediately.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap);
+  } else {
+    bootstrap();
+  }
+
+  // Safety net: in case deferred scripts run after window.onload or DOM ready edge cases
+  window.addEventListener('load', bootstrap);
 })();

@@ -9,9 +9,11 @@
   <meta name="description"
     content="Traditional luxury mobile-first interactive wedding invitation for Deepak & Vikashini with 3D envelope unfold animation.">
 
-  <!-- Google Fonts: Great Vibes (for calligraphy), Cinzel (royal serif), Playfair Display, Poppins -->
+  <!-- Cloudflare CDN & Google Fonts Network Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap">
 
@@ -22,10 +24,17 @@
   <link rel="preload" as="image" href="assets/images/stage_lotus_left.png">
   <link rel="preload" as="image" href="assets/images/stage_lotus_right.png">
 
-  <link rel="stylesheet" href="assets/css/style.css?v=9.1">
-  <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.6">
-  <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.4">
-  <link rel="stylesheet" href="assets/css/thank-you.css?v=2.8">
+  <!-- Direct Parallel CSS Loading (Zero Waterfall Latency) -->
+  <link rel="stylesheet" href="assets/css/variables.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/base.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/animations.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/audio.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/stage.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/envelope.css?v=1.1">
+  <link rel="stylesheet" href="assets/css/invitation-card.css?v=16.7">
+  <link rel="stylesheet" href="assets/css/venue-directions.css?v=3.5">
+  <link rel="stylesheet" href="assets/css/thank-you.css?v=2.9">
+  <link rel="stylesheet" href="assets/css/themes.css?v=1.1">
 
   <!-- GSAP Animation Engine for 60/120fps Hardware-Accelerated Physics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -1175,7 +1184,7 @@
   <!-- MODULAR JAVASCRIPT ARCHITECTURE                                 -->
   <!-- ================================================================ -->
   <script src="assets/js/audio.js" defer></script>
-  <script src="assets/js/stage.js" defer></script>
+  <script src="assets/js/stage.js?v=2.0" defer></script>
   <script src="assets/js/particles.js?v=3.0" defer></script>
   <script src="assets/js/text-reveal.js?v=4.5" defer></script>
   <script src="assets/js/scratch-card.js?v=5.7" defer></script>
@@ -1183,7 +1192,7 @@
   <script src="assets/js/theme-switcher.js" defer></script>
   <script src="assets/js/venue-directions.js?v=3.4" defer></script>
   <script src="assets/js/thank-you.js?v=2.4" defer></script>
-  <script src="assets/js/main.js?v=3.2" defer></script>
+  <script src="assets/js/main.js?v=3.3" defer></script>
 </body>
 
 </html>

@@ -8,8 +8,13 @@
 (function (window) {
   'use strict';
 
-  function playEntranceTimeline() {
-    if (typeof gsap === 'undefined') return;
+  function playEntranceTimeline(retryCount = 0) {
+    if (typeof gsap === 'undefined') {
+      if (retryCount < 25) {
+        setTimeout(() => playEntranceTimeline(retryCount + 1), 100);
+      }
+      return;
+    }
 
     const stageBg = document.getElementById('stage-bg');
     const lotusLeft = document.getElementById('stage-lotus-left');
